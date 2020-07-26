@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="background 的常见背景属性css2.1 中，常见的背景属性有以下几种：（经常用到，要记住）  background-color:#ff99ff;  设置元素的背景颜色。  background-image:url(images&#x2F;2.gif); 将图像设置为背景。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS属性：背景属性">
+<meta property="og:url" content="http://yoursite.com/2020/04/18/02-CSS%E5%B1%9E%E6%80%A7%EF%BC%9A%E8%83%8C%E6%99%AF%E5%B1%9E%E6%80%A7/index.html">
+<meta property="og:site_name" content="若只如初见">
+<meta property="og:description" content="background 的常见背景属性css2.1 中，常见的背景属性有以下几种：（经常用到，要记住）  background-color:#ff99ff;  设置元素的背景颜色。  background-image:url(images&#x2F;2.gif); 将图像设置为背景。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-04-18T00:00:00.000Z">
+<meta property="article:modified_time" content="2020-04-19T09:44:16.000Z">
+<meta property="article:author" content="lyy">
+<meta property="article:tag" content="CSS">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/04/18/02-CSS%E5%B1%9E%E6%80%A7%EF%BC%9A%E8%83%8C%E6%99%AF%E5%B1%9E%E6%80%A7/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>CSS属性：背景属性 | 若只如初见</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">若只如初见</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">书籍是人类进步的阶梯</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签<span class="badge">12</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th fa-fw"></i>分类<span class="badge">12</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档<span class="badge">117</span></a>
+
+  </li>
+        <li class="menu-item menu-item-疫情地图">
+
+    <a href="http://joyli.net.cn/covid19-map/" rel="noopener" target="_blank"><i class="map fa-fw"></i>疫情地图</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/18/02-CSS%E5%B1%9E%E6%80%A7%EF%BC%9A%E8%83%8C%E6%99%AF%E5%B1%9E%E6%80%A7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="lyy">
+      <meta itemprop="description" content="世间所有的相遇，都是久别重逢">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="若只如初见">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CSS属性：背景属性
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-04-18 00:00:00" itemprop="dateCreated datePublished" datetime="2020-04-18T00:00:00Z">2020-04-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-19 09:44:16" itemprop="dateModified" datetime="2020-04-19T09:44:16Z">2020-04-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CSS/" itemprop="url" rel="index"><span itemprop="name">CSS</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/04/18/02-CSS%E5%B1%9E%E6%80%A7%EF%BC%9A%E8%83%8C%E6%99%AF%E5%B1%9E%E6%80%A7/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/04/18/02-CSS%E5%B1%9E%E6%80%A7%EF%BC%9A%E8%83%8C%E6%99%AF%E5%B1%9E%E6%80%A7/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>7.7k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>7 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <hr>
+<h2 id="background-的常见背景属性"><a href="#background-的常见背景属性" class="headerlink" title="background 的常见背景属性"></a>background 的常见背景属性</h2><p><strong>css2.1</strong> 中，常见的背景属性有以下几种：（经常用到，要记住）</p>
+<ul>
+<li><p><code>background-color:#ff99ff;</code>  设置元素的背景颜色。</p>
+</li>
+<li><p><code>background-image:url(images/2.gif);</code> 将图像设置为背景。</p>
+<a id="more"></a></li>
+<li><p><code>background-repeat: no-repeat;</code>  设置背景图片是否重复及如何重复，默认平铺满。（重要）</p>
+<ul>
+<li><code>no-repeat</code>不要平铺；</li>
+<li><code>repeat-x</code>横向平铺；</li>
+<li><code>repeat-y</code>纵向平铺。</li>
+</ul>
+</li>
+<li><p><code>background-position:center top;</code> 设置背景图片在当前容器中的位置。</p>
+</li>
+<li><p><code>background-attachment:scroll;</code> 设置背景图片是否跟着滚动条一起移动。<br>属性值可以是：<code>scroll</code>（与fixed属性相反，默认属性）、<code>fixed</code>（背景就会被固定住，不会被滚动条滚走）。</p>
+</li>
+<li><p>另外还有一个综合属性叫做<code>background</code>，它的作用是：将上面的多个属性写在一个声明中。</p>
+</li>
+</ul>
+<p><strong>CSS3</strong> 中，新增了一些background属性：</p>
+<ul>
+<li><p>background-origin</p>
+</li>
+<li><p>background-clip 背景裁切</p>
+</li>
+<li><p>background-size 调整尺寸</p>
+</li>
+<li><p>多重背景</p>
+</li>
+</ul>
+<h2 id="background-color：背景颜色的表示方法"><a href="#background-color：背景颜色的表示方法" class="headerlink" title="background-color：背景颜色的表示方法"></a>background-color：背景颜色的表示方法</h2><p>css2.1 中，背景颜色的表示方法有三种：单词、rgb表示法、十六进制表示法。</p>
+<p>比如红色可以有下面的三种表示方法：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">background-color</span>: <span class="selector-tag">red</span>;</span><br><span class="line"><span class="selector-tag">background-color</span>: <span class="selector-tag">rgb</span>(255,0,0);</span><br><span class="line"><span class="selector-tag">background-color</span>: <span class="selector-id">#ff0000</span>;</span><br></pre></td></tr></table></figure>
+
+<p>CSS3 中，有一种新的表示颜色的方式：RGBA或者HSLA。</p>
+<p>RGBA、HSLA可应用于<strong>所有</strong>使用颜色的地方。</p>
+<p>下面分别介绍。</p>
+<h3 id="用英语单词表示"><a href="#用英语单词表示" class="headerlink" title="用英语单词表示"></a>用英语单词表示</h3><p>能够用英语单词来表述的颜色，都是简单颜色。比如红色、绿色等。代码举例：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">background-color</span>: <span class="selector-tag">red</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="RGB-表示法"><a href="#RGB-表示法" class="headerlink" title="RGB 表示法"></a>RGB 表示法</h3><p>RGB 表示三原色“红”red、“绿”green、“蓝”blue。</p>
+<p>光学显示器中，每个像素都是由三原色的发光原件组成的，靠明亮度不同调成不同的颜色的。r、g、b的值，每个值的取值范围0~255，一共256个值。</p>
+<p>比如红色：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">background-color</span>: <span class="selector-tag">rgb</span>(255,0,0);</span><br></pre></td></tr></table></figure>
+
+<p>黑色：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">background-color</span>: <span class="selector-tag">rgb</span>(0,0,0);</span><br></pre></td></tr></table></figure>
+
+<p>颜色可以叠加，比如黄色就是红色和绿色的叠加：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">background-color</span>: <span class="selector-tag">rgb</span>(255,255,0);</span><br></pre></td></tr></table></figure>
+
+<h3 id="RGBA-表示法"><a href="#RGBA-表示法" class="headerlink" title="RGBA 表示法"></a>RGBA 表示法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">background-color: rgba(<span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>, <span class="number">0.3</span>);</span><br><span class="line"></span><br><span class="line">border: <span class="number">30</span>px solid rgba(<span class="number">0</span>, <span class="number">255</span>, <span class="number">0</span>, <span class="number">0.3</span>);</span><br></pre></td></tr></table></figure>
+
+<p>解释：</p>
+<ul>
+<li><p>RGBA 即：Red、Green、Blue、Alpha</p>
+</li>
+<li><p>R、G、B 的取值范围是：0~255</p>
+</li>
+</ul>
+<h3 id="十六进制表示法"><a href="#十六进制表示法" class="headerlink" title="十六进制表示法"></a>十六进制表示法</h3><p>比如红色：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">background-color: #ff0000;</span><br></pre></td></tr></table></figure>
+
+<p>PS:所有用<code>#</code>开头的值，都是16进制的。</p>
+<p>这里，我们就要学会16进制与10进制之间的转换。下面举几个例子。</p>
+<p>问：16进制中28等于10进制多少？<br>答：2*16+8 = 40。</p>
+<p>16进制中的af等于10进制多少？<br>答：10 * 16 + 15 = 175</p>
+<p>所以，#ff0000就等于rgb(255,0,0)。</p>
+<p><code>background-color: #123456;</code>等价于<code>background-color: rgb(18,52,86);</code></p>
+<p><strong>十六进制可以简化为3位，所有#aabbcc的形式，能够简化为#abc</strong>。举例如下：</p>
+<p>比如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">background-color:#ff0000;</span><br></pre></td></tr></table></figure>
+
+<p>等价于：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">background-color:#f00;</span><br></pre></td></tr></table></figure>
+
+<p>比如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">background-color:#112233;</span><br></pre></td></tr></table></figure>
+
+<p>等价于：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">background-color:#123;</span><br></pre></td></tr></table></figure>
+
+<p>但是，比如下面这个是无法简化的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">background-color:#222333;</span><br></pre></td></tr></table></figure>
+
+<p>再比如，下面这个也是无法简化的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">background-color:#123123;</span><br></pre></td></tr></table></figure>
+
+<p>几种常见的颜色简写可以记住。如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#000   黑</span><br><span class="line">#fff   白</span><br><span class="line">#f00   红</span><br><span class="line">#222   深灰</span><br><span class="line">#333   灰</span><br><span class="line">#ccc   浅灰</span><br></pre></td></tr></table></figure>
+
+<h3 id="HSLA-表示法"><a href="#HSLA-表示法" class="headerlink" title="HSLA 表示法"></a>HSLA 表示法</h3><p>举例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">background-color: hsla(<span class="number">240</span>,<span class="number">50</span>%,<span class="number">50</span>%,<span class="number">0.4</span>);</span><br></pre></td></tr></table></figure>
+
+<p>解释：</p>
+<ul>
+<li><p><code>H</code> 色调，取值范围 0~360。0或360表示红色、120表示绿色、240表示蓝色。</p>
+</li>
+<li><p><code>S</code> 饱和度，取值范围 0%~100%。值越大，越鲜艳。</p>
+</li>
+<li><p><code>L</code> 亮度，取值范围 0%~100%。亮度最大时为白色，最小时为黑色。</p>
+</li>
+<li><p><code>A</code> 透明度，取值范围 0~1。</p>
+</li>
+</ul>
+<p><strong>关于设置透明度的其他方式：</strong></p>
+<p>（1）<code>opacity: 0.3;</code> 会将整个盒子及子盒子设置透明度。也就是说，当盒子设置半透明的时候，会影响里面的子盒子。</p>
+<p>（2）<code>background: transparent;</code> 可以单独设置透明度，但设置的是完全透明（不可调节透明度）。</p>
+<h2 id="background-repeat属性"><a href="#background-repeat属性" class="headerlink" title="background-repeat属性"></a><code>background-repeat</code>属性</h2><p><code>background-repeat:no-repeat;</code>设置背景图片是否重复及如何重复，默认平铺满。属性值可以是：</p>
+<ul>
+<li><code>no-repeat</code>（不要平铺）</li>
+<li><code>repeat-x</code>（横向平铺）</li>
+<li><code>repeat-y</code>（纵向平铺）</li>
+</ul>
+<h2 id="background-position属性"><a href="#background-position属性" class="headerlink" title="background-position属性"></a><code>background-position</code>属性</h2><p><code>background-position</code>属性指的是<strong>背景定位</strong>属性。</p>
+<p>在描述属性值的时候，有两种方式：用像素描述、用单词描述。下面分别介绍。</p>
+<p><strong>1、用像素值描述属性值：</strong></p>
+<p>格式如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">background-position:向右偏移量 向下偏移量;</span><br></pre></td></tr></table></figure>
+
+<p>属性值可以是正数，也可以是负数。比如：<code>100px 200px</code>、<code>-50px -120px</code>。</p>
+<p><strong>2、用单词描述属性值：</strong></p>
+<p>格式如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">background-position: 描述左右的词 描述上下的词;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>描述左右的词：left、center、right</li>
+<li>描述上下的词：top 、center、bottom</li>
+</ul>
+<p>比如说，<code>right center</code>表示将图片放到右边的中间；<code>center center</code>表示将图片放到正中间。</p>
+<p>比如说，<code>bottom</code>表示图片的底边和父亲<strong>底边贴齐</strong>（好好理解）。</p>
+<h2 id="background-attachment-属性"><a href="#background-attachment-属性" class="headerlink" title="background-attachment 属性"></a><code>background-attachment</code> 属性</h2><ul>
+<li><code>background-attachment:scroll;</code> 设置背景图片是否固定。属性值可以是：<ul>
+<li><code>fixed</code>（背景就会被固定住，不会被滚动条滚走）。</li>
+<li><code>scroll</code>（与fixed属性相反，默认属性）</li>
+</ul>
+</li>
+</ul>
+<p><code>background-attachment:fixed;</code>的效果如下：</p>
+<h3 id="background-综合属性"><a href="#background-综合属性" class="headerlink" title="background 综合属性"></a>background 综合属性</h3><p>background属性和border一样，是一个综合属性，可以将多个属性写在一起.<br>举例1:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">background</span><span class="selector-pseudo">:red</span> <span class="selector-tag">url</span>(1<span class="selector-class">.jpg</span>) <span class="selector-tag">no-repeat</span> 100<span class="selector-tag">px</span> 100<span class="selector-tag">px</span> <span class="selector-tag">fixed</span>;</span><br></pre></td></tr></table></figure>
+
+<p>等价于：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">background-color</span><span class="selector-pseudo">:red</span>;</span><br><span class="line"><span class="selector-tag">background-image</span><span class="selector-pseudo">:url(1.jpg)</span>;</span><br><span class="line"><span class="selector-tag">background-repeat</span><span class="selector-pseudo">:no-repeat</span>;</span><br><span class="line"><span class="selector-tag">background-position</span><span class="selector-pseudo">:100px</span> 100<span class="selector-tag">px</span>;</span><br><span class="line"><span class="selector-tag">background-attachment</span><span class="selector-pseudo">:fixed</span>;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="background-size属性：背景尺寸"><a href="#background-size属性：背景尺寸" class="headerlink" title="background-size属性：背景尺寸"></a><code>background-size</code>属性：背景尺寸</h2><p><code>background-size</code>属性：设置背景图片的尺寸。</p>
+<p>格式举例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 宽、高的具体数值 */</span></span><br><span class="line">background-size: <span class="number">500</span>px <span class="number">500</span>px;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 宽高的百分比（相对于容器的大小） */</span></span><br><span class="line">background-size: <span class="number">50</span>% <span class="number">50</span>%;   <span class="comment">// 如果两个属性值相同，可以简写成：background-size: 50%;</span></span><br><span class="line"></span><br><span class="line">background-size: <span class="number">100</span>% auto;  <span class="comment">//这个属性可以自己试验一下。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* cover：图片始终填充满容器，且保证长宽比不变。图片如果有超出部分，则超出部分会被隐藏。 */</span></span><br><span class="line">background-size: cover;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* contain：将图片完整地显示在容器中，且保证长宽比不变。可能会导致容器的部分区域为空白。  */</span></span><br><span class="line">background-size: contain;</span><br></pre></td></tr></table></figure>
+
+<p>这里我们对属性值 <code>cover</code> 和 <code>contain</code> 进行再次强调：</p>
+<ul>
+<li><p><code>cover</code>：图片始终<strong>填充满</strong>容器，且保证<strong>长宽比不变</strong>。图片如果有超出部分，则超出部分会被隐藏。</p>
+</li>
+<li><p><code>contain</code>：将图片<strong>完整地</strong>显示在容器中，且保证<strong>长宽比不变</strong>。可能会导致容器的部分区域留白。</p>
+</li>
+</ul>
+<h2 id="背景原点：background-origin-属性"><a href="#背景原点：background-origin-属性" class="headerlink" title="背景原点：background-origin 属性"></a>背景原点：<code>background-origin</code> 属性</h2><p><code>background-origin</code> 属性：控制背景从什么地方开始显示。</p>
+<p><strong>格式举例</strong>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/* 从 padding-box 内边距开始显示背景图 */</span></span><br><span class="line">background-origin: padding-box;           <span class="comment">//默认值</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* 从 border-box 边框开始显示背景图  */</span></span><br><span class="line">background-origin: border-box;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 从 content-box 内容区域开始显示背景图  */</span></span><br><span class="line">background-origin: content-box;</span><br></pre></td></tr></table></figure>
+
+<p>如果属性值设置成了<code>border-box</code>，那边框部分也会显示图片哦。</p>
+<h2 id="background-clip属性：设置元素的背景（背景图片或颜色）是否延伸到边框下面"><a href="#background-clip属性：设置元素的背景（背景图片或颜色）是否延伸到边框下面" class="headerlink" title="background-clip属性：设置元素的背景（背景图片或颜色）是否延伸到边框下面"></a><code>background-clip</code>属性：设置元素的背景（背景图片或颜色）是否延伸到边框下面</h2><p>格式举例：</p>
+<p><code>background-clip: content-box;</code>   超出的部分，将裁剪掉。属性值可以是：</p>
+<ul>
+<li><p><code>border-box</code> 超出 border-box 的部分，将裁剪掉</p>
+</li>
+<li><p><code>padding-box</code> 超出 padding-box 的部分，将裁剪掉</p>
+</li>
+<li><p><code>content-box</code> 超出 content-box 的部分，将裁剪掉</p>
+</li>
+</ul>
+<p>假设现在有这样的属性设置：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">background-origin: border-box;</span><br><span class="line"></span><br><span class="line">background-clip: content-box;</span><br></pre></td></tr></table></figure>
+
+<p>上方代码的意思是，背景图片从<strong>边框部分</strong>开始加载，但是呢，超出<strong>内容区域</strong>的部分将被裁减掉。</p>
+<h2 id="同时设置多个背景"><a href="#同时设置多个背景" class="headerlink" title="同时设置多个背景"></a>同时设置多个背景</h2><p>我们可以给一个盒子同时设置多个背景，用以逗号隔开即可。可用于自适应局。</p>
+<p>代码举例：</p>
+<h2 id="渐变：background-image"><a href="#渐变：background-image" class="headerlink" title="渐变：background-image"></a>渐变：background-image</h2><p>渐变是CSS3当中比较丰富多彩的一个特性，通过渐变我们可以实现许多炫丽的效果，有效的减少图片的使用数量，并且具有很强的适应性和可扩展性。</p>
+<p>渐变分为：</p>
+<ul>
+<li><p>线性渐变：沿着某条直线朝一个方向产生渐变效果。linear-gradient</p>
+</li>
+<li><p>径向渐变：从一个<strong>中心点</strong>开始沿着<strong>四周</strong>产生渐变效果。radial-gradient</p>
+</li>
+<li><p>重复渐变。linear-gradient-repeat</p>
+</li>
+</ul>
+<h3 id="线性渐变"><a href="#线性渐变" class="headerlink" title="线性渐变"></a>线性渐变</h3><p>格式：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">background-image: linear-gradient(方向, 起始颜色, 终止颜色);</span><br><span class="line"></span><br><span class="line">background-image: linear-gradient(to right, yellow, green);</span><br></pre></td></tr></table></figure>
+
+<p>参数解释：</p>
+<ul>
+<li>方向可以是：<code>to left</code>、<code>to right</code>、<code>to top</code>、<code>to bottom</code>、角度<code>30deg</code>（指的是顺时针方向30°）。</li>
+</ul>
+<p>格式举例：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line">        div &#123;</span><br><span class="line">            width: 500px;</span><br><span class="line">            height: 100px;</span><br><span class="line">            margin: 10px auto;</span><br><span class="line"><span class="css">            <span class="selector-tag">border</span>: 1<span class="selector-tag">px</span> <span class="selector-tag">solid</span> <span class="selector-id">#000</span>;</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        /* 语法：</span><br><span class="line">            linear-gradient(方向，起始颜色，终止颜色);</span><br><span class="line">            方向：to left   to right  to top   to bottom 　角度　30deg</span><br><span class="line">            起始颜色</span><br><span class="line">            终止颜色</span><br><span class="line">        */</span><br><span class="line"><span class="css">        <span class="selector-tag">div</span><span class="selector-pseudo">:nth-child(1)</span> &#123;</span></span><br><span class="line">            background-image: linear-gradient(to right, yellow, green);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"><span class="css">        <span class="comment">/* 不写方向，表示默认的方向是：从上往下 */</span></span></span><br><span class="line"><span class="css">        <span class="selector-tag">div</span><span class="selector-pseudo">:nth-child(2)</span> &#123;</span></span><br><span class="line">            background-image: linear-gradient(yellow, green);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"><span class="css">        <span class="comment">/* 方向可以指定角度 */</span></span></span><br><span class="line"><span class="css">        <span class="selector-tag">div</span><span class="selector-pseudo">:nth-child(3)</span> &#123;</span></span><br><span class="line">            width: 100px;</span><br><span class="line">            height: 100px;</span><br><span class="line">            background-image: linear-gradient(135deg, yellow, green);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"><span class="css">        <span class="comment">/* 0%的位置开始出现黄色，40%的位置开始出现红色的过度。70%的位置开始出现绿色的过度，100%的位置开始出现蓝色 */</span></span></span><br><span class="line"><span class="css">        <span class="selector-tag">div</span><span class="selector-pseudo">:nth-child(4)</span> &#123;</span></span><br><span class="line">            background-image: linear-gradient(to right,</span><br><span class="line">            yellow 0%,</span><br><span class="line">            red 40%,</span><br><span class="line">            green 70%,</span><br><span class="line">            blue 100%);</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"><span class="css">        <span class="comment">/* 颜色之间，出现突变 */</span></span></span><br><span class="line"><span class="css">        <span class="selector-tag">div</span><span class="selector-pseudo">:nth-child(5)</span> &#123;</span></span><br><span class="line">            background-image: linear-gradient(45deg,</span><br><span class="line">            yellow 0%,</span><br><span class="line">            yellow 25%,</span><br><span class="line">            blue 25%,</span><br><span class="line">            blue 50%,</span><br><span class="line">            red 50%,</span><br><span class="line">            red 75%,</span><br><span class="line">            green 75%,</span><br><span class="line">            green 100%</span><br><span class="line">            );</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"><span class="css">        <span class="selector-tag">div</span><span class="selector-pseudo">:nth-child(6)</span> &#123;</span></span><br><span class="line">            background-image: linear-gradient(to right,</span><br><span class="line"><span class="css">            <span class="selector-id">#000</span> 0%,</span></span><br><span class="line"><span class="css">            <span class="selector-id">#000</span> 25%,</span></span><br><span class="line"><span class="css">            <span class="selector-id">#fff</span> 25%,</span></span><br><span class="line"><span class="css">            <span class="selector-id">#fff</span> 50%,</span></span><br><span class="line"><span class="css">            <span class="selector-id">#000</span> 50%,</span></span><br><span class="line"><span class="css">            <span class="selector-id">#000</span> 75%,</span></span><br><span class="line"><span class="css">            <span class="selector-id">#fff</span> 75%,</span></span><br><span class="line"><span class="css">            <span class="selector-id">#fff</span> 100%</span></span><br><span class="line">            );</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="径向渐变"><a href="#径向渐变" class="headerlink" title="径向渐变"></a>径向渐变</h3><p>格式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">background-image: radial-gradient(辐射的半径大小, 中心的位置, 起始颜色, 终止颜色);</span><br><span class="line"></span><br><span class="line">background-image: radial-gradient(100px at center,yellow ,green);</span><br></pre></td></tr></table></figure>
+
+<p>解释：围绕中心点做渐变，半径是150px，从黄色到绿色做渐变。</p>
+<p>中心点的位置可以是：at  left  right  center bottom  top。如果以像素为单位，则中心点参照的是盒子的左上角。</p>
+<p>当然，还有其他的各种参数。格式举例：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line">        div &#123;</span><br><span class="line">            width: 250px;</span><br><span class="line">            height: 250px;</span><br><span class="line"><span class="css">            <span class="selector-tag">border</span>: 1<span class="selector-tag">px</span> <span class="selector-tag">solid</span> <span class="selector-id">#000</span>;</span></span><br><span class="line">            margin: 20px;</span><br><span class="line">            float: left;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        /*</span><br><span class="line">            径向渐变：</span><br><span class="line">            radial-gradient（辐射的半径大小, 中心的位置，起始颜色，终止颜色）;</span><br><span class="line">            中心点位置：at  left  right  center bottom  top</span><br><span class="line">        */</span><br><span class="line"></span><br><span class="line"><span class="css">        <span class="comment">/*辐射半径为100px，中心点在中间*/</span></span></span><br><span class="line"><span class="css">        <span class="selector-tag">div</span><span class="selector-pseudo">:nth-child(1)</span> &#123;</span></span><br><span class="line">            background-image: radial-gradient(100px at center, yellow, green);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"><span class="css">        <span class="comment">/*中心点在左上角*/</span></span></span><br><span class="line"><span class="css">        <span class="selector-tag">div</span><span class="selector-pseudo">:nth-child(3)</span> &#123;</span></span><br><span class="line">            background-image: radial-gradient(at left top, yellow, green);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"><span class="css">        <span class="selector-tag">div</span><span class="selector-pseudo">:nth-child(2)</span> &#123;</span></span><br><span class="line">            background-image: radial-gradient(at 50px 50px, yellow, green);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"><span class="css">        <span class="comment">/*设置不同的颜色渐变*/</span></span></span><br><span class="line"><span class="css">        <span class="selector-tag">div</span><span class="selector-pseudo">:nth-child(4)</span> &#123;</span></span><br><span class="line">            background-image: radial-gradient(100px at center,</span><br><span class="line">            yellow 0%,</span><br><span class="line">            green 30%,</span><br><span class="line">            blue 60%,</span><br><span class="line">            red 100%);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"><span class="css">        <span class="comment">/*如果辐射半径的宽高不同，那就是椭圆*/</span></span></span><br><span class="line"><span class="css">        <span class="selector-tag">div</span><span class="selector-pseudo">:nth-child(5)</span> &#123;</span></span><br><span class="line">            background-image: radial-gradient(100px 50px at center, yellow, green);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"box"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"box"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"box"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"box"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"box"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="clip-path：裁剪出元素的部分区域做展示"><a href="#clip-path：裁剪出元素的部分区域做展示" class="headerlink" title="clip-path：裁剪出元素的部分区域做展示"></a>clip-path：裁剪出元素的部分区域做展示</h2><p><code>clip-path</code>属性可以创建一个只有元素的部分区域可以显示的剪切区域。区域内的部分显示，区域外的隐藏。</p>
+<p>虽然<code>clip-path</code>不是背景属性，但这个属性非常强大，但往往会结合背景属性一起使用，达到一些效果。</p>
+<p>举例：（鼠标悬停时，放大裁剪的区域）</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.div1</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">320px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">320px</span>;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">1px</span> solid red;</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">url</span>(http://img.smyhvae.com/<span class="number">20191006</span>_1410.png) no-repeat;</span><br><span class="line">    <span class="attribute">background-size</span>: cover;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* 裁剪出圆形区域 */</span></span><br><span class="line">    <span class="attribute">clip-path</span>: <span class="built_in">circle</span>(<span class="number">50px</span> at <span class="number">100px</span> <span class="number">100px</span>);</span><br><span class="line">    <span class="attribute">transition</span>: clip-path .<span class="number">4s</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.div1</span><span class="selector-pseudo">:hover</span>&#123;</span><br><span class="line">    <span class="comment">/* 鼠标悬停时，裁剪出更大的圆形 */</span></span><br><span class="line">    <span class="attribute">clip-path</span>: <span class="built_in">circle</span>(<span class="number">80px</span> at <span class="number">100px</span> <span class="number">100px</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>clip-path</code>属性的好处是，即使做了任何裁剪，<strong>容器的占位大小是不变的</strong>。比如上方代码中，容器的占位大小一直都是 320px * 320px。这样的话，也方便我们做一些动画效果。</p>
+<p><code>clip-path: polygon()</code>举例：</p>
+<p>另外，通过 <code>clip-path: (svg)</code> 可以导入svg矢量图，实现 iOS图标的圆角。</p>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章推荐</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/05/21/19-水平垂直居中/" rel="bookmark">水平垂直居中</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/05/21/20-栏式布局/" rel="bookmark">栏式布局</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/04/18/01-CSS属性：字体属性和文本属性/" rel="bookmark">CSS属性：字体属性和文本属性</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/04/18/03-CSS样式表和选择器/" rel="bookmark">CSS样式表和选择器</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/04/18/04-CSS选择器：伪类/" rel="bookmark">CSS选择器：伪类</a></div>
+    </li>
+  </ul>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>lyy
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://yoursite.com/2020/04/18/02-CSS%E5%B1%9E%E6%80%A7%EF%BC%9A%E8%83%8C%E6%99%AF%E5%B1%9E%E6%80%A7/" title="CSS属性：背景属性">http://yoursite.com/2020/04/18/02-CSS属性：背景属性/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/CSS/" rel="tag"># CSS</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/04/18/03-%E5%8F%98%E9%87%8F%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" rel="prev" title="变量的数据类型">
+      <i class="fa fa-chevron-left"></i> 变量的数据类型
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/04/18/03-let%E5%92%8Cconst/" rel="next" title="let和const">
+      let和const <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#background-的常见背景属性"><span class="nav-number">1.</span> <span class="nav-text">background 的常见背景属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#background-color：背景颜色的表示方法"><span class="nav-number">2.</span> <span class="nav-text">background-color：背景颜色的表示方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#用英语单词表示"><span class="nav-number">2.1.</span> <span class="nav-text">用英语单词表示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RGB-表示法"><span class="nav-number">2.2.</span> <span class="nav-text">RGB 表示法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RGBA-表示法"><span class="nav-number">2.3.</span> <span class="nav-text">RGBA 表示法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#十六进制表示法"><span class="nav-number">2.4.</span> <span class="nav-text">十六进制表示法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HSLA-表示法"><span class="nav-number">2.5.</span> <span class="nav-text">HSLA 表示法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#background-repeat属性"><span class="nav-number">3.</span> <span class="nav-text">background-repeat属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#background-position属性"><span class="nav-number">4.</span> <span class="nav-text">background-position属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#background-attachment-属性"><span class="nav-number">5.</span> <span class="nav-text">background-attachment 属性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#background-综合属性"><span class="nav-number">5.1.</span> <span class="nav-text">background 综合属性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#background-size属性：背景尺寸"><span class="nav-number">6.</span> <span class="nav-text">background-size属性：背景尺寸</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#背景原点：background-origin-属性"><span class="nav-number">7.</span> <span class="nav-text">背景原点：background-origin 属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#background-clip属性：设置元素的背景（背景图片或颜色）是否延伸到边框下面"><span class="nav-number">8.</span> <span class="nav-text">background-clip属性：设置元素的背景（背景图片或颜色）是否延伸到边框下面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#同时设置多个背景"><span class="nav-number">9.</span> <span class="nav-text">同时设置多个背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#渐变：background-image"><span class="nav-number">10.</span> <span class="nav-text">渐变：background-image</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#线性渐变"><span class="nav-number">10.1.</span> <span class="nav-text">线性渐变</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#径向渐变"><span class="nav-number">10.2.</span> <span class="nav-text">径向渐变</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#clip-path：裁剪出元素的部分区域做展示"><span class="nav-number">11.</span> <span class="nav-text">clip-path：裁剪出元素的部分区域做展示</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="lyy"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">lyy</p>
+  <div class="site-description" itemprop="description">世间所有的相遇，都是久别重逢</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">117</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/lyylyylyylyy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;lyylyylyylyy" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zju.edu.cn/" title="ZJU → https:&#x2F;&#x2F;www.zju.edu.cn&#x2F;" rel="noopener" target="_blank"><i class="fa fa-graduation-cap fa-fw"></i>ZJU</a>
+      </span>
+  </div>
+
+
+
+    <div class="links-of-blogroll motion-element links-of-blogroll-block">
+      <div class="links-of-blogroll-title">
+        <!-- modify icon to fire by szw -->
+        <i class="fa fa-history fa-" aria-hidden="true"></i>
+        近期文章
+      </div>
+      <ul class="links-of-blogroll-list">
+        
+        
+          <li>
+            <a href="/2020/07/25/29.%20Divide%20Two%20Integers/" title="29. Divide Two Integers## 题目描述" target="_blank">29. Divide Two Integers## 题目描述</a>
+          </li>
+        
+          <li>
+            <a href="/2020/07/25/31.%20Next%20Permutation/" title="31. Next Permutation" target="_blank">31. Next Permutation</a>
+          </li>
+        
+          <li>
+            <a href="/2020/07/25/%E5%BC%82%E6%AD%A5IO/" title="异步I/O" target="_blank">异步I/O</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/24/02-JSX%E7%AE%80%E4%BB%8B/" title="JSX简介" target="_blank">JSX简介</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/24/03-%E5%85%83%E7%B4%A0%E6%B8%B2%E6%9F%93&%E7%BB%84%E4%BB%B6&props/" title="元素渲染&组件&props" target="_blank">元素渲染&组件&props</a>
+          </li>
+        
+      </ul>
+    </div>
+
+      </div>
+      <a href="https://clustrmaps.com/site/1b75d" target="_blank" rel="noopener"  title="Visit tracker"><img src="//www.clustrmaps.com/map_v2.png?d=MSgeNXm-y8DMM6r6hBqJa2IyTlI7gYrIkTQGt57lgv8&cl=ffffff" /></a>
+  </aside>
+    </div>
+    
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fab fa-android"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lyy</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-nest@1/canvas-nest.min.js"></script>
+  <script size="300" alpha="0.6" zIndex="-1" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : true,
+      appId      : 'mxQ2lQFuJOjoaYkjNciana8G-gzGzoHsz',
+      appKey     : 'AWuAvmWCK2rLASObQlsdeX2W',
+      placeholder: "Your comment makes this site better!",
+      avatar     : 'identicon',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="常见概念JavaScript的组成JavaScript基础分为三个部分：  ECMAScript：JavaScript的语法标准。包括变量、表达式、运算符、函数、if语句、for语句等。  DOM：文档对象模型（Document object Model），操作网页上的元素的API。比如让盒子移动、变色、轮播图等。  BOM：浏览器对象模型（Browser Object Model），操作浏览器">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BOM简介">
+<meta property="og:url" content="http://yoursite.com/2020/04/18/35-BOM%E7%AE%80%E4%BB%8B%E5%92%8Cnavigator.userAgent&History&Location/index.html">
+<meta property="og:site_name" content="若只如初见">
+<meta property="og:description" content="常见概念JavaScript的组成JavaScript基础分为三个部分：  ECMAScript：JavaScript的语法标准。包括变量、表达式、运算符、函数、if语句、for语句等。  DOM：文档对象模型（Document object Model），操作网页上的元素的API。比如让盒子移动、变色、轮播图等。  BOM：浏览器对象模型（Browser Object Model），操作浏览器">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-04-18T00:00:00.000Z">
+<meta property="article:modified_time" content="2020-04-19T10:05:40.000Z">
+<meta property="article:author" content="lyy">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/04/18/35-BOM%E7%AE%80%E4%BB%8B%E5%92%8Cnavigator.userAgent&History&Location/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>BOM简介 | 若只如初见</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">若只如初见</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">书籍是人类进步的阶梯</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签<span class="badge">12</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th fa-fw"></i>分类<span class="badge">12</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档<span class="badge">117</span></a>
+
+  </li>
+        <li class="menu-item menu-item-疫情地图">
+
+    <a href="http://joyli.net.cn/covid19-map/" rel="noopener" target="_blank"><i class="map fa-fw"></i>疫情地图</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/18/35-BOM%E7%AE%80%E4%BB%8B%E5%92%8Cnavigator.userAgent&History&Location/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="lyy">
+      <meta itemprop="description" content="世间所有的相遇，都是久别重逢">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="若只如初见">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          BOM简介
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-04-18 00:00:00" itemprop="dateCreated datePublished" datetime="2020-04-18T00:00:00Z">2020-04-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-19 10:05:40" itemprop="dateModified" datetime="2020-04-19T10:05:40Z">2020-04-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/04/18/35-BOM%E7%AE%80%E4%BB%8B%E5%92%8Cnavigator.userAgent&History&Location/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/04/18/35-BOM%E7%AE%80%E4%BB%8B%E5%92%8Cnavigator.userAgent&History&Location/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>4.7k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <hr>
+<h2 id="常见概念"><a href="#常见概念" class="headerlink" title="常见概念"></a>常见概念</h2><h3 id="JavaScript的组成"><a href="#JavaScript的组成" class="headerlink" title="JavaScript的组成"></a>JavaScript的组成</h3><p>JavaScript基础分为三个部分：</p>
+<ul>
+<li><p>ECMAScript：JavaScript的语法标准。包括变量、表达式、运算符、函数、if语句、for语句等。</p>
+</li>
+<li><p><strong>DOM</strong>：文档对象模型（Document object Model），操作<strong>网页上的元素</strong>的API。比如让盒子移动、变色、轮播图等。</p>
+</li>
+<li><p><strong>BOM</strong>：浏览器对象模型（Browser Object Model），操作<strong>浏览器部分功能</strong>的API。比如让浏览器自动滚动。</p>
+<a id="more"></a>
+<h3 id="常见的-BOM-对象"><a href="#常见的-BOM-对象" class="headerlink" title="常见的 BOM 对象"></a>常见的 BOM 对象</h3></li>
+</ul>
+<p>BOM可以让我们通过JS来操作浏览器。BOM中为我们提供了一些对象，来完成对浏览器相关的操作。</p>
+<p>常见的 BOM对象有：</p>
+<ul>
+<li><p>Window：代表整个浏览器的窗口，同时 window 也是网页中的全局对象。</p>
+</li>
+<li><p>Navigator：代表当前浏览器的信息，通过该对象可以识别不同的浏览器。</p>
+</li>
+<li><p>Location：代表当前浏览器的地址栏信息，通过 Location 可以获取地址栏信息，或者操作浏览器跳转页面。</p>
+</li>
+<li><p>History：代表浏览器的历史记录，通过该对象可以操作浏览器的历史记录。由于隐私原因，该对象不能获取到具体的历史记录，只能操作浏览器向前或向后翻页，而且该操作只在当次访问时有效。</p>
+</li>
+<li><p>Screen：代表用户的屏幕信息，通过该对象可以获取用户的显示器的相关信息。</p>
+</li>
+</ul>
+<p>备注：这些 BOM 对象都是作为 window 对象的属性保存的，可以通过window对象来使用，也可以直接使用。比如说，我可以使用 <code>window.location.href</code>，也可以直接使用 <code>location.href</code>，二者是等价的。</p>
+<p>备注2：不要忘了，之前学习过的<code>document</code>也是在<code>window</code>中保存的。</p>
+<p>这篇文章，我们先来讲一下 几个常见的 BOM 对象。</p>
+<h2 id="Navigator-和-navigator-userAgent"><a href="#Navigator-和-navigator-userAgent" class="headerlink" title="Navigator 和 navigator.userAgent"></a>Navigator 和 <code>navigator.userAgent</code></h2><p><code>Navigator</code>代表当前浏览器的信息，通过该对象可以识别不同的浏览器。</p>
+<p>由于历史原因，Navigator对象中的大部分属性都已经不能帮助我们识别浏览器了。</p>
+<p><strong>一般我们只会使用<code>navigator.userAgent</code>来获取浏览器的信息</strong>。</p>
+<p>userAgent 的值是一个字符串，简称 <strong>UA</strong>，这个字符串中包含了用来描述浏览器信息的内容，不同的浏览器会有不同的userAgent。</p>
+<p><strong>代码举例</strong>：（获取当前浏览器的UA）</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="actionscript">            <span class="keyword">var</span> ua = navigator.userAgent; <span class="comment">// 获取当前浏览器的 userAgent</span></span></span><br><span class="line"></span><br><span class="line"><span class="javascript">            <span class="built_in">console</span>.log(<span class="string">'qianguyihao 当前浏览器的UA是：'</span> + ua);</span></span><br><span class="line"></span><br><span class="line"><span class="javascript">            <span class="keyword">if</span> (<span class="regexp">/firefox/i</span>.test(ua)) &#123;</span></span><br><span class="line"><span class="actionscript">                alert(<span class="string">'是火狐浏览器'</span>);</span></span><br><span class="line"><span class="javascript">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="regexp">/chrome/i</span>.test(ua)) &#123;</span></span><br><span class="line"><span class="actionscript">                alert(<span class="string">'是Chrome浏览器'</span>);</span></span><br><span class="line"><span class="javascript">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="regexp">/msie/i</span>.test(ua)) &#123;</span></span><br><span class="line"><span class="actionscript">                alert(<span class="string">'是IE浏览器'</span>);</span></span><br><span class="line"><span class="javascript">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="string">'ActiveXObject'</span> <span class="keyword">in</span> <span class="built_in">window</span>) &#123;</span></span><br><span class="line"><span class="actionscript">                alert(<span class="string">'是 IE11 浏览器'</span>);</span></span><br><span class="line">            &#125;</span><br><span class="line">        <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="在电脑上模拟移动端浏览器"><a href="#在电脑上模拟移动端浏览器" class="headerlink" title="在电脑上模拟移动端浏览器"></a>在电脑上模拟移动端浏览器</h3><p>不同浏览器（包括微信内置的浏览器）的 userAgent 信息，是不一样的，我们可以根据 <code>navigator.userAgent</code>属性来获取。</p>
+<p>比如说，我们在电脑浏览器上，按F12，然后在控制台输入<code>navigator.userAgent</code>，</p>
+<p>MacOS上的Chrome浏览器的 userAgent 是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;Mozilla&#x2F;5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit&#x2F;537.36 (KHTML, like Gecko) Chrome&#x2F;66.0.3359.117 Safari&#x2F;537.36&quot;</span><br></pre></td></tr></table></figure>
+
+<p>我们还可以在电脑浏览器的控制台里可以添加很多设备，通过这种方式，可以模拟移动端浏览器的场景，非常有用，请务必掌握。操作如下：</p>
+<p>（1）需要点击 edit，手动添加：</p>
+<p>（2）添加时，根据 User agent 来识别不同的浏览器：</p>
+<h3 id="不同浏览器的-userAgent"><a href="#不同浏览器的-userAgent" class="headerlink" title="不同浏览器的 userAgent"></a>不同浏览器的 userAgent</h3><p>iOS 版微信浏览器：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Mozilla&#x2F;5.0 (iPhone; CPU iPhone OS 9_3 like Mac OS X) AppleWebKit&#x2F;601.1.46 (KHTML, like Gecko) Mobile&#x2F;13E233 MicroMessenger&#x2F;6.3.15 NetType&#x2F;WIFI Language&#x2F;zh_CN</span><br></pre></td></tr></table></figure>
+
+<p>Android 版微信浏览器：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Mozilla&#x2F;5.0 (Linux; Android 5.0.1; GT-I9502 Build&#x2F;LRX22C; wv) AppleWebKit&#x2F;537.36 (KHTML, like Gecko) Version&#x2F;4.0 Chrome&#x2F;43.0.2357.121 Mobile Safari&#x2F;537.36 MicroMessenger&#x2F;6.1.0.78_r1129455.543 NetType&#x2F;WIFI</span><br></pre></td></tr></table></figure>
+
+<p>iOS 版本QQ浏览器：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Mozilla&#x2F;5.0 (iPhone; CPU iPhone OS 11_2_2 like Mac OS X) AppleWebKit&#x2F;604.4.7 (KHTML, like Gecko) Mobile&#x2F;15C202 QQ&#x2F;7.3.5.473 V1_IPH_SQ_7.3.5_1_APP_A Pixel&#x2F;1125 Core&#x2F;UIWebView Device&#x2F;Apple(iPhone X) NetType&#x2F;WIFI QBWebViewType&#x2F;1</span><br></pre></td></tr></table></figure>
+
+<p>Android 版 QQ浏览器：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Mozilla&#x2F;5.0 (Linux; Android 4.4.2; PE-TL20 Build&#x2F;HuaweiPE-TL20; wv) AppleWebKit&#x2F;537.36 (KHTML, like Gecko) Version&#x2F;4.0 Chrome&#x2F;57.0.2987.132 MQQBrowser&#x2F;6.2 TBS&#x2F;043807 Mobile Safari&#x2F;537.36 V1_AND_SQ_7.3.2_762_YYB_D QQ&#x2F;7.3.2.3350 NetType&#x2F;WIFI WebP&#x2F;0.3.0 Pixel&#x2F;1080</span><br></pre></td></tr></table></figure>
+
+
+<p><strong>参考链接</strong>：</p>
+<ul>
+<li><p><a href="https://blog.csdn.net/taambernk520/article/details/80801574" target="_blank" rel="noopener">微信、QQ在Android和iOS的UserAgent</a></p>
+</li>
+<li><p><a href="http://www.cnblogs.com/7z7chn/p/5370352.html" target="_blank" rel="noopener">判断微信内置浏览器的UserAgent</a></p>
+</li>
+<li><p><a href="https://gist.github.com/wjp2013/fff34c063cf0cf227d65" target="_blank" rel="noopener">微信内置浏览器UserAgent的判断</a></p>
+</li>
+</ul>
+<h2 id="History-对象"><a href="#History-对象" class="headerlink" title="History 对象"></a>History 对象</h2><p>History对象：可以用来操作浏览器的向前或向后翻页。</p>
+<h3 id="History对象的属性"><a href="#History对象的属性" class="headerlink" title="History对象的属性"></a>History对象的属性</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">history.length</span><br></pre></td></tr></table></figure>
+
+<p>解释：获取浏览器历史列表中的 url 数量。注意，只是统计当次的数量，如果浏览器关了，数量会重置为1。</p>
+<h3 id="History对象的方法"><a href="#History对象的方法" class="headerlink" title="History对象的方法"></a>History对象的方法</h3><p><strong>方法1</strong>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">history.back();</span><br></pre></td></tr></table></figure>
+
+<p>解释：用来回退到上一个页面，作用和浏览器的「回退按钮」一样。</p>
+<p><strong>方法2</strong>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">history.forward();</span><br></pre></td></tr></table></figure>
+
+<p>解释：用来跳转下一个页面，作用和浏览器的「前进按钮」一样。</p>
+<p><strong>方法3</strong>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">history.go( int n);  <span class="comment">// 需要整数作为参数</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 代码举例：</span></span><br><span class="line">history.go( <span class="number">1</span> ); <span class="comment">// 向前跳转一个页面，相当于 history.forward()</span></span><br><span class="line"></span><br><span class="line">history.go( <span class="number">2</span> ); <span class="comment">// 表示向前跳转两个页面</span></span><br><span class="line"></span><br><span class="line">history.go( <span class="number">0</span> ); <span class="comment">// 刷新当前页面</span></span><br><span class="line"></span><br><span class="line">history.go( <span class="number">-1</span> ); <span class="comment">// 向后跳转一个页面，相当于 history.back()</span></span><br><span class="line"></span><br><span class="line">history.go( <span class="number">-2</span> ); <span class="comment">// 向后跳转两个页面</span></span><br></pre></td></tr></table></figure>
+
+<p>解释：向前/向后跳转 n 个页面。</p>
+<h2 id="Location-对象"><a href="#Location-对象" class="headerlink" title="Location 对象"></a>Location 对象</h2><p>Location 对象：封装了浏览器地址栏的 URL 信息。</p>
+<p>下面介绍一些常见的属性和方法。</p>
+<h3 id="Location-对象的属性"><a href="#Location-对象的属性" class="headerlink" title="Location 对象的属性"></a>Location 对象的属性</h3><p><strong>属性1</strong>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">location.href</span><br><span class="line"></span><br><span class="line">location.href &#x3D; &#39;https:&#x2F;&#x2F;xxx&#39;;</span><br></pre></td></tr></table></figure>
+
+<p>解释：获取当前页面的 url 路径（或者设置 url 路径）。</p>
+<p>代码举例1：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(location.href); <span class="comment">// 获取当前页面的url 路径</span></span><br></pre></td></tr></table></figure>
+
+<p>代码举例2：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">location.href = <span class="string">'www.baidu.com'</span>; <span class="comment">// 跳转到指定的页面链接。通俗理解就是：跳转到其他的页面</span></span><br></pre></td></tr></table></figure>
+
+<p>从上方的<strong>举例2</strong>中可以看出：如果直接将<code>location.href</code>属性修改为一个绝对路径（或相对路径），则页面会自动跳转到该路径，并生成相应的历史记录。</p>
+<h3 id="Location-对象的方法"><a href="#Location-对象的方法" class="headerlink" title="Location 对象的方法"></a>Location 对象的方法</h3><p><strong>方法1</strong>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">location.assign(str);</span><br></pre></td></tr></table></figure>
+
+<p>解释：用来跳转到其他的页面，作用和直接修改<code>location.href</code>一样。</p>
+<p><strong>方法2</strong>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">location.reload();</span><br></pre></td></tr></table></figure>
+
+<p>解释：用于重新加载当前页面，作用和刷新按钮一样。</p>
+<p>代码举例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">location.reload(); <span class="comment">// 重新加载当前页面。</span></span><br><span class="line">location.reload(<span class="literal">true</span>); <span class="comment">// 在方法的参数中传递一个true，则会强制清空缓存刷新页面。</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>方法3</strong>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">location.replace();</span><br></pre></td></tr></table></figure>
+
+<p>解释：使用一个新的页面替换当前页面，调用完毕也会跳转页面。但不会生成历史记录，不能使用「后退按钮」后退。</p>
+<h3 id="hash和history的区别"><a href="#hash和history的区别" class="headerlink" title="hash和history的区别"></a>hash和history的区别</h3><blockquote>
+<p>为什么要有 hash 和 history？</p>
+</blockquote>
+<blockquote>
+<p>对于 Vue 这类渐进式前端开发框架，为了构建 SPA（单页面应用），需要引入前端路由系统，这也就是 Vue-Router 存在的意义。前端路由的核心，就在于 —— 改变视图的同时不会向后端发出请求。</p>
+</blockquote>
+<p>为了达到这一目的，浏览器当前提供了以下两种支持：</p>
+<ul>
+<li><p>hash —— 即地址栏 URL 中的 # 符号（此 hash 不是密码学里的散列运算）。</p>
+<blockquote>
+<p>比如这个 URL：<a href="http://www.abc.com/#/hello，hash" target="_blank" rel="noopener">http://www.abc.com/#/hello，hash</a> 的值为 #/hello。它的特点在于：hash 虽然出现在 URL 中，但不会被包括在 HTTP 请求中，对后端完全没有影响，因此改变 hash 不会重新加载页面。</p>
+</blockquote>
+</li>
+<li><p>history —— 利用了 HTML5 History Interface 中新增的 pushState() 和 replaceState() 方法。（需要特定浏览器支持）</p>
+<blockquote>
+<p>这两个方法应用于浏览器的历史记录栈，在当前已有的 back、forward、go 的基础之上，它们提供了对历史记录进行修改的功能。只是当它们执行修改时，虽然改变了当前的 URL，但浏览器不会立即向后端发送请求。</p>
+</blockquote>
+</li>
+<li><p>因此可以说，hash 模式和 history 模式都属于浏览器自身的特性，Vue-Router 只是利用了这两个特性（通过调用浏览器提供的接口）来实现前端路由。</p>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章推荐</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/05/20/46-脚本化HTTP/" rel="bookmark">脚本化HTTP</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/04/18/01-JS简介/" rel="bookmark">JS简介</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/04/18/02-变量/" rel="bookmark">变量</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/04/18/03-变量的数据类型/" rel="bookmark">变量的数据类型</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/04/18/04-基本数据类型vs引用数据类型/" rel="bookmark">基本数据类型vs引用数据类型</a></div>
+    </li>
+  </ul>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>lyy
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://yoursite.com/2020/04/18/35-BOM%E7%AE%80%E4%BB%8B%E5%92%8Cnavigator.userAgent&History&Location/" title="BOM简介">http://yoursite.com/2020/04/18/35-BOM简介和navigator.userAgent&History&Location/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/04/18/37-BOM%E7%9A%84%E5%B8%B8%E8%A7%81%E5%86%85%E7%BD%AE%E6%96%B9%E6%B3%95%E5%92%8C%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1/" rel="prev" title="BOM的常见内置方法和内置对象">
+      <i class="fa fa-chevron-left"></i> BOM的常见内置方法和内置对象
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/04/18/36-%E5%AE%9A%E6%97%B6%E5%99%A8/" rel="next" title="定时器typeof和数据类型转换">
+      定时器typeof和数据类型转换 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#常见概念"><span class="nav-number">1.</span> <span class="nav-text">常见概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JavaScript的组成"><span class="nav-number">1.1.</span> <span class="nav-text">JavaScript的组成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常见的-BOM-对象"><span class="nav-number">1.2.</span> <span class="nav-text">常见的 BOM 对象</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Navigator-和-navigator-userAgent"><span class="nav-number">2.</span> <span class="nav-text">Navigator 和 navigator.userAgent</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#在电脑上模拟移动端浏览器"><span class="nav-number">2.1.</span> <span class="nav-text">在电脑上模拟移动端浏览器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不同浏览器的-userAgent"><span class="nav-number">2.2.</span> <span class="nav-text">不同浏览器的 userAgent</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#History-对象"><span class="nav-number">3.</span> <span class="nav-text">History 对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#History对象的属性"><span class="nav-number">3.1.</span> <span class="nav-text">History对象的属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#History对象的方法"><span class="nav-number">3.2.</span> <span class="nav-text">History对象的方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Location-对象"><span class="nav-number">4.</span> <span class="nav-text">Location 对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Location-对象的属性"><span class="nav-number">4.1.</span> <span class="nav-text">Location 对象的属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Location-对象的方法"><span class="nav-number">4.2.</span> <span class="nav-text">Location 对象的方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hash和history的区别"><span class="nav-number">4.3.</span> <span class="nav-text">hash和history的区别</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="lyy"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">lyy</p>
+  <div class="site-description" itemprop="description">世间所有的相遇，都是久别重逢</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">117</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/lyylyylyylyy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;lyylyylyylyy" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zju.edu.cn/" title="ZJU → https:&#x2F;&#x2F;www.zju.edu.cn&#x2F;" rel="noopener" target="_blank"><i class="fa fa-graduation-cap fa-fw"></i>ZJU</a>
+      </span>
+  </div>
+
+
+
+    <div class="links-of-blogroll motion-element links-of-blogroll-block">
+      <div class="links-of-blogroll-title">
+        <!-- modify icon to fire by szw -->
+        <i class="fa fa-history fa-" aria-hidden="true"></i>
+        近期文章
+      </div>
+      <ul class="links-of-blogroll-list">
+        
+        
+          <li>
+            <a href="/2020/07/25/29.%20Divide%20Two%20Integers/" title="29. Divide Two Integers## 题目描述" target="_blank">29. Divide Two Integers## 题目描述</a>
+          </li>
+        
+          <li>
+            <a href="/2020/07/25/31.%20Next%20Permutation/" title="31. Next Permutation" target="_blank">31. Next Permutation</a>
+          </li>
+        
+          <li>
+            <a href="/2020/07/25/%E5%BC%82%E6%AD%A5IO/" title="异步I/O" target="_blank">异步I/O</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/24/02-JSX%E7%AE%80%E4%BB%8B/" title="JSX简介" target="_blank">JSX简介</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/24/03-%E5%85%83%E7%B4%A0%E6%B8%B2%E6%9F%93&%E7%BB%84%E4%BB%B6&props/" title="元素渲染&组件&props" target="_blank">元素渲染&组件&props</a>
+          </li>
+        
+      </ul>
+    </div>
+
+      </div>
+      <a href="https://clustrmaps.com/site/1b75d" target="_blank" rel="noopener"  title="Visit tracker"><img src="//www.clustrmaps.com/map_v2.png?d=MSgeNXm-y8DMM6r6hBqJa2IyTlI7gYrIkTQGt57lgv8&cl=ffffff" /></a>
+  </aside>
+    </div>
+    
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fab fa-android"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lyy</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-nest@1/canvas-nest.min.js"></script>
+  <script size="300" alpha="0.6" zIndex="-1" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : true,
+      appId      : 'mxQ2lQFuJOjoaYkjNciana8G-gzGzoHsz',
+      appKey     : 'AWuAvmWCK2rLASObQlsdeX2W',
+      placeholder: "Your comment makes this site better!",
+      avatar     : 'identicon',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

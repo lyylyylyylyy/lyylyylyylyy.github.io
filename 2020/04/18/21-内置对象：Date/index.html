@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="内置对象：Date Date 对象在实际开发中，使用得很频繁，且容易在细节地方出错，需要引起重视。  内置对象 Date 用来处理日期和时间。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="内置对象Date">
+<meta property="og:url" content="http://yoursite.com/2020/04/18/21-%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1%EF%BC%9ADate/index.html">
+<meta property="og:site_name" content="若只如初见">
+<meta property="og:description" content="内置对象：Date Date 对象在实际开发中，使用得很频繁，且容易在细节地方出错，需要引起重视。  内置对象 Date 用来处理日期和时间。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-04-18T00:00:00.000Z">
+<meta property="article:modified_time" content="2020-04-19T09:59:52.000Z">
+<meta property="article:author" content="lyy">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/04/18/21-%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1%EF%BC%9ADate/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>内置对象Date | 若只如初见</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">若只如初见</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">书籍是人类进步的阶梯</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签<span class="badge">12</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th fa-fw"></i>分类<span class="badge">12</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档<span class="badge">117</span></a>
+
+  </li>
+        <li class="menu-item menu-item-疫情地图">
+
+    <a href="http://joyli.net.cn/covid19-map/" rel="noopener" target="_blank"><i class="map fa-fw"></i>疫情地图</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/18/21-%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1%EF%BC%9ADate/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="lyy">
+      <meta itemprop="description" content="世间所有的相遇，都是久别重逢">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="若只如初见">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          内置对象Date
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-04-18 00:00:00" itemprop="dateCreated datePublished" datetime="2020-04-18T00:00:00Z">2020-04-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-19 09:59:52" itemprop="dateModified" datetime="2020-04-19T09:59:52Z">2020-04-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/04/18/21-%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1%EF%BC%9ADate/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/04/18/21-%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1%EF%BC%9ADate/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>5.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>5 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <hr>
+<h2 id="内置对象：Date"><a href="#内置对象：Date" class="headerlink" title="内置对象：Date"></a>内置对象：Date</h2><blockquote>
+<p>Date 对象在实际开发中，使用得很频繁，且容易在细节地方出错，需要引起重视。</p>
+</blockquote>
+<p>内置对象 Date 用来处理日期和时间。</p>
+<a id="more"></a>
+<p><strong>需要注意的是</strong>：与 Math 对象不同，Date 对象是一个<strong>构造函数</strong> ，需要<strong>先实例化</strong>后才能使用。</p>
+<h2 id="创建Date对象"><a href="#创建Date对象" class="headerlink" title="创建Date对象"></a>创建Date对象</h2><p>创建Date对象有两种写法：</p>
+<ul>
+<li><p>写法一：如果Date()不写参数，就返回当前时间对象</p>
+</li>
+<li><p>写法二：如果Date()里面写参数，就返回括号里输入的时间对象</p>
+</li>
+</ul>
+<p>针对这两种写法，我们来具体讲一讲。</p>
+<h3 id="写法一：不传递参数时，则获取系统的当前时间对象"><a href="#写法一：不传递参数时，则获取系统的当前时间对象" class="headerlink" title="写法一：不传递参数时，则获取系统的当前时间对象"></a>写法一：不传递参数时，则获取系统的当前时间对象</h3><p>代码举例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> date1 = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line"><span class="built_in">console</span>.log(date1);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> date1);</span><br></pre></td></tr></table></figure>
+
+<p>代码解释：不传递参数时，表示的是获取系统的当前时间对象。也可以理解成是：获取当前代码执行的时间。</p>
+<p>打印结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Mon Feb 17 2020 21:57:22 GMT+0800 (中国标准时间)</span><br><span class="line">object</span><br></pre></td></tr></table></figure>
+
+<h3 id="写法二：传递参数"><a href="#写法二：传递参数" class="headerlink" title="写法二：传递参数"></a>写法二：传递参数</h3><p>参数中既可以传递数字，也可以传递字符串。</p>
+<p>代码举例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> date21 = <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="string">'2020/02/17 21:00:00'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(date21);</span><br><span class="line"><span class="comment">// Mon Feb 17 2020 21:00:00 GMT+0800 (中国标准时间)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> date22 = <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="number">2020</span>, <span class="number">2</span>, <span class="number">18</span>); <span class="comment">// 第二个参数返回的是三月，不是二月</span></span><br><span class="line"><span class="built_in">console</span>.log(date22);</span><br><span class="line"><span class="comment">// Wed Mar 18 2020 00:00:00 GMT+0800 (中国标准时间)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> date23 = <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="number">2020</span>, <span class="number">3</span>, <span class="number">18</span>, <span class="number">22</span>, <span class="number">59</span>, <span class="number">58</span>);</span><br><span class="line"><span class="built_in">console</span>.log(date23);</span><br><span class="line"><span class="comment">// Sat Apr 18 2020 22:59:58 GMT+0800 (中国标准时间)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> date24 = <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="string">'2020/04/19'</span>); <span class="comment">// 返回的就是四月</span></span><br><span class="line"><span class="built_in">console</span>.log(date24);</span><br><span class="line"><span class="comment">// Sun Apr 19 2020 00:00:00 GMT+0800 (中国标准时间)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> date25 = <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="string">'2020-05-20'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(date25);</span><br><span class="line"><span class="comment">// Wed May 20 2020 08:00:00 GMT+0800 (中国标准时间)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> date26 = <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="string">'Wed Jan 27 2017 12:00:00 GMT+0800 (中国标准时间)'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(date26);</span><br><span class="line"><span class="comment">// Fri Jan 27 2017 12:00:00 GMT+0800 (中国标准时间)</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+<h2 id="日期的格式化"><a href="#日期的格式化" class="headerlink" title="日期的格式化"></a>日期的格式化</h2><p>上一段内容里，我们获取到了 Date <strong>对象</strong>，但这个对象，打印出来的结果并不是特别直观。</p>
+<p>如果我们需要获取日期的<strong>指定部分</strong>，就需要用到 Date对象自带的方法。</p>
+<p>获取了日期指定的部分之后，我们就可以让日期按照指定的格式，进行展示（即日期的格式化）。比如说，我期望能以 <code>2020-02-02 19:30:59</code> 这种格式进行展示。</p>
+<p>在这之前，我们先来看看 Date 对象有哪些方法。</p>
+<h3 id="Date对象的方法"><a href="#Date对象的方法" class="headerlink" title="Date对象的方法"></a>Date对象的方法</h3><p>Date对象 有如下方法，可以获取日期和时间的<strong>指定部分</strong>：</p>
+<ul>
+<li><p><code>getFullYear()</code>        获取年份</p>
+</li>
+<li><p><code>getMonth()</code>           <strong>获取月 0-11</strong>（0代表一月）</p>
+</li>
+<li><p><code>getDate()</code>                 <strong>获取日 1-31</strong>。即：获取的是几号</p>
+</li>
+<li><p><code>getDay()</code>                 <strong>获取星期 0-6</strong>（0代表周日，1代表周一）</p>
+</li>
+<li><p><code>getHours()</code>      获取小时 0-23</p>
+</li>
+<li><p><code>getMinutes()</code>         获取分钟 0-59</p>
+</li>
+<li><p><code>getSeconds()</code>         获取秒  0-59</p>
+</li>
+<li><p><code>getMilliseconds()</code>    获取毫秒 （1s = 1000ms）</p>
+</li>
+</ul>
+<p><strong>代码举例</strong>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 我在执行这行代码时，当前时间为 2019年2月4日，周一，13:23:52</span></span><br><span class="line"><span class="keyword">var</span> myDate = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(myDate); <span class="comment">// 打印结果：Mon Feb 04 2019 13:23:52 GMT+0800 (中国标准时间)</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(myDate.getFullYear()); <span class="comment">// 打印结果：2019</span></span><br><span class="line"><span class="built_in">console</span>.log(myDate.getMonth() + <span class="number">1</span>); <span class="comment">// 打印结果：2</span></span><br><span class="line"><span class="built_in">console</span>.log(myDate.getDate()); <span class="comment">// 打印结果：4</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(myDate.getDay()); <span class="comment">// 打印结果：1</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(myDate.getHours()); <span class="comment">// 打印结果：13</span></span><br><span class="line"><span class="built_in">console</span>.log(myDate.getMinutes()); <span class="comment">// 打印结果：23</span></span><br><span class="line"><span class="built_in">console</span>.log(myDate.getSeconds()); <span class="comment">// 打印结果：52</span></span><br><span class="line"><span class="built_in">console</span>.log(myDate.getMilliseconds()); <span class="comment">// 打印结果：393</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(myDate.getTime()); <span class="comment">// 获取时间戳。打印结果：1549257832393</span></span><br></pre></td></tr></table></figure>
+
+<p>获取了日期和时间的指定部分之后，我们把它们用字符串拼接起来，就可以按照自己想要的格式，来展示日期。</p>
+<h3 id="举例1：年月日的格式化"><a href="#举例1：年月日的格式化" class="headerlink" title="举例1：年月日的格式化"></a>举例1：年月日的格式化</h3><p>代码举例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 格式化年月日：2020年2月2日 星期三</span></span><br><span class="line"><span class="keyword">var</span> date = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line"><span class="keyword">var</span> year = date.getFullYear();</span><br><span class="line"><span class="keyword">var</span> month = date.getMonth() + <span class="number">1</span>;</span><br><span class="line"><span class="keyword">var</span> dates = date.getDate();</span><br><span class="line"><span class="keyword">var</span> day = date.getDay();</span><br><span class="line"><span class="keyword">var</span> arr = [<span class="string">'星期日'</span>, <span class="string">'星期一'</span>, <span class="string">'星期二'</span>, <span class="string">'星期三'</span>, <span class="string">'星期四'</span>, <span class="string">'星期五'</span>, <span class="string">'星期六'</span>];</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'今天是：'</span> + year + <span class="string">'年'</span> + month + <span class="string">'月'</span> + dates + <span class="string">'日 '</span> + arr[day]);</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="举例2：时分秒的格式化"><a href="#举例2：时分秒的格式化" class="headerlink" title="举例2：时分秒的格式化"></a>举例2：时分秒的格式化</h3><p>封装一个函数，返回当前时间的时分秒，格式为 06:06:06）</p>
+<h2 id="getTime-：获取时间戳"><a href="#getTime-：获取时间戳" class="headerlink" title="getTime()：获取时间戳"></a>getTime()：获取时间戳</h2><p>Date对象 还有如下方法：</p>
+<ul>
+<li><code>getTime()</code>         获取当前日期对象的<strong>时间戳</strong>。这个方法在实际开发中，用得比较多。</li>
+</ul>
+<p>啥叫时间戳？接下来，我们解释一下。</p>
+<p><strong>时间戳</strong>：指的是从格林威治标准时间的<code>1970年1月1日，0时0分0秒</code>到当前日期所花费的<strong>毫秒数</strong>（1秒 = 1000毫秒）。</p>
+<p>计算机底层在保存时间时，使用的都是时间戳。时间戳的存在，就是为了<strong>统一</strong>时间的单位。</p>
+<p>我们再来看下面这样的代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myDate = <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="string">"1970/01/01 0:0:0"</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(myDate.getTime()); <span class="comment">// 获取时间戳</span></span><br></pre></td></tr></table></figure>
+
+<p>打印结果（可能会让你感到惊讶）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">-28800000</span></span><br></pre></td></tr></table></figure>
+
+<p>为啥打印结果是<code>-28800000</code>，而不是<code>0</code>呢？这是因为，我们的当前代码，是在中文环境下运行的，与英文时间会存在<strong>8个小时的时差</strong>（中文时间比英文时间早了八个小时）。如果代码是在英文环境下运行，打印结果就是<code>0</code>。</p>
+<p><strong>利用时间戳检测代码的执行时间</strong>：</p>
+<p>我们可以在业务代码的前面定义 <code>时间戳1</code>，在业务代码的后面定义 <code>时间戳2</code>。把这两个时间戳相减，就能得出业务代码的执行时间。</p>
+<h3 id="format"><a href="#format" class="headerlink" title="format()"></a>format()</h3><p>将时间对象转换为指定格式。</p>
+<p>参考链接：<a href="https://www.cnblogs.com/tugenhua0707/p/3776808.html" target="_blank" rel="noopener">https://www.cnblogs.com/tugenhua0707/p/3776808.html</a></p>
+<h2 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h2><h3 id="举例1：模拟日历"><a href="#举例1：模拟日历" class="headerlink" title="举例1：模拟日历"></a>举例1：模拟日历</h3><p>要求每天打开这个页面，都能定时显示当前的日期。</p>
+<p>代码实现：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line">        div &#123;</span><br><span class="line">            width: 800px;</span><br><span class="line">            margin: 200px auto;</span><br><span class="line">            color: red;</span><br><span class="line">            text-align: center;</span><br><span class="line">            font: 600 30px/30px "simsun";</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="actionscript">        <span class="comment">//模拟日历</span></span></span><br><span class="line"><span class="actionscript">        <span class="comment">//需求：每天打开这个页面都能定时显示年月日和星期几</span></span></span><br><span class="line"></span><br><span class="line"><span class="actionscript">        <span class="comment">//1.创建一个当前日期的日期对象</span></span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> date = <span class="keyword">new</span> <span class="built_in">Date</span>();</span></span><br><span class="line"><span class="actionscript">        <span class="comment">//2.然后获取其中的年、月、日和星期</span></span></span><br><span class="line"><span class="actionscript">        <span class="keyword">var</span> year = date.getFullYear();</span></span><br><span class="line"><span class="actionscript">        <span class="keyword">var</span> month = date.getMonth();</span></span><br><span class="line"><span class="actionscript">        <span class="keyword">var</span> hao = date.getDate();</span></span><br><span class="line"><span class="actionscript">        <span class="keyword">var</span> week = date.getDay();</span></span><br><span class="line"><span class="actionscript"><span class="comment">//        console.log(year+" "+month+" "+hao+" "+week);</span></span></span><br><span class="line"><span class="actionscript">        <span class="comment">//3.赋值给div</span></span></span><br><span class="line"><span class="actionscript">        <span class="keyword">var</span> arr = [<span class="string">"星期日"</span>,<span class="string">"星期一"</span>,<span class="string">"星期二"</span>,<span class="string">"星期三"</span>,<span class="string">"星期四"</span>,<span class="string">"星期五"</span>,<span class="string">"星期六"</span>];</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> div = <span class="built_in">document</span>.getElementsByTagName(<span class="string">"div"</span>)[<span class="number">0</span>];</span></span><br><span class="line"><span class="actionscript">        div.innerText = <span class="string">"今天是："</span>+year+<span class="string">"年"</span>+(month+<span class="number">1</span>)+<span class="string">"月"</span>+hao+<span class="string">"日 "</span>+arr[week];</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="举例2：发布会倒计时"><a href="#举例2：发布会倒计时" class="headerlink" title="举例2：发布会倒计时"></a>举例2：发布会倒计时</h3><p>实现思路：</p>
+<p>设置一个定时器，每间隔1毫秒就自动刷新一次div的内容。</p>
+<p>代码实现：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line">        div &#123;</span><br><span class="line">            width: 1210px;</span><br><span class="line">            margin: 200px auto;</span><br><span class="line">            color: red;</span><br><span class="line">            text-align: center;</span><br><span class="line">            font: 600 30px/30px "simsun";</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> div = <span class="built_in">document</span>.getElementsByTagName(<span class="string">"div"</span>)[<span class="number">0</span>];</span></span><br><span class="line"><span class="actionscript">    <span class="keyword">var</span> timer = setInterval(fn, <span class="number">1</span>);</span></span><br><span class="line"></span><br><span class="line"><span class="actionscript">    <span class="function"><span class="keyword">function</span> <span class="title">fn</span><span class="params">()</span> </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> nowtime = <span class="keyword">new</span> <span class="built_in">Date</span>();</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> future = <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="string">"2019/02/03 11:20:00"</span>);</span></span><br><span class="line"><span class="actionscript">        <span class="keyword">var</span> timeSum = future.getTime() - nowtime.getTime();  <span class="comment">//获取时间差：发布会时间减去此刻的毫秒值</span></span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> day = <span class="built_in">parseInt</span>(timeSum / <span class="number">1000</span> / <span class="number">60</span> / <span class="number">60</span> / <span class="number">24</span>);</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> hour = <span class="built_in">parseInt</span>(timeSum / <span class="number">1000</span> / <span class="number">60</span> / <span class="number">60</span> % <span class="number">24</span>);</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> minu = <span class="built_in">parseInt</span>(timeSum / <span class="number">1000</span> / <span class="number">60</span> % <span class="number">60</span>);</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> sec = <span class="built_in">parseInt</span>(timeSum / <span class="number">1000</span> % <span class="number">60</span>);</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> millsec = <span class="built_in">parseInt</span>(timeSum % <span class="number">1000</span>);</span></span><br><span class="line"></span><br><span class="line"><span class="actionscript">        <span class="comment">//问题处理：所有的时间小于10的时候，在前面自动补0，毫秒值要补双0（比如如，把 8 秒改成 08 秒）</span></span></span><br><span class="line"><span class="actionscript">        day = day &lt; <span class="number">10</span> ? <span class="string">"0"</span> + day : day;  <span class="comment">//day小于10吗？如果小于，就补0；如果不小于，就是day本身</span></span></span><br><span class="line"><span class="actionscript">        hour = hour &lt; <span class="number">10</span> ? <span class="string">"0"</span> + hour : hour;</span></span><br><span class="line"><span class="actionscript">        minu = minu &lt; <span class="number">10</span> ? <span class="string">"0"</span> + minu : minu;</span></span><br><span class="line"><span class="actionscript">        sec = sec &lt; <span class="number">10</span> ? <span class="string">"0"</span> + sec : sec;</span></span><br><span class="line">        if (millsec &lt; 10) &#123;</span><br><span class="line"><span class="actionscript">            millsec = <span class="string">"00"</span> + millsec;</span></span><br><span class="line"><span class="actionscript">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (millsec &lt; <span class="number">100</span>) &#123;</span></span><br><span class="line"><span class="actionscript">            millsec = <span class="string">"0"</span> + millsec;</span></span><br><span class="line">        &#125;</span><br><span class="line"><span class="actionscript"><span class="comment">//        console.log(day);</span></span></span><br><span class="line"><span class="actionscript"><span class="comment">//        console.log(parseInt(timeSum/1000/60/60/24));</span></span></span><br><span class="line">        if (timeSum &lt; 0) &#123;</span><br><span class="line"><span class="actionscript">            div.innerHTML = <span class="string">"距离苹果发布会还有00天00小时00分00秒000毫秒"</span>;</span></span><br><span class="line">            clearInterval(timer);</span><br><span class="line"><span class="actionscript">            <span class="keyword">return</span>;</span></span><br><span class="line">        &#125;</span><br><span class="line"><span class="actionscript">        div.innerHTML = <span class="string">"距离苹果发布会还有"</span> + day + <span class="string">"天"</span> + hour + <span class="string">"小时"</span> + minu + <span class="string">"分"</span> + sec + <span class="string">"秒"</span> + millsec + <span class="string">"毫秒"</span>;</span></span><br><span class="line">    &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章推荐</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/05/20/46-脚本化HTTP/" rel="bookmark">脚本化HTTP</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/04/18/01-JS简介/" rel="bookmark">JS简介</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/04/18/02-变量/" rel="bookmark">变量</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/04/18/03-变量的数据类型/" rel="bookmark">变量的数据类型</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/04/18/04-基本数据类型vs引用数据类型/" rel="bookmark">基本数据类型vs引用数据类型</a></div>
+    </li>
+  </ul>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>lyy
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://yoursite.com/2020/04/18/21-%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1%EF%BC%9ADate/" title="内置对象Date">http://yoursite.com/2020/04/18/21-内置对象：Date/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/04/18/22-Class%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/" rel="prev" title="Class的基本语法">
+      <i class="fa fa-chevron-left"></i> Class的基本语法
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/04/18/21-async%E5%87%BD%E6%95%B0/" rel="next" title="async函数">
+      async函数 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#内置对象：Date"><span class="nav-number">1.</span> <span class="nav-text">内置对象：Date</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建Date对象"><span class="nav-number">2.</span> <span class="nav-text">创建Date对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#写法一：不传递参数时，则获取系统的当前时间对象"><span class="nav-number">2.1.</span> <span class="nav-text">写法一：不传递参数时，则获取系统的当前时间对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#写法二：传递参数"><span class="nav-number">2.2.</span> <span class="nav-text">写法二：传递参数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#日期的格式化"><span class="nav-number">3.</span> <span class="nav-text">日期的格式化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Date对象的方法"><span class="nav-number">3.1.</span> <span class="nav-text">Date对象的方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#举例1：年月日的格式化"><span class="nav-number">3.2.</span> <span class="nav-text">举例1：年月日的格式化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#举例2：时分秒的格式化"><span class="nav-number">3.3.</span> <span class="nav-text">举例2：时分秒的格式化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#getTime-：获取时间戳"><span class="nav-number">4.</span> <span class="nav-text">getTime()：获取时间戳</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#format"><span class="nav-number">4.1.</span> <span class="nav-text">format()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#练习"><span class="nav-number">5.</span> <span class="nav-text">练习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#举例1：模拟日历"><span class="nav-number">5.1.</span> <span class="nav-text">举例1：模拟日历</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#举例2：发布会倒计时"><span class="nav-number">5.2.</span> <span class="nav-text">举例2：发布会倒计时</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="lyy"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">lyy</p>
+  <div class="site-description" itemprop="description">世间所有的相遇，都是久别重逢</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">117</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/lyylyylyylyy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;lyylyylyylyy" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zju.edu.cn/" title="ZJU → https:&#x2F;&#x2F;www.zju.edu.cn&#x2F;" rel="noopener" target="_blank"><i class="fa fa-graduation-cap fa-fw"></i>ZJU</a>
+      </span>
+  </div>
+
+
+
+    <div class="links-of-blogroll motion-element links-of-blogroll-block">
+      <div class="links-of-blogroll-title">
+        <!-- modify icon to fire by szw -->
+        <i class="fa fa-history fa-" aria-hidden="true"></i>
+        近期文章
+      </div>
+      <ul class="links-of-blogroll-list">
+        
+        
+          <li>
+            <a href="/2020/07/25/29.%20Divide%20Two%20Integers/" title="29. Divide Two Integers## 题目描述" target="_blank">29. Divide Two Integers## 题目描述</a>
+          </li>
+        
+          <li>
+            <a href="/2020/07/25/31.%20Next%20Permutation/" title="31. Next Permutation" target="_blank">31. Next Permutation</a>
+          </li>
+        
+          <li>
+            <a href="/2020/07/25/%E5%BC%82%E6%AD%A5IO/" title="异步I/O" target="_blank">异步I/O</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/24/02-JSX%E7%AE%80%E4%BB%8B/" title="JSX简介" target="_blank">JSX简介</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/24/03-%E5%85%83%E7%B4%A0%E6%B8%B2%E6%9F%93&%E7%BB%84%E4%BB%B6&props/" title="元素渲染&组件&props" target="_blank">元素渲染&组件&props</a>
+          </li>
+        
+      </ul>
+    </div>
+
+      </div>
+      <a href="https://clustrmaps.com/site/1b75d" target="_blank" rel="noopener"  title="Visit tracker"><img src="//www.clustrmaps.com/map_v2.png?d=MSgeNXm-y8DMM6r6hBqJa2IyTlI7gYrIkTQGt57lgv8&cl=ffffff" /></a>
+  </aside>
+    </div>
+    
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fab fa-android"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lyy</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-nest@1/canvas-nest.min.js"></script>
+  <script size="300" alpha="0.6" zIndex="-1" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : true,
+      appId      : 'mxQ2lQFuJOjoaYkjNciana8G-gzGzoHsz',
+      appKey     : 'AWuAvmWCK2rLASObQlsdeX2W',
+      placeholder: "Your comment makes this site better!",
+      avatar     : 'identicon',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

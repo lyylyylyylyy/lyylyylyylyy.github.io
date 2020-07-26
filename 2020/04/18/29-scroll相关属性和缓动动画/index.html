@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="scroll 相关属性window.onscroll() 方法当我们用鼠标滚轮，滚动网页的时候，会触发 window.onscroll() 方法。效果如下：（注意看控制台的打印结果）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="29-scroll相关属性和缓动动画">
+<meta property="og:url" content="http://yoursite.com/2020/04/18/29-scroll%E7%9B%B8%E5%85%B3%E5%B1%9E%E6%80%A7%E5%92%8C%E7%BC%93%E5%8A%A8%E5%8A%A8%E7%94%BB/index.html">
+<meta property="og:site_name" content="若只如初见">
+<meta property="og:description" content="scroll 相关属性window.onscroll() 方法当我们用鼠标滚轮，滚动网页的时候，会触发 window.onscroll() 方法。效果如下：（注意看控制台的打印结果）">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-04-18T00:00:00.000Z">
+<meta property="article:modified_time" content="2020-04-19T10:05:06.000Z">
+<meta property="article:author" content="lyy">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/04/18/29-scroll%E7%9B%B8%E5%85%B3%E5%B1%9E%E6%80%A7%E5%92%8C%E7%BC%93%E5%8A%A8%E5%8A%A8%E7%94%BB/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>29-scroll相关属性和缓动动画 | 若只如初见</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">若只如初见</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">书籍是人类进步的阶梯</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签<span class="badge">12</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th fa-fw"></i>分类<span class="badge">12</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档<span class="badge">117</span></a>
+
+  </li>
+        <li class="menu-item menu-item-疫情地图">
+
+    <a href="http://joyli.net.cn/covid19-map/" rel="noopener" target="_blank"><i class="map fa-fw"></i>疫情地图</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/18/29-scroll%E7%9B%B8%E5%85%B3%E5%B1%9E%E6%80%A7%E5%92%8C%E7%BC%93%E5%8A%A8%E5%8A%A8%E7%94%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="lyy">
+      <meta itemprop="description" content="世间所有的相遇，都是久别重逢">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="若只如初见">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          29-scroll相关属性和缓动动画
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-04-18 00:00:00" itemprop="dateCreated datePublished" datetime="2020-04-18T00:00:00Z">2020-04-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-19 10:05:06" itemprop="dateModified" datetime="2020-04-19T10:05:06Z">2020-04-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/04/18/29-scroll%E7%9B%B8%E5%85%B3%E5%B1%9E%E6%80%A7%E5%92%8C%E7%BC%93%E5%8A%A8%E5%8A%A8%E7%94%BB/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/04/18/29-scroll%E7%9B%B8%E5%85%B3%E5%B1%9E%E6%80%A7%E5%92%8C%E7%BC%93%E5%8A%A8%E5%8A%A8%E7%94%BB/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>12k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>11 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <hr>
+<h2 id="scroll-相关属性"><a href="#scroll-相关属性" class="headerlink" title="scroll 相关属性"></a>scroll 相关属性</h2><h3 id="window-onscroll-方法"><a href="#window-onscroll-方法" class="headerlink" title="window.onscroll() 方法"></a>window.onscroll() 方法</h3><p>当我们用鼠标滚轮，滚动网页的时候，会触发 window.onscroll() 方法。效果如下：（注意看控制台的打印结果）</p>
+<a id="more"></a>
+<p>如果你需要做滚动监听，可以使用这个方法。</p>
+<p>我们来看看和 scroll 相关的有哪些属性。</p>
+<h3 id="1、ScrollWidth-和-scrollHeight"><a href="#1、ScrollWidth-和-scrollHeight" class="headerlink" title="1、ScrollWidth 和 scrollHeight"></a>1、ScrollWidth 和 scrollHeight</h3><p><code>ScrollWidth</code> 和 <code>scrollHeight</code>：获取元素<strong>整个滚动区域</strong>的宽、高。包括 width 和 padding，不包括 border和margin。</p>
+<p><strong>注意</strong>：</p>
+<p><code>scrollHeight</code> 的特点是：如果内容超出了盒子，<code>scrollHeight</code>为内容的高（包括超出的内容）；如果不超出，<code>scrollHeight</code>为盒子本身的高度。<code>ScrollWidth</code>同理。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line">        div &#123;</span><br><span class="line">            width: 100px;</span><br><span class="line">            height: 100px;</span><br><span class="line">            padding: 10px;</span><br><span class="line">            margin: 3px;</span><br><span class="line">            border: 8px solid red;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"box"</span>&gt;</span></span><br><span class="line">    静，能寒窗苦守；动，能点石成金。</span><br><span class="line">    静，能寒窗苦守；动，能点石成金。</span><br><span class="line">    静，能寒窗苦守；动，能点石成金。</span><br><span class="line">    静，能寒窗苦守；动，能点石成金。</span><br><span class="line">    静，能寒窗苦守；动，能点石成金。</span><br><span class="line">    静，能寒窗苦守；动，能点石成金。</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> div = <span class="built_in">document</span>.getElementsByTagName(<span class="string">"div"</span>)[<span class="number">0</span>];</span></span><br><span class="line"></span><br><span class="line"><span class="actionscript">    <span class="comment">// `scrollHeight` 的特点是：如果内容超出了盒子，`scrollHeight`为内容的高（包括超出的内容）；如果不超出，`scrollHeight`为盒子本身的高度。</span></span></span><br><span class="line"><span class="actionscript">    <span class="comment">//IE8以下（不包括IE8），为盒子本身内容的高度。</span></span></span><br><span class="line"><span class="javascript">    <span class="built_in">console</span>.log(div.scrollWidth);</span></span><br><span class="line"><span class="javascript">    <span class="built_in">console</span>.log(div.scrollHeight);</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="2、scrollTop-和-scrollLeft"><a href="#2、scrollTop-和-scrollLeft" class="headerlink" title="2、scrollTop 和 scrollLeft"></a>2、scrollTop 和 scrollLeft</h3><ul>
+<li><p><code>scrollLeft</code>：获取水平滚动条滚动的距离。</p>
+</li>
+<li><p><code>scrollTop</code>：获取垂直滚动条滚动的距离。</p>
+</li>
+</ul>
+<p><strong>实战经验</strong>：</p>
+<p>当某个元素满足<code>scrollHeight - scrollTop == clientHeight</code>时，说明垂直滚动条滚动到底了。</p>
+<p>当某个元素满足<code>scrollWidth - scrollLeft == clientWidth</code>时，说明水平滚动条滚动到底了。</p>
+<p>这个实战经验非常有用，可以用来判断用户是否已经将内容滑动到底了。比如说，有些场景下，希望用户能够看完“长长的活动规则”，才允许触发接下来的表单操作。</p>
+<h3 id="scrollTop-的兼容性"><a href="#scrollTop-的兼容性" class="headerlink" title="scrollTop 的兼容性"></a>scrollTop 的兼容性</h3><p>如果要获取页面滚动的距离，scrollTop 这个属性的写法要注意兼容性，如下。</p>
+<p>（1）如果文档没有 DTD 声明，写法为：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.body.scrollTop</span><br></pre></td></tr></table></figure>
+
+<p>在没有 DTD 声明的情况下，要求是这种写法，chrome浏览器才能认出来。</p>
+<p>（2）如果文档有 DTD 声明，写法为：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.documentElement.scrollTop</span><br></pre></td></tr></table></figure>
+
+<p>在有 DTD 声明的情况下，要求是这种写法，IE6、7、8才能认出来。</p>
+<p>综合上面这两个，就诞生了一种兼容性的写法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.body.scrollTop || <span class="built_in">document</span>.documentElement.scrollTop <span class="comment">//方式一</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">document</span>.body.scrollTop + <span class="built_in">document</span>.documentElement.scrollTop  <span class="comment">//方式二</span></span><br></pre></td></tr></table></figure>
+
+<p>另外还有一种兼容性的写法：<code>window.pageYOffset</code> 和 <code>window.pageXOffset</code>。这种写法无视DTD的声明。这种写法支持的浏览器版本是：火狐/谷歌/ie9+。</p>
+<p>综合上面的几种写法，为了兼容，不管有没有DTD，<strong>最终版的兼容性写法：</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.pageYOffset || <span class="built_in">document</span>.body.scrollTop || <span class="built_in">document</span>.documentElement.scrollTop;</span><br></pre></td></tr></table></figure>
+
+<h3 id="判断是否已经-DTD-声明"><a href="#判断是否已经-DTD-声明" class="headerlink" title="判断是否已经 DTD 声明"></a>判断是否已经 DTD 声明</h3><p>方法如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.compatMode === <span class="string">"CSS1Compat"</span>   <span class="comment">// 已声明</span></span><br><span class="line"><span class="built_in">document</span>.compatMode === <span class="string">"BackCompat"</span>   <span class="comment">// 未声明</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="将-scrollTop-和-scrollLeft-进行封装"><a href="#将-scrollTop-和-scrollLeft-进行封装" class="headerlink" title="将 scrollTop 和 scrollLeft 进行封装"></a>将 scrollTop 和 scrollLeft 进行封装</h3><p>这里，我们将 scrollTop 和 scrollLeft 封装为一个方法，名叫scroll()，返回值为 一个对象。以后就直接调用<code>scroll().top</code> 和 <code>scroll().left</code>就好。</p>
+<p>代码实现：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line">        body &#123;</span><br><span class="line">            height: 6000px;</span><br><span class="line">            width: 5000px;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="actionscript">    <span class="comment">//需求：封装一个兼容的scroll().返回的是对象，用scroll().top获取scrollTop，用scroll().left获取scrollLeft</span></span></span><br><span class="line"></span><br><span class="line"><span class="javascript">    <span class="built_in">window</span>.onscroll = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="actionscript"><span class="comment">//        var myScroll = scroll();</span></span></span><br><span class="line"><span class="actionscript"><span class="comment">//        myScroll.top;</span></span></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(scroll().top);</span></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(scroll().left);</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="actionscript">    <span class="comment">//函数封装（简单封装，实际工作使用）</span></span></span><br><span class="line"><span class="actionscript">    <span class="function"><span class="keyword">function</span> <span class="title">scroll</span><span class="params">()</span> </span>&#123;</span></span><br><span class="line"><span class="actionscript">        <span class="keyword">return</span> &#123; <span class="comment">//此函数的返回值是对象</span></span></span><br><span class="line"><span class="javascript">            left: <span class="built_in">window</span>.pageYOffset || <span class="built_in">document</span>.body.scrollTop || <span class="built_in">document</span>.documentElement.scrollTop,</span></span><br><span class="line"><span class="javascript">            right: <span class="built_in">window</span>.pageXOffset || <span class="built_in">document</span>.body.scrollLeft || <span class="built_in">document</span>.documentElement.scrollLeft</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>上方代码中，函数定义的那部分就是要封装的代码。</p>
+<p>另外还有一种比较麻烦的封装方式：（仅供参考）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">scroll</span>(<span class="params"></span>) </span>&#123;  <span class="comment">// 开始封装自己的scrollTop</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">window</span>.pageYOffset !== <span class="literal">undefined</span>) &#123;  <span class="comment">// ie9+ 高版本浏览器</span></span><br><span class="line">        <span class="comment">// 因为 window.pageYOffset 默认的是  0  所以这里需要判断</span></span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            left: <span class="built_in">window</span>.pageXOffset,</span><br><span class="line">            top: <span class="built_in">window</span>.pageYOffset</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(<span class="built_in">document</span>.compatMode === <span class="string">"CSS1Compat"</span>) &#123;    <span class="comment">// 标准浏览器   来判断有没有声明DTD</span></span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            left: <span class="built_in">document</span>.documentElement.scrollLeft,</span><br><span class="line">            top: <span class="built_in">document</span>.documentElement.scrollTop</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> &#123;   <span class="comment">// 未声明 DTD</span></span><br><span class="line">        left: <span class="built_in">document</span>.body.scrollLeft,</span><br><span class="line">        top: <span class="built_in">document</span>.body.scrollTop</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="获取-html-文档的方法"><a href="#获取-html-文档的方法" class="headerlink" title="获取 html 文档的方法"></a>获取 html 文档的方法</h2><p>获取title、body、head、html标签的方法如下：</p>
+<ul>
+<li><p><code>document.title</code> 文档标题；</p>
+</li>
+<li><p><code>document.head</code>  文档的头标签</p>
+</li>
+<li><p><code>document.body</code>  文档的body标签；</p>
+</li>
+<li><p><code>document.documentElement</code>  （这个很重要）。</p>
+</li>
+</ul>
+<p><code>document.documentElement</code>表示文档的html标签。也就是说，基本结构当中的 <code>html 标签</code>而是通过<code>document.documentElement</code>访问的，并不是通过 document.html 去访问的。</p>
+<h2 id="scrollTop-举例：固定导航栏"><a href="#scrollTop-举例：固定导航栏" class="headerlink" title="scrollTop 举例：固定导航栏"></a>scrollTop 举例：固定导航栏</h2><p>完整版代码实现：</p>
+<p>（1）index.html：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line">        * &#123;</span><br><span class="line">            margin: 0;</span><br><span class="line">            padding: 0</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        img &#123;</span><br><span class="line">            vertical-align: top;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"><span class="css">        <span class="selector-class">.main</span> &#123;</span></span><br><span class="line">            margin: 0 auto;</span><br><span class="line">            width: 1000px;</span><br><span class="line">            margin-top: 10px;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"><span class="css">        <span class="selector-id">#Q-nav1</span> &#123;</span></span><br><span class="line">            overflow: hidden;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"><span class="css">        <span class="selector-class">.fixed</span> &#123;</span></span><br><span class="line">            position: fixed;</span><br><span class="line">            top: 0;</span><br><span class="line">            left: 0;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!--引入工具js--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"tools.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">        <span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="actionscript">            <span class="comment">//需求1：当我们滚动界面的时候，被卷曲的头部如果超过第二个盒子距离顶部的位置，那么直接给第二个盒子加类名.fixed</span></span></span><br><span class="line"><span class="actionscript">            <span class="comment">//需求2：当我们滚动界面的时候，被卷曲的头部如果小于第二个盒子距离顶部的位置，那么直接给第二个盒子取消类名.fixed</span></span></span><br><span class="line"></span><br><span class="line"><span class="actionscript">            <span class="comment">//1.老三步。</span></span></span><br><span class="line"><span class="javascript">            <span class="keyword">var</span> topDiv = <span class="built_in">document</span>.getElementById(<span class="string">"top"</span>);</span></span><br><span class="line"><span class="actionscript">            <span class="keyword">var</span> height = topDiv.offsetHeight;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">var</span> middle = <span class="built_in">document</span>.getElementById(<span class="string">"Q-nav1"</span>);</span></span><br><span class="line"><span class="javascript">            <span class="keyword">var</span> main = <span class="built_in">document</span>.getElementById(<span class="string">"main"</span>);</span></span><br><span class="line"></span><br><span class="line"><span class="javascript">            <span class="built_in">window</span>.onscroll = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="actionscript">                <span class="comment">//2.判断 ，被卷曲的头部的大小</span></span></span><br><span class="line">                if (scroll().top &gt; height) &#123;</span><br><span class="line"><span class="actionscript">                    <span class="comment">//3.满足条件添加类，否则删除类</span></span></span><br><span class="line"><span class="actionscript">                    middle.className += <span class="string">" fixed"</span>;</span></span><br><span class="line"><span class="actionscript">                    <span class="comment">//第二个盒子也要占位置，为了避免重叠，我们给第三个盒子一个上padding的空间，把这个空间留给第二个盒子</span></span></span><br><span class="line"><span class="actionscript">                    main.style.paddingTop = middle.offsetHeight + <span class="string">"px"</span>;</span></span><br><span class="line"><span class="actionscript">                &#125; <span class="keyword">else</span> &#123;</span></span><br><span class="line"><span class="actionscript">                    middle.className = <span class="string">""</span>;</span></span><br><span class="line"><span class="actionscript">                    <span class="comment">//清零</span></span></span><br><span class="line">                    main.style.paddingTop = 0;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"top"</span> <span class="attr">id</span>=<span class="string">"top"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"images/top.png"</span> <span class="attr">alt</span>=<span class="string">""</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"Q-nav1"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"images/nav.png"</span> <span class="attr">alt</span>=<span class="string">""</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"main"</span> <span class="attr">id</span>=<span class="string">"main"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"images/main.png"</span> <span class="attr">alt</span>=<span class="string">""</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>上方代码中，有一个技巧：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">main.style.paddingTop = middle.offsetHeight + <span class="string">"px"</span>;</span><br></pre></td></tr></table></figure>
+
+<p>仔细看注释就好。</p>
+<p>（2）tools.js：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by smyhvae on 2018/02/03.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">scroll</span>(<span class="params"></span>) </span>&#123;  <span class="comment">// 开始封装自己的scrollTop</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">window</span>.pageYOffset !== <span class="literal">undefined</span>) &#123;  <span class="comment">// ie9+ 高版本浏览器</span></span><br><span class="line">        <span class="comment">// 因为 window.pageYOffset 默认的是  0  所以这里需要判断</span></span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            left: <span class="built_in">window</span>.pageXOffset,</span><br><span class="line">            top: <span class="built_in">window</span>.pageYOffset</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">document</span>.compatMode === <span class="string">"CSS1Compat"</span>) &#123;    <span class="comment">// 标准浏览器   来判断有没有声明DTD</span></span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            left: <span class="built_in">document</span>.documentElement.scrollLeft,</span><br><span class="line">            top: <span class="built_in">document</span>.documentElement.scrollTop</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> &#123;   <span class="comment">// 未声明 DTD</span></span><br><span class="line">        left: <span class="built_in">document</span>.body.scrollLeft,</span><br><span class="line">        top: <span class="built_in">document</span>.body.scrollTop</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="缓动动画"><a href="#缓动动画" class="headerlink" title="缓动动画"></a>缓动动画</h2><h3 id="三个函数"><a href="#三个函数" class="headerlink" title="三个函数"></a>三个函数</h3><p>缓慢动画里，我们要用到三个函数，这里先列出来：</p>
+<ul>
+<li><p>Math.ceil()         向上取整</p>
+</li>
+<li><p>Math.floor()        向下取整</p>
+</li>
+<li><p>Math.round();   四舍五入</p>
+</li>
+</ul>
+<h3 id="缓动动画的原理"><a href="#缓动动画的原理" class="headerlink" title="缓动动画的原理"></a>缓动动画的原理</h3><p>缓动动画的原理就是：在移动的过程中，步长越来越小。</p>
+<p>设置步长为：<strong>目标位置和盒子当前位置的十分之一</strong>。用公式表达，即：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">盒子位置 &#x3D; 盒子本身位置 + (目标位置 - 盒子本身位置)&#x2F; 10；</span><br></pre></td></tr></table></figure>
+
+<p>代码举例：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line">        div &#123;</span><br><span class="line">            width: 100px;</span><br><span class="line">            height: 100px;</span><br><span class="line">            background-color: pink;</span><br><span class="line">            position: absolute;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span>&gt;</span>运动到left = 400px<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> btn = <span class="built_in">document</span>.getElementsByTagName(<span class="string">"button"</span>)[<span class="number">0</span>];</span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> div = <span class="built_in">document</span>.getElementsByTagName(<span class="string">"div"</span>)[<span class="number">0</span>];</span></span><br><span class="line"></span><br><span class="line"><span class="actionscript">    btn.onclick = <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span></span><br><span class="line"><span class="actionscript">        setInterval(<span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span></span><br><span class="line"><span class="actionscript">            <span class="comment">//动画原理：盒子未来的位置 = 盒子当前的位置+步长</span></span></span><br><span class="line"><span class="actionscript">            div.style.left = div.offsetLeft + (<span class="number">400</span> - div.offsetLeft) / <span class="number">10</span> + <span class="string">"px"</span>;</span></span><br><span class="line">        &#125;, 30);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="缓慢动画的封装（解决四舍五入的问题）"><a href="#缓慢动画的封装（解决四舍五入的问题）" class="headerlink" title="缓慢动画的封装（解决四舍五入的问题）"></a>缓慢动画的封装（解决四舍五入的问题）</h3><p>我们发现一个问题，上图中的盒子最终并没有到达400px的位置，而是只到了396.04px就停住了：</p>
+<p>原因是：JS在取整的运算时，进行了四舍五入。</p>
+<p>我么发现，通过<code>div.style.left</code>获取的值是精确的，通过<code>div.offsetLeft</code>获取的left值会进行四舍五入。</p>
+<p>此时，我们就要用到取整的函数了。</p>
+<p>通过对缓动动画进行封装，完整版的代码实现如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line">        div &#123;</span><br><span class="line">            width: 100px;</span><br><span class="line">            height: 100px;</span><br><span class="line">            background-color: pink;</span><br><span class="line">            position: absolute;</span><br><span class="line">            left: 0;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span>&gt;</span>运动到200<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span>&gt;</span>运动到400<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> btn = <span class="built_in">document</span>.getElementsByTagName(<span class="string">"button"</span>);</span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> div = <span class="built_in">document</span>.getElementsByTagName(<span class="string">"div"</span>)[<span class="number">0</span>];</span></span><br><span class="line"></span><br><span class="line"><span class="actionscript">    btn[<span class="number">0</span>].onclick = <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span></span><br><span class="line">        animate(div, 200);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="actionscript">    btn[<span class="number">1</span>].onclick = <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span></span><br><span class="line">        animate(div, 400);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="actionscript">    <span class="comment">//缓动动画封装</span></span></span><br><span class="line"><span class="actionscript">    <span class="function"><span class="keyword">function</span> <span class="title">animate</span><span class="params">(ele, target)</span> </span>&#123;</span></span><br><span class="line"><span class="actionscript">        <span class="comment">//要用定时器，先清定时器</span></span></span><br><span class="line"><span class="actionscript">        <span class="comment">//一个萝卜一个坑儿，一个元素对应一个定时器</span></span></span><br><span class="line">        clearInterval(ele.timer);</span><br><span class="line"><span class="actionscript">        <span class="comment">//定义定时器</span></span></span><br><span class="line"><span class="actionscript">        ele.timer = setInterval(<span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span></span><br><span class="line"><span class="actionscript">            <span class="comment">//获取步长</span></span></span><br><span class="line"><span class="actionscript">            <span class="comment">//步长应该是越来越小的，缓动的算法。</span></span></span><br><span class="line"><span class="actionscript">            <span class="keyword">var</span> step = (target - ele.offsetLeft) / <span class="number">10</span>;</span></span><br><span class="line"><span class="actionscript">            <span class="comment">//对步长进行二次加工(大于0向上取整,小于0向下取整)</span></span></span><br><span class="line"><span class="actionscript">            <span class="comment">//达到的效果是：最后10像素的时候都是1像素1像素的向目标位置移动，就能够到达指定位置。</span></span></span><br><span class="line"><span class="javascript">            step = step &gt; <span class="number">0</span> ? <span class="built_in">Math</span>.ceil(step) : <span class="built_in">Math</span>.floor(step);</span></span><br><span class="line"><span class="actionscript">            <span class="comment">//动画原理： 目标位置 = 当前位置 + 步长</span></span></span><br><span class="line"><span class="actionscript">            ele.style.left = ele.offsetLeft + step + <span class="string">"px"</span>;</span></span><br><span class="line"><span class="javascript">            <span class="built_in">console</span>.log(step);</span></span><br><span class="line"><span class="actionscript">            <span class="comment">//检测缓动动画有没有停止</span></span></span><br><span class="line"><span class="javascript">            <span class="built_in">console</span>.log(<span class="string">"smyhvae"</span>);</span></span><br><span class="line"><span class="javascript">            <span class="keyword">if</span> (<span class="built_in">Math</span>.abs(target - ele.offsetLeft) &lt;= <span class="built_in">Math</span>.abs(step)) &#123;</span></span><br><span class="line"><span class="actionscript">                <span class="comment">//处理小数赋值</span></span></span><br><span class="line"><span class="actionscript">                ele.style.left = target + <span class="string">"px"</span>;</span></span><br><span class="line">                clearInterval(ele.timer);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;, 30);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="window-scrollTo-方法举例：返回到顶部小火箭"><a href="#window-scrollTo-方法举例：返回到顶部小火箭" class="headerlink" title="window.scrollTo()方法举例：返回到顶部小火箭"></a>window.scrollTo()方法举例：返回到顶部小火箭</h2><p>（1）index.html：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line">        img &#123;</span><br><span class="line">            position: fixed;</span><br><span class="line">            bottom: 100px;</span><br><span class="line">            right: 50px;</span><br><span class="line">            cursor: pointer;</span><br><span class="line">            display: none;</span><br><span class="line"><span class="css">            <span class="selector-tag">border</span>: 1<span class="selector-tag">px</span> <span class="selector-tag">solid</span> <span class="selector-id">#000</span>;</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        div &#123;</span><br><span class="line">            width: 1210px;</span><br><span class="line">            margin: 100px auto;</span><br><span class="line">            text-align: center;</span><br><span class="line">            font: 500 26px/35px "simsun";</span><br><span class="line">            color: red;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"tools.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">        <span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="actionscript">            <span class="comment">//需求：被卷去的头部超过100显示小火箭，然后点击小火箭屏幕缓慢移动到最顶端。</span></span></span><br><span class="line"><span class="actionscript">            <span class="comment">//难点：我们以前是移动盒子，现在是移动屏幕，我们没有学过如何移动屏幕。</span></span></span><br><span class="line"><span class="actionscript">            <span class="comment">//      技术点：window.scrollTo(x,y);浏览器显示区域跳转到指定的坐标</span></span></span><br><span class="line"><span class="actionscript">            <span class="comment">//步骤：</span></span></span><br><span class="line"><span class="actionscript">            <span class="comment">//1.老三步</span></span></span><br><span class="line"><span class="javascript">            <span class="keyword">var</span> img = <span class="built_in">document</span>.getElementsByTagName(<span class="string">"img"</span>)[<span class="number">0</span>];</span></span><br><span class="line"><span class="javascript">            <span class="built_in">window</span>.onscroll = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="actionscript">                <span class="comment">//被卷去的距离大于200显示小火箭，否则隐藏</span></span></span><br><span class="line"><span class="actionscript">                <span class="comment">//2.显示隐藏小火箭</span></span></span><br><span class="line">                if (scroll().top &gt; 1000) &#123;</span><br><span class="line"><span class="actionscript">                    img.style.display = <span class="string">"block"</span>;</span></span><br><span class="line"><span class="actionscript">                &#125; <span class="keyword">else</span> &#123;</span></span><br><span class="line"><span class="actionscript">                    img.style.display = <span class="string">"none"</span>;</span></span><br><span class="line">                &#125;</span><br><span class="line"><span class="actionscript">                <span class="comment">//每次移动滚动条的时候都给leader赋值，模拟leader获取距离顶部的距离</span></span></span><br><span class="line">                leader = scroll().top;</span><br><span class="line">            &#125;</span><br><span class="line"><span class="actionscript">            <span class="comment">//3.缓动跳转到页面最顶端（利用我们的缓动动画）</span></span></span><br><span class="line"><span class="actionscript">            <span class="keyword">var</span> timer = <span class="literal">null</span>;</span></span><br><span class="line"><span class="actionscript">            <span class="keyword">var</span> target = <span class="number">0</span>; <span class="comment">//目标位置</span></span></span><br><span class="line"><span class="actionscript">            <span class="keyword">var</span> leader = <span class="number">0</span>; <span class="comment">//显示区域自身的位置</span></span></span><br><span class="line"><span class="actionscript">            img.onclick = <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span></span><br><span class="line"><span class="actionscript">                <span class="comment">//技术点：window.scrollTo(0,0);</span></span></span><br><span class="line"><span class="actionscript">                <span class="comment">//要用定时器，先清定时器</span></span></span><br><span class="line">                clearInterval(timer);</span><br><span class="line"><span class="actionscript">                timer = setInterval(<span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span></span><br><span class="line"><span class="actionscript">                    <span class="comment">//获取步长</span></span></span><br><span class="line"><span class="actionscript">                    <span class="keyword">var</span> step = (target - leader) / <span class="number">10</span>;</span></span><br><span class="line"><span class="actionscript">                    <span class="comment">//二次处理步长</span></span></span><br><span class="line"><span class="javascript">                    step = step &gt; <span class="number">0</span> ? <span class="built_in">Math</span>.ceil(step) : <span class="built_in">Math</span>.floor(step);</span></span><br><span class="line"><span class="actionscript">                    leader = leader + step; <span class="comment">//往上移动的过程中，step是负数。当前位置减去步长，就等于下一步的位置。</span></span></span><br><span class="line"><span class="actionscript">                    <span class="comment">//显示区域移动</span></span></span><br><span class="line"><span class="javascript">                    <span class="built_in">window</span>.scrollTo(<span class="number">0</span>, leader);</span></span><br><span class="line"><span class="actionscript">                    <span class="comment">//清除定时器</span></span></span><br><span class="line">                    if (leader === 0) &#123;</span><br><span class="line">                        clearInterval(timer);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;, 25);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"images/Top.jpg"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    我是最顶端.....<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    生命壹号，永不止步.....<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    生命壹号，永不止步.....<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    生命壹号，永不止步.....<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    生命壹号，永不止步.....<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    生命壹号，永不止步.....<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    生命壹号，永不止步.....<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    生命壹号，永不止步.....<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    生命壹号，永不止步.....<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    生命壹号，永不止步.....<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    生命壹号，永不止步.....<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    生命壹号，永不止步.....<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    生命壹号，永不止步.....<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    生命壹号，永不止步.....<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    生命壹号，永不止步.....<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    生命壹号，永不止步.....<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    生命壹号，永不止步.....<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    生命壹号，永不止步.....<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    生命壹号，永不止步.....<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    生命壹号，永不止步.....<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    生命壹号，永不止步.....<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    生命壹号，永不止步.....<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    生命壹号，永不止步.....<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    生命壹号，永不止步.....<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    生命壹号，永不止步.....<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    生命壹号，永不止步.....<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    生命壹号，永不止步.....<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    生命壹号，永不止步.....<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    生命壹号，永不止步.....<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    生命壹号，永不止步.....<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    生命壹号，永不止步.....<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    生命壹号，永不止步.....<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    生命壹号，永不止步.....<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    生命壹号，永不止步.....<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    生命壹号，永不止步.....<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    生命壹号，永不止步.....<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    生命壹号，永不止步.....<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    生命壹号，永不止步.....<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    生命壹号，永不止步.....<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    生命壹号，永不止步.....<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    生命壹号，永不止步.....<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    生命壹号，永不止步.....<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    生命壹号，永不止步.....<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    生命壹号，永不止步.....<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    生命壹号，永不止步.....<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    生命壹号，永不止步.....<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    生命壹号，永不止步.....<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    生命壹号，永不止步.....<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    生命壹号，永不止步.....<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    生命壹号，永不止步.....<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    生命壹号，永不止步.....<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    生命壹号，永不止步.....<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    生命壹号，永不止步.....<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    生命壹号，永不止步.....<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    生命壹号，永不止步.....<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    生命壹号，永不止步.....<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    生命壹号，永不止步.....<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    生命壹号，永不止步.....<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    生命壹号，永不止步.....<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    生命壹号，永不止步.....<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    生命壹号，永不止步.....<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    生命壹号，永不止步.....<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    生命壹号，永不止步.....<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    生命壹号，永不止步.....<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    生命壹号，永不止步.....<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    生命壹号，永不止步.....<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    生命壹号，永不止步.....<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    生命壹号，永不止步.....<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    生命壹号，永不止步.....<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    生命壹号，永不止步.....<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    生命壹号，永不止步.....<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    生命壹号，永不止步.....<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    生命壹号，永不止步.....<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>（2）tools.js:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by smyhvae on 2015/12/8.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//函数：获取scrollTop和scrollLeft的值</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">scroll</span>(<span class="params"></span>) </span>&#123;  <span class="comment">// 开始封装自己的scrollTop</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">window</span>.pageYOffset != <span class="literal">null</span>) &#123;  <span class="comment">// ie9+ 高版本浏览器</span></span><br><span class="line">        <span class="comment">// 因为 window.pageYOffset 默认的是  0  所以这里需要判断</span></span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            left: <span class="built_in">window</span>.pageXOffset,</span><br><span class="line">            top: <span class="built_in">window</span>.pageYOffset</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">document</span>.compatMode === <span class="string">"CSS1Compat"</span>) &#123;    <span class="comment">// 标准浏览器   来判断有没有声明DTD</span></span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            left: <span class="built_in">document</span>.documentElement.scrollLeft,</span><br><span class="line">            top: <span class="built_in">document</span>.documentElement.scrollTop</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> &#123;   <span class="comment">// 未声明 DTD</span></span><br><span class="line">        left: <span class="built_in">document</span>.body.scrollLeft,</span><br><span class="line">        top: <span class="built_in">document</span>.body.scrollTop</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章推荐</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/05/20/46-脚本化HTTP/" rel="bookmark">脚本化HTTP</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/04/18/01-JS简介/" rel="bookmark">JS简介</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/04/18/02-变量/" rel="bookmark">变量</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/04/18/03-变量的数据类型/" rel="bookmark">变量的数据类型</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/04/18/04-基本数据类型vs引用数据类型/" rel="bookmark">基本数据类型vs引用数据类型</a></div>
+    </li>
+  </ul>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>lyy
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://yoursite.com/2020/04/18/29-scroll%E7%9B%B8%E5%85%B3%E5%B1%9E%E6%80%A7%E5%92%8C%E7%BC%93%E5%8A%A8%E5%8A%A8%E7%94%BB/" title="29-scroll相关属性和缓动动画">http://yoursite.com/2020/04/18/29-scroll相关属性和缓动动画/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/04/18/30-client-%E5%8F%AF%E8%A7%86%E5%8C%BA/" rel="prev" title="client相关属性">
+      <i class="fa fa-chevron-left"></i> client相关属性
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/04/18/28-offset%E7%9B%B8%E5%85%B3%E5%B1%9E%E6%80%A7%E5%92%8C%E5%8C%80%E9%80%9F%E5%8A%A8%E7%94%BB(%E5%90%AB%E8%BD%AE%E6%92%AD%E5%9B%BE%E7%9A%84%E5%AE%9E%E7%8E%B0)/" rel="next" title="offset相关属性和匀速动画">
+      offset相关属性和匀速动画 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#scroll-相关属性"><span class="nav-number">1.</span> <span class="nav-text">scroll 相关属性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#window-onscroll-方法"><span class="nav-number">1.1.</span> <span class="nav-text">window.onscroll() 方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1、ScrollWidth-和-scrollHeight"><span class="nav-number">1.2.</span> <span class="nav-text">1、ScrollWidth 和 scrollHeight</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、scrollTop-和-scrollLeft"><span class="nav-number">1.3.</span> <span class="nav-text">2、scrollTop 和 scrollLeft</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#scrollTop-的兼容性"><span class="nav-number">1.4.</span> <span class="nav-text">scrollTop 的兼容性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#判断是否已经-DTD-声明"><span class="nav-number">1.5.</span> <span class="nav-text">判断是否已经 DTD 声明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#将-scrollTop-和-scrollLeft-进行封装"><span class="nav-number">1.6.</span> <span class="nav-text">将 scrollTop 和 scrollLeft 进行封装</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取-html-文档的方法"><span class="nav-number">2.</span> <span class="nav-text">获取 html 文档的方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#scrollTop-举例：固定导航栏"><span class="nav-number">3.</span> <span class="nav-text">scrollTop 举例：固定导航栏</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#缓动动画"><span class="nav-number">4.</span> <span class="nav-text">缓动动画</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#三个函数"><span class="nav-number">4.1.</span> <span class="nav-text">三个函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缓动动画的原理"><span class="nav-number">4.2.</span> <span class="nav-text">缓动动画的原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缓慢动画的封装（解决四舍五入的问题）"><span class="nav-number">4.3.</span> <span class="nav-text">缓慢动画的封装（解决四舍五入的问题）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#window-scrollTo-方法举例：返回到顶部小火箭"><span class="nav-number">5.</span> <span class="nav-text">window.scrollTo()方法举例：返回到顶部小火箭</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="lyy"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">lyy</p>
+  <div class="site-description" itemprop="description">世间所有的相遇，都是久别重逢</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">117</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/lyylyylyylyy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;lyylyylyylyy" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zju.edu.cn/" title="ZJU → https:&#x2F;&#x2F;www.zju.edu.cn&#x2F;" rel="noopener" target="_blank"><i class="fa fa-graduation-cap fa-fw"></i>ZJU</a>
+      </span>
+  </div>
+
+
+
+    <div class="links-of-blogroll motion-element links-of-blogroll-block">
+      <div class="links-of-blogroll-title">
+        <!-- modify icon to fire by szw -->
+        <i class="fa fa-history fa-" aria-hidden="true"></i>
+        近期文章
+      </div>
+      <ul class="links-of-blogroll-list">
+        
+        
+          <li>
+            <a href="/2020/07/25/29.%20Divide%20Two%20Integers/" title="29. Divide Two Integers## 题目描述" target="_blank">29. Divide Two Integers## 题目描述</a>
+          </li>
+        
+          <li>
+            <a href="/2020/07/25/31.%20Next%20Permutation/" title="31. Next Permutation" target="_blank">31. Next Permutation</a>
+          </li>
+        
+          <li>
+            <a href="/2020/07/25/%E5%BC%82%E6%AD%A5IO/" title="异步I/O" target="_blank">异步I/O</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/24/02-JSX%E7%AE%80%E4%BB%8B/" title="JSX简介" target="_blank">JSX简介</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/24/03-%E5%85%83%E7%B4%A0%E6%B8%B2%E6%9F%93&%E7%BB%84%E4%BB%B6&props/" title="元素渲染&组件&props" target="_blank">元素渲染&组件&props</a>
+          </li>
+        
+      </ul>
+    </div>
+
+      </div>
+      <a href="https://clustrmaps.com/site/1b75d" target="_blank" rel="noopener"  title="Visit tracker"><img src="//www.clustrmaps.com/map_v2.png?d=MSgeNXm-y8DMM6r6hBqJa2IyTlI7gYrIkTQGt57lgv8&cl=ffffff" /></a>
+  </aside>
+    </div>
+    
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fab fa-android"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lyy</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-nest@1/canvas-nest.min.js"></script>
+  <script size="300" alpha="0.6" zIndex="-1" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : true,
+      appId      : 'mxQ2lQFuJOjoaYkjNciana8G-gzGzoHsz',
+      appKey     : 'AWuAvmWCK2rLASObQlsdeX2W',
+      placeholder: "Your comment makes this site better!",
+      avatar     : 'identicon',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

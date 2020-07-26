@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="网络应用体系结构  客户机&#x2F;服务器 P2P(点对点结构 ) 混合结构">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网络应用">
+<meta property="og:url" content="http://yoursite.com/2020/03/18/%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8/index.html">
+<meta property="og:site_name" content="若只如初见">
+<meta property="og:description" content="网络应用体系结构  客户机&#x2F;服务器 P2P(点对点结构 ) 混合结构">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/2020/03/18/%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8/HTTP%E8%AF%B7%E6%B1%82%E6%B6%88%E6%81%AF.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/18/%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8/HTTP%E5%93%8D%E5%BA%94%E6%B6%88%E6%81%AF.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/18/%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8/img/MIME.png">
+<meta property="article:published_time" content="2020-03-18T00:00:00.000Z">
+<meta property="article:modified_time" content="2020-04-19T10:07:58.000Z">
+<meta property="article:author" content="lyy">
+<meta property="article:tag" content="计算机网络">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/03/18/%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8/HTTP%E8%AF%B7%E6%B1%82%E6%B6%88%E6%81%AF.png">
+
+<link rel="canonical" href="http://yoursite.com/2020/03/18/%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>网络应用 | 若只如初见</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">若只如初见</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">书籍是人类进步的阶梯</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签<span class="badge">12</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th fa-fw"></i>分类<span class="badge">12</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档<span class="badge">117</span></a>
+
+  </li>
+        <li class="menu-item menu-item-疫情地图">
+
+    <a href="http://joyli.net.cn/covid19-map/" rel="noopener" target="_blank"><i class="map fa-fw"></i>疫情地图</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/18/%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="lyy">
+      <meta itemprop="description" content="世间所有的相遇，都是久别重逢">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="若只如初见">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          网络应用
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-18 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-18T00:00:00Z">2020-03-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-19 10:07:58" itemprop="dateModified" datetime="2020-04-19T10:07:58Z">2020-04-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index"><span itemprop="name">计算机网络</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/03/18/%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/18/%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>4.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <hr>
+<ul>
+<li><p>网络应用体系结构</p>
+<ul>
+<li>客户机/服务器</li>
+<li>P2P(点对点结构 )</li>
+<li>混合结构<a id="more"></a></li>
+</ul>
+</li>
+<li><p>网络应用的服务需求</p>
+<ul>
+<li>可靠性</li>
+<li>带宽</li>
+<li>时延</li>
+</ul>
+</li>
+<li><p><strong>Internet传输层服务模型</strong></p>
+<ul>
+<li>TCP</li>
+<li>UDP</li>
+</ul>
+</li>
+<li><p><strong>特定网络应用协议</strong></p>
+<ul>
+<li>HTTP</li>
+<li>SMTP,POP,IMAP</li>
+<li>DNS</li>
+<li>P2P应用</li>
+</ul>
+</li>
+<li><p><strong>Socket编程</strong></p>
+<ul>
+<li>TCP</li>
+<li>UDP</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-网络应用体系结构"><a href="#1-网络应用体系结构" class="headerlink" title="1. 网络应用体系结构"></a>1. 网络应用体系结构</h3><ul>
+<li>客户机/服务器<ul>
+<li>服务器<ul>
+<li>7*24小时提供服务</li>
+<li>永久性访问地址/域名</li>
+<li>利用大量服务器实现可拓展性</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code>- 客户机
+  - 与服务器通信，使用服务器提供的服务
+  - 间歇性接入网络
+  - 可能使用动态IP地址
+  - 不会与其他客户机直接通信</code></pre><ul>
+<li><p>P2P(点对点结构)</p>
+<ul>
+<li>纯P2P结构<ul>
+<li>没有永远在线的服务器</li>
+<li>任意端系统/节点之间可以直接通信</li>
+<li>节点间歇性接入网络</li>
+<li>节点可能改变IP地址</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>混合结构</p>
+</li>
+</ul>
+<h3 id="2-网络应用进程通信"><a href="#2-网络应用进程通信" class="headerlink" title="2. 网络应用进程通信"></a>2. 网络应用进程通信</h3><p><strong>网络应用的基础：进程间通信。</strong></p>
+<p>进程：主机上运行的程序。</p>
+<p>同一主机上运行的进程之间如何通信？</p>
+<ul>
+<li>进程间通信机制</li>
+<li>操作系统提供</li>
+</ul>
+<p>不同主机上运行的进程间如何通信？</p>
+<ul>
+<li>消息交换</li>
+</ul>
+<p>客户机进程：发起通信间的进程。</p>
+<p>服务器进程：等待通信请求的进程。</p>
+<p><strong>套接字：Socket</strong></p>
+<ul>
+<li>进程间利用socket发送/接受消息</li>
+<li>类似于寄信<ul>
+<li>发送方将消息送到门外邮箱</li>
+<li>发送方依赖传输基础设施将消息传到接收方所在主机，并送到接收方的门外。</li>
+<li>接收方从门外获取信息</li>
+</ul>
+</li>
+<li>传输基础设施向进程提供API<ul>
+<li>传输协议的选择  </li>
+<li>参数的设置</li>
+</ul>
+</li>
+</ul>
+<p><strong>寻址进程</strong></p>
+<ul>
+<li>不同主机上的进程间通信，每个进程必须拥有<strong>标识符</strong>。</li>
+<li>寻址主机—— IP地址</li>
+<li>端口号/port number<ul>
+<li>为主机上每个需要通信的进程分配一个端口号</li>
+<li><strong>HTTP Server：80</strong></li>
+<li>Mail Server：25</li>
+</ul>
+</li>
+<li>进程的标识符<ul>
+<li><strong>IP地址+端口号</strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="3-应用层协议"><a href="#3-应用层协议" class="headerlink" title="3. 应用层协议"></a>3. 应用层协议</h3><p> 网络应用需要遵循应用层协议。</p>
+<p> 公开协议</p>
+<ul>
+<li>由RFC(<em>Request For Comments</em>)定义</li>
+<li>允许互操作</li>
+<li><strong>HTTP,SMTP……</strong></li>
+</ul>
+<p>私有协议</p>
+<ul>
+<li>多数P2P文件共享协议</li>
+</ul>
+<p><strong>应用层协议的内容</strong></p>
+<ul>
+<li>消息的类型<ul>
+<li>请求消息</li>
+<li>响应消息</li>
+</ul>
+</li>
+<li>消息的语法(<em>syntax</em>)/格式<ul>
+<li>字段</li>
+</ul>
+</li>
+<li>字段的语义<ul>
+<li>字段中信息的含义</li>
+</ul>
+</li>
+<li>规则</li>
+</ul>
+<h3 id="4-网络应用对传输服务的需求"><a href="#4-网络应用对传输服务的需求" class="headerlink" title="4. 网络应用对传输服务的需求"></a>4. 网络应用对传输服务的需求</h3><p>数据丢失/可靠性</p>
+<ul>
+<li>某些网络应用能够容忍一定的数据丢失：网络电话</li>
+<li>某些要求100%可靠：文件传输，telnet</li>
+</ul>
+<p>时延</p>
+<p>带宽</p>
+<h3 id="4-Internet提供的传输服务"><a href="#4-Internet提供的传输服务" class="headerlink" title="4. Internet提供的传输服务"></a>4. Internet提供的传输服务</h3><p><strong>TCP服务</strong></p>
+<ul>
+<li>面向连接：客户/服务器进程间需要建立连接</li>
+<li>可靠的传输</li>
+<li>流量控制：发送方不会发送速度过快，超过接收方的处理能力</li>
+<li>拥塞控制：当网络负载过重时能够限制发送方的发送速度</li>
+<li>不提供时间/延迟保障</li>
+<li>不提供最小带宽保障</li>
+</ul>
+<p><strong>UDP服务</strong></p>
+<ul>
+<li>无连接</li>
+<li>不可靠的数据传输</li>
+<li>不提供：<ul>
+<li>可靠性保障</li>
+<li>流量控制</li>
+<li>拥塞控制</li>
+<li>延迟保障</li>
+<li>带宽保障</li>
+</ul>
+</li>
+</ul>
+<h3 id="5-HTTP"><a href="#5-HTTP" class="headerlink" title="5. HTTP"></a>5. HTTP</h3><p>网页包含多个对象：</p>
+<ul>
+<li>对象：</li>
+<li>基本HTML文件</li>
+</ul>
+<p>对象的寻址：</p>
+<ul>
+<li>URL(<em>uniform resource locator</em>):统一资源定位器 RFC1738</li>
+<li>Schema：//host:port/path</li>
+</ul>
+<p><strong>HTTP协议</strong></p>
+<ul>
+<li>超文本传输协议</li>
+<li>C/S结构(<em>client-server</em>)</li>
+<li><strong>使用TCP传输协议</strong><ul>
+<li>服务器在<strong>80端口</strong> 等待客户的请求</li>
+<li>浏览器发起到服务器的TCP连接</li>
+<li>服务器接受来自浏览器的TCP连接</li>
+<li>浏览器与Web服务器交换HTTP消息</li>
+<li>关闭TCP连接</li>
+</ul>
+</li>
+<li><strong>无状态，不记录用户信息</strong><ul>
+<li>服务器不维护任何有关客户端过去行为的信息</li>
+</ul>
+</li>
+</ul>
+<p>HTTP连接：</p>
+<ul>
+<li>非持久性连接<ul>
+<li>每个TCP连接最多允许传输<strong>一</strong>个对象</li>
+<li>HTTP 1.0 版本使用<strong>非持久性连接</strong></li>
+<li>每个对象需要2个RTT，时间长</li>
+<li>操作系统需要为每个TCP连接开销资源</li>
+<li>浏览器打开多个并行TCP，对服务器造成负担</li>
+</ul>
+</li>
+<li>持久性连接(<em>presistent http</em>)<ul>
+<li>每个TCP连接允许传输<strong>多个</strong>对象</li>
+<li>HTTP 1.1 版本默认使用<strong>持久性连接</strong></li>
+<li>发送响应后，服务器保持TCP连接<ul>
+<li><strong>无流水的持久性连接</strong><ul>
+<li>客户端只有收到前一个响应后才发送新的请求</li>
+<li>每个被引用的对象耗时一个RTT</li>
+</ul>
+</li>
+<li>带有流水机制的持久性连接<ul>
+<li>HTTP 1.1的默认选项</li>
+<li>客户端只要遇到一个引用对象就尽快发出请求</li>
+<li>理想情况下，收到所有的引用对象只需耗时1个RTT</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>相应事件分析与建模：</p>
+<ul>
+<li>RTT(<em>Round Trip Time</em>)</li>
+<li>响应时间<ul>
+<li>发起、建立TCP连接</li>
+<li>发送HTTP请求消息到HTTP响应消息的前几个字节到达</li>
+<li>响应消息中所包含的文件/对象传输时间</li>
+<li>total=2RTT + 文件发送时间</li>
+</ul>
+</li>
+</ul>
+<p><strong>HTTP请求消息</strong></p>
+<ul>
+<li>HTTP协议有两类消息<ul>
+<li>请求消息<br><img src="HTTP%E8%AF%B7%E6%B1%82%E6%B6%88%E6%81%AF.png" alt=""></li>
+<li>响应消息<br><img src="HTTP%E5%93%8D%E5%BA%94%E6%B6%88%E6%81%AF.png" alt=""></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>请求消息<ul>
+<li>ASCII：人直接可读</li>
+</ul>
+</li>
+</ul>
+<p><strong>上传输入的方法</strong></p>
+<ul>
+<li><strong>POST方法</strong><ul>
+<li>网页经常需要填写表格</li>
+<li>在请求消息的消息体(<em>entity body</em>)中上传客户端的输入</li>
+</ul>
+</li>
+<li><strong>URL方法</strong><ul>
+<li>使用<strong>GET</strong>方法</li>
+<li>输入消息通过request行的URL字段上传</li>
+</ul>
+</li>
+<li><strong>HEAD</strong><ul>
+<li>请求Server不要将所请求的对象放入响应消息中</li>
+</ul>
+</li>
+<li><strong>PUT(HTTP/1.1)</strong><ul>
+<li>将消息体中的文件上传到URL字段所指定的路径</li>
+</ul>
+</li>
+<li><strong>DELETE(HTTP/1.1)</strong><ul>
+<li>删除URL字段指定的文件</li>
+</ul>
+</li>
+</ul>
+<p><strong>HTTP响应状态代码</strong></p>
+<ul>
+<li>响应消息的第一行</li>
+<li>示例：<ul>
+<li>200 OK</li>
+<li>301 Moved Permanently</li>
+<li>400 Bad Request</li>
+<li>404 Not Found</li>
+<li>505 HTTP Version Not Supported</li>
+<li>500 Internet Server Error</li>
+</ul>
+</li>
+</ul>
+<h3 id="6-Cookie"><a href="#6-Cookie" class="headerlink" title="6. Cookie"></a>6. Cookie</h3><p>为什么需要Cookie？</p>
+<ul>
+<li>HTTP协议无状态，很多应用需要服务器掌握客户端的状态，如网上购物</li>
+</ul>
+<p>Cookie技术：</p>
+<ul>
+<li>某些网站为了辨别用户身份、进行session跟踪而储存在本地终端上的数据(通常经过加密)。</li>
+<li>RFC6265</li>
+</ul>
+<p><strong>Cookie组件：</strong></p>
+<ul>
+<li>HTTP响应消息的cookie头部行</li>
+<li>HTTP请求消息的cookie头部行</li>
+<li>保存在客户端主机上的cookie文件，由浏览器管理</li>
+<li>Web服务器端的后台数据库</li>
+</ul>
+<p>Cookie的原理：</p>
+<p>cookie能够用于：</p>
+<ul>
+<li>身份认证</li>
+<li>购物车</li>
+<li>推荐</li>
+<li>web email</li>
+<li>……</li>
+<li>隐私问题</li>
+</ul>
+<h3 id="7-Web缓存-代理服务器技术"><a href="#7-Web缓存-代理服务器技术" class="headerlink" title="7. Web缓存/代理服务器技术"></a>7. Web缓存/代理服务器技术</h3><p>功能：</p>
+<ul>
+<li>在不访问服务器的前提下满足客户端的HTTP请求</li>
+<li>缩短客户请求的响应时间</li>
+<li>减少机构/组织的流量</li>
+<li>在大范围实现有效的内容分发</li>
+</ul>
+<p>Web缓存/代理服务器技术</p>
+<ul>
+<li>用户设定浏览器通过缓存进行Web访问</li>
+<li>浏览器向缓存/代理服务器发送所有的HTTP请求<ul>
+<li>如果请求对象在缓存中，缓存返回对象</li>
+<li>否则，缓存服务器向原始服务器发送HTTP 请求，获取对象，然后返回给客户端并保存该对象</li>
+</ul>
+</li>
+<li>缓存既充当客户端，也充当服务器</li>
+</ul>
+<p>HTTP 的条件性Get方法</p>
+<ul>
+<li>如果缓存有最新的对象，则不需要发送请求对象</li>
+<li>缓存：<ul>
+<li>在HTTP请求消息中声明所持有版本的日期</li>
+<li>If-modified-since:<date></li>
+</ul>
+</li>
+<li>服务器<ul>
+<li>如果缓存的版本是最新的，则响应消息中不包含对象</li>
+<li>HTTP/1.0 304 Not Modified</li>
+</ul>
+</li>
+</ul>
+<h3 id="8-email应用"><a href="#8-email应用" class="headerlink" title="8. email应用"></a>8. email应用</h3><p>Email应用的构成组件</p>
+<ul>
+<li>异步应用</li>
+<li>邮件客户端<ul>
+<li>读、写Email消息</li>
+<li>与服务器交互，收发Email信息</li>
+<li>outlook……</li>
+<li>web客户端</li>
+</ul>
+</li>
+<li>邮件服务器<ul>
+<li>邮箱：存储发给该客户的email</li>
+<li>消息队列：存储等待发送的email</li>
+</ul>
+</li>
+<li>SMTP协议(<em>Simple Mail Transfer Protocol</em>)<ul>
+<li>邮件服务器之间传递消息所使用的协议</li>
+<li>客户端：发送消息的服务器</li>
+<li>服务器：接收消息的服务器</li>
+<li>使用<strong>TCP</strong>进行email消息的可靠传输</li>
+<li>端口25</li>
+<li>传输过程的三个阶段<ul>
+<li>握手</li>
+<li>消息传输</li>
+<li>关闭</li>
+</ul>
+</li>
+<li><strong>命令/响应交互模式</strong><ul>
+<li>命令(<em>command</em>):ASCII文本</li>
+<li>响应(<em>response</em>):状态代码和语句</li>
+<li>Email消息只能包含<strong>7</strong>位ASCII码</li>
+</ul>
+</li>
+<li>使用持久性连接</li>
+<li>SMTP服务器利用CRLF.CRLF确定消息的结束</li>
+</ul>
+</li>
+</ul>
+<p><strong>与HTTP 对比</strong>：</p>
+<ul>
+<li>HTTP：拉式(<em>pull</em>)</li>
+<li>SMTP:退式(<em>push</em>)</li>
+<li>都使用命令/响应交互模式</li>
+<li>命令和状态代码都是ASCII代码</li>
+<li>HTTP:每个对象封装在独立的响应消息中</li>
+<li>SMTP：多个对象在由多个部分构成的消息中发送</li>
+</ul>
+<p>Email消息格式</p>
+<ul>
+<li><p>RFC 822</p>
+<ul>
+<li>头部行(<em>header</em>)<ul>
+<li>To</li>
+<li>From 与SMTP命令不同</li>
+<li>Subject</li>
+</ul>
+</li>
+<li>消息体(<em>body</em>)<ul>
+<li>消息本身</li>
+<li>只能说ASCII字符                     </li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>多媒体拓展</strong> RFC 2045 2056</p>
+<ul>
+<li>MIME：多媒体邮件拓展<ul>
+<li>通过在有键头部增加额外的行以声明MIME的内容类型  <img src='./img/MIME.png'></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>邮件访问协议：从服务器获取邮件</p>
+<ul>
+<li>POP：Post Office Protocal<ul>
+<li>认证/授权和下载</li>
+<li>IMAP：Internet Mail Access Protocal<ul>
+<li>能够操纵服务器上存储的消息</li>
+<li>所有消息统一保存在一个地方：服务器</li>
+<li>允许用户利用文件夹组织信息</li>
+<li>支持跨会话的用户状态</li>
+</ul>
+</li>
+<li>HTTP：163， QQ Mail……</li>
+</ul>
+</li>
+</ul>
+<h3 id="9-DNS-Domain-Name-System"><a href="#9-DNS-Domain-Name-System" class="headerlink" title="9. DNS(Domain Name System)"></a>9. DNS(<em>Domain Name System</em>)</h3><p>Internet上主机/路由的识别问题</p>
+<ul>
+<li><strong>IP地址</strong></li>
+<li><strong>域名</strong></li>
+<li>域名和IP地址之间如何映射？<ul>
+<li>域名解析系统DNS<ul>
+<li>多层命名服务器构成的<strong>分布式层次式</strong>数据库</li>
+<li>应用层协议：完成名字的解析<ul>
+<li>Internet核心功能，用应用层协议实现</li>
+<li>网络边界复杂</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>DNS服务</strong></p>
+<ul>
+<li>域名向IP地址的翻译</li>
+<li>主机别名</li>
+<li>邮件服务器别名</li>
+<li>负载均衡：Web服务器</li>
+</ul>
+<p><strong>客户端想要查询<a href="http://www.amazon.com的IP" target="_blank" rel="noopener">www.amazon.com的IP</a></strong></p>
+<ul>
+<li>客户端查询根服务器</li>
+<li>客户端查询com域名解析服务器，找到amazon.com域名解析服务器</li>
+<li>客户端查询amazon.com域名解析服务器，获得<a href="http://www.amazon.com的IP地址" target="_blank" rel="noopener">www.amazon.com的IP地址</a></li>
+</ul>
+<p>DNS根域名服务器</p>
+<ul>
+<li>本地域名服务器无法解析域名时，访问根域名服务器</li>
+<li>根域名服务器</li>
+</ul>
+<p>TLD和权威域名解析服务器</p>
+<ul>
+<li>顶级域名服务器(<em>top-level domain</em>)：负责com，org，net，edu等顶级域名和国家域名</li>
+<li>权威域名解析服务器：组织的域名解析服务器，提供组织内部服务器的解析服务</li>
+</ul>
+<p><strong>本地域名解析服务器</strong></p>
+<ul>
+<li>不属于层级体系</li>
+<li>每个ISP有一个本地域名服务器<ul>
+<li>默认域名解析服务器</li>
+</ul>
+</li>
+<li>当主机进行DNS查询时，查询被发到本地域名服务器作为代理，将查询转发给层级式域名解析服务器系统</li>
+</ul>
+<p>迭代查询</p>
+<ul>
+<li>被查询服务器返回域名解析服务器的名字</li>
+</ul>
+<p>递归查询</p>
+<ul>
+<li>将域名解析的任务交给所联系的服务器</li>
+</ul>
+<p>DNS记录缓存和更新</p>
+<ul>
+<li>只要域名解析服务器获得域名——IP映射，即缓存这一映射<ul>
+<li>本地域名服务器一般缓存顶级域名服务器的映射</li>
+</ul>
+</li>
+</ul>
+<p>DNS记录：</p>
+<ul>
+<li>资源记录</li>
+<li>Type=A<ul>
+<li>name：主机域名</li>
+<li>value：IP地址</li>
+<li>Type=NS<ul>
+<li>name：域(<em>edu.cn</em>)</li>
+<li>value：该域权威域名解析服务器的主机域名</li>
+</ul>
+</li>
+<li>Type=CNAME<ul>
+<li>name：某一真实域名的别名</li>
+<li>value：真实域名</li>
+</ul>
+</li>
+<li>Type=MX<ul>
+<li>value是与name相对应的邮件服务器</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>DNS协议：</p>
+<ul>
+<li>查询(<em>query</em>)和回复(<em>reply</em>)</li>
+<li>消息格式相同<br>消息头部</li>
+<li>identification：16位查询编号，回复使用相同编号</li>
+<li>flags<ul>
+<li>查询或回复</li>
+<li>期望递归</li>
+<li>递归可用</li>
+<li>权威回答</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章推荐</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/03/18/传输层/" rel="bookmark">传输层</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/03/18/计算机网络概述/" rel="bookmark">计算机网络概述</a></div>
+    </li>
+  </ul>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>lyy
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://yoursite.com/2020/03/18/%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8/" title="网络应用">http://yoursite.com/2020/03/18/网络应用/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag"># 计算机网络</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/18/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%A6%82%E8%BF%B0/" rel="prev" title="计算机网络概述">
+      <i class="fa fa-chevron-left"></i> 计算机网络概述
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/18/%E4%BC%A0%E8%BE%93%E5%B1%82/" rel="next" title="传输层">
+      传输层 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-网络应用体系结构"><span class="nav-number">1.</span> <span class="nav-text">1. 网络应用体系结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-网络应用进程通信"><span class="nav-number">2.</span> <span class="nav-text">2. 网络应用进程通信</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-应用层协议"><span class="nav-number">3.</span> <span class="nav-text">3. 应用层协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-网络应用对传输服务的需求"><span class="nav-number">4.</span> <span class="nav-text">4. 网络应用对传输服务的需求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Internet提供的传输服务"><span class="nav-number">5.</span> <span class="nav-text">4. Internet提供的传输服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-HTTP"><span class="nav-number">6.</span> <span class="nav-text">5. HTTP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-Cookie"><span class="nav-number">7.</span> <span class="nav-text">6. Cookie</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-Web缓存-代理服务器技术"><span class="nav-number">8.</span> <span class="nav-text">7. Web缓存&#x2F;代理服务器技术</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-email应用"><span class="nav-number">9.</span> <span class="nav-text">8. email应用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-DNS-Domain-Name-System"><span class="nav-number">10.</span> <span class="nav-text">9. DNS(Domain Name System)</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="lyy"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">lyy</p>
+  <div class="site-description" itemprop="description">世间所有的相遇，都是久别重逢</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">117</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/lyylyylyylyy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;lyylyylyylyy" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zju.edu.cn/" title="ZJU → https:&#x2F;&#x2F;www.zju.edu.cn&#x2F;" rel="noopener" target="_blank"><i class="fa fa-graduation-cap fa-fw"></i>ZJU</a>
+      </span>
+  </div>
+
+
+
+    <div class="links-of-blogroll motion-element links-of-blogroll-block">
+      <div class="links-of-blogroll-title">
+        <!-- modify icon to fire by szw -->
+        <i class="fa fa-history fa-" aria-hidden="true"></i>
+        近期文章
+      </div>
+      <ul class="links-of-blogroll-list">
+        
+        
+          <li>
+            <a href="/2020/07/25/29.%20Divide%20Two%20Integers/" title="29. Divide Two Integers## 题目描述" target="_blank">29. Divide Two Integers## 题目描述</a>
+          </li>
+        
+          <li>
+            <a href="/2020/07/25/31.%20Next%20Permutation/" title="31. Next Permutation" target="_blank">31. Next Permutation</a>
+          </li>
+        
+          <li>
+            <a href="/2020/07/25/%E5%BC%82%E6%AD%A5IO/" title="异步I/O" target="_blank">异步I/O</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/24/02-JSX%E7%AE%80%E4%BB%8B/" title="JSX简介" target="_blank">JSX简介</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/24/03-%E5%85%83%E7%B4%A0%E6%B8%B2%E6%9F%93&%E7%BB%84%E4%BB%B6&props/" title="元素渲染&组件&props" target="_blank">元素渲染&组件&props</a>
+          </li>
+        
+      </ul>
+    </div>
+
+      </div>
+      <a href="https://clustrmaps.com/site/1b75d" target="_blank" rel="noopener"  title="Visit tracker"><img src="//www.clustrmaps.com/map_v2.png?d=MSgeNXm-y8DMM6r6hBqJa2IyTlI7gYrIkTQGt57lgv8&cl=ffffff" /></a>
+  </aside>
+    </div>
+    
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fab fa-android"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lyy</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-nest@1/canvas-nest.min.js"></script>
+  <script size="300" alpha="0.6" zIndex="-1" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : true,
+      appId      : 'mxQ2lQFuJOjoaYkjNciana8G-gzGzoHsz',
+      appKey     : 'AWuAvmWCK2rLASObQlsdeX2W',
+      placeholder: "Your comment makes this site better!",
+      avatar     : 'identicon',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="前言 在日常开发中，String对象的使用频率是非常高的。所以有必要详细介绍。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="内置对象：String">
+<meta property="og:url" content="http://yoursite.com/2020/04/18/22-%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1%EF%BC%9AString/index.html">
+<meta property="og:site_name" content="若只如初见">
+<meta property="og:description" content="前言 在日常开发中，String对象的使用频率是非常高的。所以有必要详细介绍。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-04-18T00:00:00.000Z">
+<meta property="article:modified_time" content="2020-04-19T09:59:36.000Z">
+<meta property="article:author" content="lyy">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/04/18/22-%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1%EF%BC%9AString/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>内置对象：String | 若只如初见</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">若只如初见</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">书籍是人类进步的阶梯</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签<span class="badge">12</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th fa-fw"></i>分类<span class="badge">12</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档<span class="badge">117</span></a>
+
+  </li>
+        <li class="menu-item menu-item-疫情地图">
+
+    <a href="http://joyli.net.cn/covid19-map/" rel="noopener" target="_blank"><i class="map fa-fw"></i>疫情地图</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/18/22-%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1%EF%BC%9AString/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="lyy">
+      <meta itemprop="description" content="世间所有的相遇，都是久别重逢">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="若只如初见">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          内置对象：String
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-04-18 00:00:00" itemprop="dateCreated datePublished" datetime="2020-04-18T00:00:00Z">2020-04-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-19 09:59:36" itemprop="dateModified" datetime="2020-04-19T09:59:36Z">2020-04-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/04/18/22-%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1%EF%BC%9AString/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/04/18/22-%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1%EF%BC%9AString/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>6.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>6 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <hr>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
+<p>在日常开发中，String对象的使用频率是非常高的。所以有必要详细介绍。</p>
+</blockquote>
+<a id="more"></a>
+<h3 id="基本数据类型不能绑定属性和方法"><a href="#基本数据类型不能绑定属性和方法" class="headerlink" title="基本数据类型不能绑定属性和方法"></a>基本数据类型不能绑定属性和方法</h3><p><strong>1、基本数据类型：</strong></p>
+<p>注意，基本数据类型<code>string</code>是<strong>无法绑定属性和方法</strong>的。比如说：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">"qianguyihao"</span>;</span><br><span class="line"></span><br><span class="line">str.aaa = <span class="number">12</span>;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> str);  <span class="comment">//打印结果为：string</span></span><br><span class="line"><span class="built_in">console</span>.log(str.aaa);     <span class="comment">//打印结果为：undefined</span></span><br></pre></td></tr></table></figure>
+
+<p>上方代码中，当我们尝试打印<code>str.aaa</code>的时候，会发现打印结果为：undefined。也就是说，不能给 <code>string</code> 绑定属性和方法。</p>
+<p>当然，我们可以打印str.length、str.indexOf(“m”)等等。因为这两个方法的底层做了数据类型转换（<strong>临时</strong>将 <code>string</code> 字符串转换为 <code>String</code> 对象，然后再调用内置方法），也就是我们在上一篇文章中讲到的<strong>包装类</strong>。</p>
+<p><strong>2、引用数据类型：</strong></p>
+<p>引用数据类型<code>String</code>是可以绑定属性和方法的。如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> strObj = <span class="keyword">new</span> <span class="built_in">String</span>(<span class="string">"smyhvae"</span>);</span><br><span class="line">strObj.aaa = <span class="number">123</span>;</span><br><span class="line"><span class="built_in">console</span>.log(strObj);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> strObj);  <span class="comment">//打印结果：Object</span></span><br><span class="line"><span class="built_in">console</span>.log(strObj.aaa);</span><br></pre></td></tr></table></figure>
+
+<p>内置对象Number也有一些自带的方法，比如：</p>
+<ul>
+<li><p>Number.MAX_VALUE;</p>
+</li>
+<li><p>Number.MIN_VALUE;</p>
+</li>
+</ul>
+<p>内置对象Boolean也有一些自带的方法，但是用的不多。</p>
+<h3 id="在底层，字符串以字符数组的形式保存"><a href="#在底层，字符串以字符数组的形式保存" class="headerlink" title="在底层，字符串以字符数组的形式保存"></a>在底层，字符串以字符数组的形式保存</h3><p>在底层，字符串是以字符数组的形式保存的。代码举例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">"smyhvae"</span>;</span><br><span class="line"><span class="built_in">console</span>.log(str.length); <span class="comment">// 获取字符串的长度</span></span><br><span class="line"><span class="built_in">console</span>.log(str[<span class="number">2</span>]); <span class="comment">// 获取字符串中的第2个字符</span></span><br></pre></td></tr></table></figure>
+
+<p>上方代码中，<code>smyhvae</code>这个字符串在底层是以<code>[&quot;s&quot;, &quot;m&quot;, &quot;y&quot;, &quot;h&quot;, &quot;v&quot;, &quot;a&quot;, &quot;e&quot;]</code>的形式保存的。因此，我们既可以获取字符串的长度，也可以获取指定索引index位置的单个字符。这很像数组中的操作。</p>
+<h2 id="内置对象-String-的常见方法"><a href="#内置对象-String-的常见方法" class="headerlink" title="内置对象 String 的常见方法"></a>内置对象 String 的常见方法</h2><h3 id="charAt"><a href="#charAt" class="headerlink" title="charAt()"></a>charAt()</h3><p><code>charAt</code>：返回字符串指定位置的字符。不会修改原字符串。</p>
+<p>语法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">字符 = str.charAt(index);</span><br></pre></td></tr></table></figure>
+
+<p>解释：字符串中第一个字符的下标是 0。如果参数 index 不在 [0, string.length) 之间，该方法将返回一个空字符串。</p>
+<p>而且，这里的 <code>str.charAt(index)</code>和<code>str[index]</code>的效果是一样的。</p>
+<p><strong>代码举例</strong>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="keyword">new</span> <span class="built_in">String</span>(<span class="string">"smyhvae"</span>);</span><br><span class="line"></span><br><span class="line"> <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; str.length; i++) &#123;</span><br><span class="line">     <span class="built_in">console</span>.log(str.charAt(i));</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>上面这个例子一般不用。一般打印数组和json的时候用索引，打印String不建议用索引。</p>
+<h3 id="charCodeAt"><a href="#charCodeAt" class="headerlink" title="charCodeAt()"></a>charCodeAt()</h3><p><code>charCodeAt</code>：返回字符串指定位置的字符的 Unicode 编码。不会修改原字符串。</p>
+<p>语法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">字符 = str.charCodeAt(index);</span><br></pre></td></tr></table></figure>
+
+<p><strong>代码举例</strong>：打印字符串的占位长度</p>
+<p>提示：一个英文占一个位置，一个中文占两个位置。</p>
+<p>思路：判断该字符是否在0-127之间（在的话是英文，不在是非英文）。</p>
+<p>代码实现：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="actionscript">    <span class="comment">//    sort();   底层用到了charCodeAt();</span></span></span><br><span class="line"></span><br><span class="line"><span class="actionscript">    <span class="keyword">var</span> str = <span class="string">"I love my country!我你爱中国！"</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="actionscript">    <span class="comment">//需求：求一个字符串占有几个字符位。</span></span></span><br><span class="line"><span class="actionscript">    <span class="comment">//思路；如果是英文，站一个字符位，如果不是英文占两个字符位。</span></span></span><br><span class="line"><span class="actionscript">    <span class="comment">//技术点：判断该字符是否在0-127之间。（在的话是英文，不在是非英文）</span></span></span><br><span class="line">    alert(getZFWlength(str));</span><br><span class="line">    alert(str.length);</span><br><span class="line"></span><br><span class="line"><span class="actionscript">    <span class="comment">//定义方法：字符位</span></span></span><br><span class="line"><span class="actionscript">    <span class="function"><span class="keyword">function</span> <span class="title">getZFWlength</span><span class="params">(string)</span> </span>&#123;</span></span><br><span class="line"><span class="actionscript">        <span class="comment">//定义一个计数器</span></span></span><br><span class="line"><span class="actionscript">        <span class="keyword">var</span> count = <span class="number">0</span>;</span></span><br><span class="line"><span class="actionscript">        <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; string.length; i++) &#123;</span></span><br><span class="line"><span class="actionscript">            <span class="comment">//对每一位字符串进行判断，如果Unicode编码在0-127，计数器+1；否则+2</span></span></span><br><span class="line"><span class="handlebars"><span class="xml">            if (string.charCodeAt(i) <span class="tag">&lt; <span class="attr">128</span> &amp;&amp; <span class="attr">string.charCodeAt</span>(<span class="attr">i</span>) &gt;</span>= 0) &#123;</span></span></span><br><span class="line">                count++;</span><br><span class="line"><span class="actionscript">            &#125; <span class="keyword">else</span> &#123;</span></span><br><span class="line">                count += 2;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"><span class="actionscript">        <span class="keyword">return</span> count;</span></span><br><span class="line">    &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>打印结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">30</span><br><span class="line">24</span><br></pre></td></tr></table></figure>
+
+<p>从打印结果可以看出：字符串的长度是24，但是却占了30个字符位（一个中文占两个字符位）。</p>
+<p>另外，sort()方法其实底层也是用到了charCodeAt()，因为用到了Unicode编码。</p>
+<h3 id="String-fromCharCode"><a href="#String-fromCharCode" class="headerlink" title="String.fromCharCode()"></a>String.fromCharCode()</h3><p><code>String.fromCharCode()</code>：根据字符的 Unicode 编码获取字符。</p>
+<p>代码举例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result1 = <span class="built_in">String</span>.fromCharCode(<span class="number">72</span>);</span><br><span class="line"><span class="keyword">var</span> result2 = <span class="built_in">String</span>.fromCharCode(<span class="number">20013</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(result1); <span class="comment">// 打印结果：H</span></span><br><span class="line"><span class="built_in">console</span>.log(result2); <span class="comment">// 打印结果：中</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="indexOf-lastIndexOf"><a href="#indexOf-lastIndexOf" class="headerlink" title="indexOf()/lastIndexOf()"></a>indexOf()/lastIndexOf()</h3><p><code>indexOf()/lastIndexOf()</code>：获取指定字符的索引。</p>
+<p>语法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">索引值 = str.indexOf(想要查询的字符);</span><br></pre></td></tr></table></figure>
+
+<p>解释：<code>indexOf()</code> 是从前向后索引字符串的位置。同理，<code>lastIndexOf()</code>是从后向前寻找。</p>
+<p><strong>作用</strong>：可以检索一个字符串中是否含有指定内容。如果字符串中含有该内容，则会返回其<strong>第一次出现</strong>的索引；如果没有找到指定的内容，则返回 -1。</p>
+<p>因此可以得出一个技巧：<strong>如果获取的索引值为0，说明字符串是以查询的参数为开头的</strong>。</p>
+<p>这个方法还可以指定第二个参数，用来 指定开始查找的位置。</p>
+<p><strong>代码举例1</strong>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">"abcdea"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//给字符查索引(索引值为0,说明字符串以查询的参数为开头)</span></span><br><span class="line"><span class="built_in">console</span>.log(str.indexOf(<span class="string">"c"</span>));</span><br><span class="line"><span class="built_in">console</span>.log(str.lastIndexOf(<span class="string">"c"</span>));</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(str.indexOf(<span class="string">"a"</span>));</span><br><span class="line"><span class="built_in">console</span>.log(str.lastIndexOf(<span class="string">"a"</span>));</span><br></pre></td></tr></table></figure>
+
+
+<p><strong>代码举例2</strong>：（两个参数时，需要特别注意）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">'qianguyihao'</span>;</span><br><span class="line">result = str.indexOf(<span class="string">'a'</span>, <span class="number">3</span>); <span class="comment">// 从第三个位置开始查找 'a'这个字符 【重要】</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(result); <span class="comment">// 打印结果：9</span></span><br></pre></td></tr></table></figure>
+
+<p>上方代码中，<code>indexOf()</code>方法中携带了两个参数，具体解释请看注释。</p>
+<h3 id="concat"><a href="#concat" class="headerlink" title="concat()"></a>concat()</h3><p><code>concat()</code>：字符串的连接。</p>
+<p>语法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">新字符串 = str1.concat(str2)； <span class="comment">//链接两个字符串</span></span><br></pre></td></tr></table></figure>
+
+<p>这种方法基本不用，直接把两个字符串相加就好。</p>
+<p>是的，你会发现，数组中也有<code>concat()</code>方法，用于数组的连接。这个方法在数组中用得挺多的。</p>
+<p>代码举例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str1 = <span class="string">'qiangu'</span>;</span><br><span class="line"><span class="keyword">var</span> str2 = <span class="string">'yihao'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> result = str1.concat(str2);</span><br><span class="line"><span class="built_in">console</span>.log(result); <span class="comment">// 打印结果：qianguyihao</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="slice"><a href="#slice" class="headerlink" title="slice()"></a>slice()</h3><p><code>slice()</code>：从字符串中截取指定的内容。不会修改原字符串，而是将及截取到的内容返回。</p>
+<p>语法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">字符串 = str.slice(开始索引, 结束索引); <span class="comment">//两个参数都是索引值。包左不包右。</span></span><br></pre></td></tr></table></figure>
+
+<p>解释：上面的参数，包左不包右。参数举例如下：</p>
+<ul>
+<li><p>(2, 5) 截取时，包左不包右。</p>
+</li>
+<li><p>(2) 表示<strong>从指定的索引位置开始，截取到最后</strong>。</p>
+</li>
+<li><p>(-3) 表示从倒数第几个开始，截取到最后。</p>
+</li>
+<li><p>(1, -1) 表示从第一个截取到倒数第一个。</p>
+</li>
+<li><p>(5, 2) 表示前面的大，后面的小，返回值为空。</p>
+</li>
+</ul>
+<h3 id="substring"><a href="#substring" class="headerlink" title="substring()"></a>substring()</h3><p><code>substring()</code>：从字符串中截取指定的内容。和<code>slice()</code>类似。</p>
+<p>语法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">字符串 = str.substring(开始索引, 结束索引); <span class="comment">//两个参数都是索引值。包左不包右。</span></span><br></pre></td></tr></table></figure>
+
+<p><code>substring()</code>和<code>slice()</code>是类似的。但不同之处在于：</p>
+<ul>
+<li><p><code>substring()</code>不能接受负值作为参数。如果传递了一个<strong>负值</strong>，则默认使用0。</p>
+</li>
+<li><p><code>substring()</code>还会自动调整参数的位置，如果第二个参数小于第一个，则自动交换。比如说， <code>substring(1, 0)</code>截取的是第一个字符。</p>
+</li>
+</ul>
+<h3 id="substr"><a href="#substr" class="headerlink" title="substr()"></a>substr()</h3><p><code>substr()</code>：从字符串中截取指定的内容。不会修改原字符串，而是将及截取到的内容返回。</p>
+<p>语法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">字符串 = str.substr(开始索引, 截取的长度);</span><br></pre></td></tr></table></figure>
+
+<p>参数举例：</p>
+<ul>
+<li><p>(2,4)：从索引值为2的字符开始，截取4个字符。</p>
+</li>
+<li><p>(1)：从指定位置开始，截取到最后。</p>
+</li>
+<li><p>(-3)：从倒数第几个开始，剪到最后.</p>
+</li>
+<li><p>不包括前大后小的情况。</p>
+</li>
+</ul>
+<p>备注：ECMAscript 没有对 <code>substr()</code> 方法进行标准化，因此不建议使用它。</p>
+<h3 id="split-【重要】"><a href="#split-【重要】" class="headerlink" title="split() 【重要】"></a>split() 【重要】</h3><p><code>split()</code>：将一个字符串拆分成一个数组。</p>
+<p>语法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">数组 = str.split();</span><br></pre></td></tr></table></figure>
+
+
+<p>备注：<code>split()</code>这个方法在实际开发中用得非常多。一般来说，从接口拿到的json数据中，经常会收到类似于<code>&quot;q, i, a, n&quot;</code>这样的字符串，前端需要将这个字符串拆分成<code>[&#39;q&#39;, &#39;i&#39;, &#39;a&#39;, &#39;n&#39;]</code>数组，这个时候<code>split()</code>方法就排上用场了。</p>
+<p><strong>代码举例1</strong>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">var</span> str = <span class="string">"qian, gu, yi, hao"</span>; <span class="comment">// 用逗号隔开的字符串</span></span><br><span class="line"><span class="keyword">var</span> array = str.split(<span class="string">","</span>); <span class="comment">// 将字符串 str 拆分成数组，通过逗号来拆分</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(array); <span class="comment">// 打印结果是数组：["qian", " gu", " yi", " hao"]</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>代码举例2</strong>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//split()方法：字符串变数组</span></span><br><span class="line"><span class="keyword">var</span> str3 = <span class="string">"生命壹号|许嵩|smyhvae"</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(str3);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(str3.split());   <span class="comment">// 无参数，表示：把字符串作为一个元素添加到数组中。</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(str3.split(<span class="string">""</span>));  <span class="comment">//参数为空字符串，则表示：分隔字符串中每一个字符，分别添加到数组中</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(str3.split(<span class="string">"|"</span>)); <span class="comment">//参数为指定字符，表示：此字符将不会出现在数组的任意一个元素中</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(str3.split(<span class="string">"许"</span>)); <span class="comment">//同理</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="trim"><a href="#trim" class="headerlink" title="trim()"></a>trim()</h3><p><code>trim()</code>：去除字符串前后的空白。</p>
+<p>代码举例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//去除前后的空格，trim();</span></span><br><span class="line"><span class="keyword">var</span> str1 = <span class="string">"   a   b   c   "</span>;</span><br><span class="line"><span class="built_in">console</span>.log(str1);</span><br><span class="line"><span class="built_in">console</span>.log(str1.trim());</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="replace"><a href="#replace" class="headerlink" title="replace()"></a>replace()</h3><p><code>replace()</code>：将字符串中的指定内容，替换为新的内容并返回。不会修改原字符串。</p>
+<p>语法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">新的字符串 = str.replace(被替换的内容，新的内容);</span><br></pre></td></tr></table></figure>
+
+<p>代码举例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//replace()方法：替换</span></span><br><span class="line"><span class="keyword">var</span> str2 = <span class="string">"Today is fine day,today is fine day !!!"</span></span><br><span class="line"><span class="built_in">console</span>.log(str2);</span><br><span class="line"><span class="built_in">console</span>.log(str2.replace(<span class="string">"today"</span>,<span class="string">"tomorrow"</span>));  <span class="comment">//只能替换第一个today</span></span><br><span class="line"><span class="built_in">console</span>.log(str2.replace(<span class="regexp">/today/gi</span>,<span class="string">"tomorrow"</span>)); <span class="comment">//这里用到了正则，才能替换所有的today</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="大小写转换"><a href="#大小写转换" class="headerlink" title="大小写转换"></a>大小写转换</h3><p>举例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">"abcdEFG"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//转换成小写</span></span><br><span class="line"><span class="built_in">console</span>.log(str.toLowerCase());</span><br><span class="line"></span><br><span class="line"><span class="comment">//转换成大写</span></span><br><span class="line"><span class="built_in">console</span>.log(str.toUpperCase());</span><br></pre></td></tr></table></figure>
+
+<h2 id="html方法"><a href="#html方法" class="headerlink" title="html方法"></a>html方法</h2><ul>
+<li><p>anchor()  创建a链接</p>
+</li>
+<li><p>big()</p>
+</li>
+<li><p>sub()</p>
+</li>
+<li><p>sup()</p>
+</li>
+<li><p>link()</p>
+</li>
+<li><p>bold()</p>
+</li>
+</ul>
+<p>注意，str.link()  返回值是字符串。</p>
+<p>举例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">"你好"</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(str.anchor())</span><br><span class="line"><span class="built_in">console</span>.log(str.big())</span><br><span class="line"><span class="built_in">console</span>.log(str.sub())</span><br><span class="line"><span class="built_in">console</span>.log(str.sup())</span><br><span class="line"><span class="built_in">console</span>.log(str.link(<span class="string">"http://www.baidu.com"</span>));</span><br><span class="line"><span class="built_in">console</span>.log(str.bold())</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="字符串练习"><a href="#字符串练习" class="headerlink" title="字符串练习"></a>字符串练习</h2><p><strong>练习1</strong>：”smyhvaevaesmyh”查找字符串中所有m出现的位置。</p>
+<p>代码实现：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str2 = <span class="string">"abcoefoxyozzopp"</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;str2.length;i++)&#123;</span><br><span class="line">    <span class="comment">//如果指定位置的符号=== "o"</span></span><br><span class="line">    <span class="comment">//str2[i]</span></span><br><span class="line">    <span class="keyword">if</span>( str2.charAt(i)===<span class="string">"o"</span>)&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>练习2</strong>：判断一个字符串中出现次数最多的字符，统计这个次数</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="actionscript">    <span class="keyword">var</span> str2 = <span class="string">"smyhvaevaesmyhvae"</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="actionscript">    <span class="comment">//定义一个json，然后判断json中是够有该属性，如果有该属性，那么值+1;否则创建一个该属性，并赋值为1；</span></span></span><br><span class="line"><span class="actionscript">    <span class="keyword">var</span> json = &#123;&#125;;</span></span><br><span class="line"><span class="actionscript">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; str2.length; i++) &#123;</span></span><br><span class="line"><span class="actionscript">        <span class="comment">//判断：如果有该属性，那么值+1;否则创建一个该属性，并赋值为1；</span></span></span><br><span class="line"><span class="actionscript">        <span class="keyword">var</span> key = str2.charAt(i);</span></span><br><span class="line"><span class="actionscript">        <span class="keyword">if</span> (json[key] === <span class="literal">undefined</span>) &#123;</span></span><br><span class="line">            json[key] = 1;</span><br><span class="line"><span class="actionscript">        &#125; <span class="keyword">else</span> &#123;</span></span><br><span class="line">            json[key] += 1;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="javascript">    <span class="built_in">console</span>.log(json);</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="javascript">    <span class="built_in">console</span>.log(<span class="string">"----------------"</span>);</span></span><br><span class="line"><span class="actionscript">    <span class="comment">//获取json中属性值最大的选项</span></span></span><br><span class="line"><span class="actionscript">    <span class="keyword">var</span> maxKey = <span class="string">""</span>;</span></span><br><span class="line"><span class="actionscript">    <span class="keyword">var</span> maxValue = <span class="number">0</span>;</span></span><br><span class="line"><span class="actionscript">    <span class="keyword">for</span> (<span class="keyword">var</span> k <span class="keyword">in</span> json) &#123;</span></span><br><span class="line"><span class="actionscript">        <span class="comment">//        if(maxKey == "")&#123;</span></span></span><br><span class="line"><span class="actionscript">        <span class="comment">//            maxKey = k;</span></span></span><br><span class="line"><span class="actionscript">        <span class="comment">//            maxValue = json[k];</span></span></span><br><span class="line"><span class="actionscript">        <span class="comment">//        &#125;else&#123;</span></span></span><br><span class="line">        if (json[k] &gt; maxValue) &#123;</span><br><span class="line">            maxKey = k;</span><br><span class="line">            maxValue = json[k];</span><br><span class="line">        &#125;</span><br><span class="line"><span class="actionscript">        <span class="comment">//        &#125;</span></span></span><br><span class="line">    &#125;</span><br><span class="line"><span class="javascript">    <span class="built_in">console</span>.log(maxKey);</span></span><br><span class="line"><span class="javascript">    <span class="built_in">console</span>.log(maxValue);</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章推荐</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/05/20/46-脚本化HTTP/" rel="bookmark">脚本化HTTP</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/04/18/01-JS简介/" rel="bookmark">JS简介</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/04/18/02-变量/" rel="bookmark">变量</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/04/18/03-变量的数据类型/" rel="bookmark">变量的数据类型</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/04/18/04-基本数据类型vs引用数据类型/" rel="bookmark">基本数据类型vs引用数据类型</a></div>
+    </li>
+  </ul>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>lyy
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://yoursite.com/2020/04/18/22-%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1%EF%BC%9AString/" title="内置对象：String">http://yoursite.com/2020/04/18/22-内置对象：String/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/04/18/23-%E5%8C%85%E8%A3%85%E7%B1%BB/" rel="prev" title="包装类">
+      <i class="fa fa-chevron-left"></i> 包装类
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/04/18/23-Class%E7%9A%84%E7%BB%A7%E6%89%BF/" rel="next" title="Class的继承">
+      Class的继承 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本数据类型不能绑定属性和方法"><span class="nav-number">1.1.</span> <span class="nav-text">基本数据类型不能绑定属性和方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在底层，字符串以字符数组的形式保存"><span class="nav-number">1.2.</span> <span class="nav-text">在底层，字符串以字符数组的形式保存</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内置对象-String-的常见方法"><span class="nav-number">2.</span> <span class="nav-text">内置对象 String 的常见方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#charAt"><span class="nav-number">2.1.</span> <span class="nav-text">charAt()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#charCodeAt"><span class="nav-number">2.2.</span> <span class="nav-text">charCodeAt()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#String-fromCharCode"><span class="nav-number">2.3.</span> <span class="nav-text">String.fromCharCode()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#indexOf-lastIndexOf"><span class="nav-number">2.4.</span> <span class="nav-text">indexOf()&#x2F;lastIndexOf()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#concat"><span class="nav-number">2.5.</span> <span class="nav-text">concat()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#slice"><span class="nav-number">2.6.</span> <span class="nav-text">slice()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#substring"><span class="nav-number">2.7.</span> <span class="nav-text">substring()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#substr"><span class="nav-number">2.8.</span> <span class="nav-text">substr()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#split-【重要】"><span class="nav-number">2.9.</span> <span class="nav-text">split() 【重要】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#trim"><span class="nav-number">2.10.</span> <span class="nav-text">trim()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#replace"><span class="nav-number">2.11.</span> <span class="nav-text">replace()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#大小写转换"><span class="nav-number">2.12.</span> <span class="nav-text">大小写转换</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#html方法"><span class="nav-number">3.</span> <span class="nav-text">html方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串练习"><span class="nav-number">4.</span> <span class="nav-text">字符串练习</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="lyy"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">lyy</p>
+  <div class="site-description" itemprop="description">世间所有的相遇，都是久别重逢</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">117</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/lyylyylyylyy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;lyylyylyylyy" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zju.edu.cn/" title="ZJU → https:&#x2F;&#x2F;www.zju.edu.cn&#x2F;" rel="noopener" target="_blank"><i class="fa fa-graduation-cap fa-fw"></i>ZJU</a>
+      </span>
+  </div>
+
+
+
+    <div class="links-of-blogroll motion-element links-of-blogroll-block">
+      <div class="links-of-blogroll-title">
+        <!-- modify icon to fire by szw -->
+        <i class="fa fa-history fa-" aria-hidden="true"></i>
+        近期文章
+      </div>
+      <ul class="links-of-blogroll-list">
+        
+        
+          <li>
+            <a href="/2020/07/25/29.%20Divide%20Two%20Integers/" title="29. Divide Two Integers## 题目描述" target="_blank">29. Divide Two Integers## 题目描述</a>
+          </li>
+        
+          <li>
+            <a href="/2020/07/25/31.%20Next%20Permutation/" title="31. Next Permutation" target="_blank">31. Next Permutation</a>
+          </li>
+        
+          <li>
+            <a href="/2020/07/25/%E5%BC%82%E6%AD%A5IO/" title="异步I/O" target="_blank">异步I/O</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/24/02-JSX%E7%AE%80%E4%BB%8B/" title="JSX简介" target="_blank">JSX简介</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/24/03-%E5%85%83%E7%B4%A0%E6%B8%B2%E6%9F%93&%E7%BB%84%E4%BB%B6&props/" title="元素渲染&组件&props" target="_blank">元素渲染&组件&props</a>
+          </li>
+        
+      </ul>
+    </div>
+
+      </div>
+      <a href="https://clustrmaps.com/site/1b75d" target="_blank" rel="noopener"  title="Visit tracker"><img src="//www.clustrmaps.com/map_v2.png?d=MSgeNXm-y8DMM6r6hBqJa2IyTlI7gYrIkTQGt57lgv8&cl=ffffff" /></a>
+  </aside>
+    </div>
+    
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fab fa-android"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lyy</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-nest@1/canvas-nest.min.js"></script>
+  <script size="300" alpha="0.6" zIndex="-1" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : true,
+      appId      : 'mxQ2lQFuJOjoaYkjNciana8G-gzGzoHsz',
+      appKey     : 'AWuAvmWCK2rLASObQlsdeX2W',
+      placeholder: "Your comment makes this site better!",
+      avatar     : 'identicon',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

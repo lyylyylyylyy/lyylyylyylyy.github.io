@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="前言本文主要内容：  String.fromCodePoint() String.raw() 实例方法：codePointAt() 实例方法：normalize() 实例方法：includes(), startsWith(), endsWith() 实例方法：repeat() 实例方法：padStart()，padEnd() 实例方法：trimStart()，trimEnd() 实例方法：mat">
+<meta property="og:type" content="article">
+<meta property="og:title" content="字符串的新增方法">
+<meta property="og:url" content="http://yoursite.com/2020/04/18/06-%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%96%B0%E5%A2%9E%E6%96%B9%E6%B3%95/index.html">
+<meta property="og:site_name" content="若只如初见">
+<meta property="og:description" content="前言本文主要内容：  String.fromCodePoint() String.raw() 实例方法：codePointAt() 实例方法：normalize() 实例方法：includes(), startsWith(), endsWith() 实例方法：repeat() 实例方法：padStart()，padEnd() 实例方法：trimStart()，trimEnd() 实例方法：mat">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-04-18T00:00:00.000Z">
+<meta property="article:modified_time" content="2020-04-19T03:53:06.000Z">
+<meta property="article:author" content="lyy">
+<meta property="article:tag" content="ES6">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/04/18/06-%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%96%B0%E5%A2%9E%E6%96%B9%E6%B3%95/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>字符串的新增方法 | 若只如初见</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">若只如初见</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">书籍是人类进步的阶梯</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签<span class="badge">12</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th fa-fw"></i>分类<span class="badge">12</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档<span class="badge">117</span></a>
+
+  </li>
+        <li class="menu-item menu-item-疫情地图">
+
+    <a href="http://joyli.net.cn/covid19-map/" rel="noopener" target="_blank"><i class="map fa-fw"></i>疫情地图</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/18/06-%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%96%B0%E5%A2%9E%E6%96%B9%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="lyy">
+      <meta itemprop="description" content="世间所有的相遇，都是久别重逢">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="若只如初见">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          字符串的新增方法
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-04-18 00:00:00" itemprop="dateCreated datePublished" datetime="2020-04-18T00:00:00Z">2020-04-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-19 03:53:06" itemprop="dateModified" datetime="2020-04-19T03:53:06Z">2020-04-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ES6/" itemprop="url" rel="index"><span itemprop="name">ES6</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/04/18/06-%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%96%B0%E5%A2%9E%E6%96%B9%E6%B3%95/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/04/18/06-%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%96%B0%E5%A2%9E%E6%96%B9%E6%B3%95/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>8.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>7 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <hr>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本文主要内容：</p>
+<ul>
+<li>String.fromCodePoint()</li>
+<li>String.raw()</li>
+<li>实例方法：codePointAt()</li>
+<li>实例方法：normalize()</li>
+<li>实例方法：includes(), startsWith(), endsWith()</li>
+<li>实例方法：repeat()</li>
+<li>实例方法：padStart()，padEnd()</li>
+<li>实例方法：trimStart()，trimEnd()</li>
+<li>实例方法：matchAll()<a id="more"></a>
+<h2 id="String-fromCodePoint"><a href="#String-fromCodePoint" class="headerlink" title="String.fromCodePoint()"></a>String.fromCodePoint()</h2></li>
+</ul>
+<p>ES5 提供<code>String.fromCharCode()</code>方法，用于从 <code>Unicode</code> 码点返回对应字符，但是这个方法不能识别码点大于<code>0xFFFF</code>的字符。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String.fromCharCode(0x20BB7)</span><br><span class="line">&#x2F;&#x2F; &quot;ஷ&quot;</span><br></pre></td></tr></table></figure>
+
+<p>上面代码中，<code>String.fromCharCode()</code>不能识别大于0xFFFF的码点，所以0x20BB7就发生了溢出，最高位2被舍弃了，最后返回码点U+0BB7对应的字符，而不是码点U+20BB7对应的字符。</p>
+<p>ES6 提供了<code>String.fromCodePoint()</code>方法，可以识别大于0xFFFF的字符，弥补了<code>String.fromCharCode()</code>方法的不足。在作用上，正好与下面的<code>codePointAt()</code>方法相反。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String.fromCodePoint(0x20BB7)</span><br><span class="line">&#x2F;&#x2F; &quot;𠮷&quot;</span><br><span class="line">String.fromCodePoint(0x78, 0x1f680, 0x79) &#x3D;&#x3D;&#x3D; &#39;x\uD83D\uDE80y&#39;</span><br><span class="line">&#x2F;&#x2F; true</span><br></pre></td></tr></table></figure>
+
+<p>上面代码中，如果String.fromCodePoint方法有多个参数，则它们会被合并成一个字符串返回。</p>
+<p>注意，<code>fromCodePoint</code>方法定义在String对象上，而<code>codePointAt</code>方法定义在字符串的实例对象上。</p>
+<h2 id="String-raw"><a href="#String-raw" class="headerlink" title="String.raw()"></a>String.raw()</h2><p>ES6 还为原生的 String 对象，提供了一个<code>raw()</code>方法。<strong>该方法返回一个斜杠都被转义（即斜杠前面再加一个斜杠）的字符串</strong>，往往用于模板字符串的处理方法。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">String.raw&#96;Hi\n$&#123;2+3&#125;!&#96;</span><br><span class="line">&#x2F;&#x2F; 实际返回 &quot;Hi\\n5!&quot;，显示的是转义后的结果 &quot;Hi\n5!&quot;</span><br><span class="line"></span><br><span class="line">String.raw&#96;Hi\u000A!&#96;;</span><br><span class="line">&#x2F;&#x2F; 实际返回 &quot;Hi\\u000A!&quot;，显示的是转义后的结果 &quot;Hi\u000A!&quot;</span><br></pre></td></tr></table></figure>
+
+<p>如果原字符串的斜杠已经转义，那么String.raw()会进行再次转义。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String.raw&#96;Hi\\n&#96;</span><br><span class="line">&#x2F;&#x2F; 返回 &quot;Hi\\\\n&quot;</span><br><span class="line"></span><br><span class="line">String.raw&#96;Hi\\n&#96; &#x3D;&#x3D;&#x3D; &quot;Hi\\\\n&quot; &#x2F;&#x2F; true</span><br></pre></td></tr></table></figure>
+
+<p><code>String.raw()</code>方法可以作为处理模板字符串的基本方法，它会将所有变量替换，而且对斜杠进行转义，方便下一步作为字符串来使用。</p>
+<p><code>String.raw()</code>本质上是一个正常的函数，只是专用于模板字符串的标签函数。如果写成正常函数的形式，它的第一个参数，应该是一个具有raw属性的对象，且raw属性的值应该是一个数组，对应模板字符串解析后的值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; &#96;foo$&#123;1 + 2&#125;bar&#96;</span><br><span class="line">&#x2F;&#x2F; 等同于</span><br><span class="line">String.raw(&#123; raw: [&#39;foo&#39;, &#39;bar&#39;] &#125;, 1 + 2) &#x2F;&#x2F; &quot;foo3bar&quot;</span><br></pre></td></tr></table></figure>
+
+<p>上面代码中，<code>String.raw()</code>方法的第一个参数是一个对象，它的raw属性等同于原始的模板字符串解析后得到的数组。</p>
+<p>作为函数，<code>String.raw()</code>的代码实现基本如下。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">String.raw &#x3D; function (strings, ...values) &#123;</span><br><span class="line">  let output &#x3D; &#39;&#39;;</span><br><span class="line">  let index;</span><br><span class="line">  for (index &#x3D; 0; index &lt; values.length; index++) &#123;</span><br><span class="line">    output +&#x3D; strings.raw[index] + values[index];</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  output +&#x3D; strings.raw[index]</span><br><span class="line">  return output;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="实例方法：codePointAt"><a href="#实例方法：codePointAt" class="headerlink" title="实例方法：codePointAt()"></a>实例方法：codePointAt()</h2><p>JavaScript 内部，字符以 UTF-16 的格式储存，每个字符固定为2个字节。对于那些需要4个字节储存的字符（Unicode 码点大于0xFFFF的字符），JavaScript 会认为它们是两个字符。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var s &#x3D; &quot;𠮷&quot;;</span><br><span class="line"></span><br><span class="line">s.length &#x2F;&#x2F; 2</span><br><span class="line">s.charAt(0) &#x2F;&#x2F; &#39;&#39;</span><br><span class="line">s.charAt(1) &#x2F;&#x2F; &#39;&#39;</span><br><span class="line">s.charCodeAt(0) &#x2F;&#x2F; 55362</span><br><span class="line">s.charCodeAt(1) &#x2F;&#x2F; 57271</span><br></pre></td></tr></table></figure>
+
+<p>上面代码中，汉字“𠮷”（注意，这个字不是“吉祥”的“吉”）的码点是0x20BB7，UTF-16 编码为0xD842 0xDFB7（十进制为55362 57271），需要4个字节储存。对于这种4个字节的字符，JavaScript 不能正确处理，字符串长度会误判为2，而且charAt()方法无法读取整个字符，charCodeAt()方法只能分别返回前两个字节和后两个字节的值。</p>
+<p><strong>ES6 提供了<code>codePointAt()</code>方法，能够正确处理 4 个字节储存的字符，返回一个字符的码点。</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">let s &#x3D; &#39;𠮷a&#39;;</span><br><span class="line"></span><br><span class="line">s.codePointAt(0) &#x2F;&#x2F; 134071</span><br><span class="line">s.codePointAt(1) &#x2F;&#x2F; 57271</span><br><span class="line"></span><br><span class="line">s.codePointAt(2) &#x2F;&#x2F; 97</span><br></pre></td></tr></table></figure>
+
+<p><code>codePointAt()</code>方法的参数，是字符在字符串中的位置（从 0 开始）。上面代码中，JavaScript 将“𠮷a”视为三个字符，<code>codePointAt</code>方法在第一个字符上，正确地识别了“𠮷”，返回了它的十进制码点 134071（即十六进制的20BB7）。在第二个字符（即“𠮷”的后两个字节）和第三个字符“a”上，<code>codePointAt()</code>方法的结果与<code>charCodeAt()</code>方法相同。</p>
+<p>总之，<code>codePointAt()</code>方法会正确返回 32 位的 UTF-16 字符的码点。对于那些两个字节储存的常规字符，它的返回结果与charCodeAt()方法相同。</p>
+<p><code>codePointAt()</code>方法返回的是码点的十进制值，如果想要十六进制的值，可以使用<code>toString()</code>方法转换一下。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">let s &#x3D; &#39;𠮷a&#39;;</span><br><span class="line"></span><br><span class="line">s.codePointAt(0).toString(16) &#x2F;&#x2F; &quot;20bb7&quot;</span><br><span class="line">s.codePointAt(2).toString(16) &#x2F;&#x2F; &quot;61&quot;</span><br></pre></td></tr></table></figure>
+
+<p>你可能注意到了，<code>codePointAt()</code>方法的参数，仍然是不正确的。比如，上面代码中，字符a在字符串s的正确位置序号应该是 1，但是必须向codePointAt()方法传入 2。解决这个问题的一个办法是使用for…of循环，因为它会正确识别 32 位的 UTF-16 字符。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">let s &#x3D; &#39;𠮷a&#39;;</span><br><span class="line">for (let ch of s) &#123;</span><br><span class="line">  console.log(ch.codePointAt(0).toString(16));</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F; 20bb7</span><br><span class="line">&#x2F;&#x2F; 61</span><br></pre></td></tr></table></figure>
+
+<p>另一种方法也可以，使用扩展运算符（…）进行展开运算。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">let arr &#x3D; [...&#39;𠮷a&#39;]; &#x2F;&#x2F; arr.length &#x3D;&#x3D;&#x3D; 2</span><br><span class="line">arr.forEach(</span><br><span class="line">  ch &#x3D;&gt; console.log(ch.codePointAt(0).toString(16))</span><br><span class="line">);</span><br><span class="line">&#x2F;&#x2F; 20bb7</span><br><span class="line">&#x2F;&#x2F; 61</span><br><span class="line">codePointAt()方法是测试一个字符由两个字节还是由四个字节组成的最简单方法。</span><br><span class="line"></span><br><span class="line">function is32Bit(c) &#123;</span><br><span class="line">  return c.codePointAt(0) &gt; 0xFFFF;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">is32Bit(&quot;𠮷&quot;) &#x2F;&#x2F; true</span><br><span class="line">is32Bit(&quot;a&quot;) &#x2F;&#x2F; false</span><br></pre></td></tr></table></figure>
+
+<h2 id="实例方法：normalize"><a href="#实例方法：normalize" class="headerlink" title="实例方法：normalize()"></a>实例方法：normalize()</h2><p>许多欧洲语言有语调符号和重音符号。为了表示它们，Unicode 提供了两种方法。一种是直接提供带重音符号的字符，比如Ǒ（\u01D1）。另一种是提供合成符号（combining character），即原字符与重音符号的合成，两个字符合成一个字符，比如O（\u004F）和ˇ（\u030C）合成Ǒ（\u004F\u030C）。</p>
+<p>这两种表示方法，在视觉和语义上都等价，但是 JavaScript 不能识别。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#39;\u01D1&#39;&#x3D;&#x3D;&#x3D;&#39;\u004F\u030C&#39; &#x2F;&#x2F;false</span><br><span class="line"></span><br><span class="line">&#39;\u01D1&#39;.length &#x2F;&#x2F; 1</span><br><span class="line">&#39;\u004F\u030C&#39;.length &#x2F;&#x2F; 2</span><br></pre></td></tr></table></figure>
+
+<p>上面代码表示，JavaScript 将合成字符视为两个字符，导致两种表示方法不相等。</p>
+<p>ES6 提供字符串实例的<code>normalize()</code>方法，用来将字符的不同表示方法统一为同样的形式，这称为 <strong>Unicode 正规化</strong>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#39;\u01D1&#39;.normalize() &#x3D;&#x3D;&#x3D; &#39;\u004F\u030C&#39;.normalize()</span><br><span class="line">&#x2F;&#x2F; true&#96;</span><br></pre></td></tr></table></figure>
+
+<p><code>normalize</code>方法可以接受一个参数来指定<code>normalize</code>的方式，参数的四个可选值如下。</p>
+<ul>
+<li>NFC，默认参数，表示“标准等价合成”（Normalization Form Canonical Composition），返回多个简单字符的合成字符。所谓“标准等价”指的是视觉和语义上的等价。</li>
+<li>NFD，表示“标准等价分解”（Normalization Form Canonical Decomposition），即在标准等价的前提下，返回合成字符分解的多个简单字符。</li>
+<li>NFKC，表示“兼容等价合成”（Normalization Form Compatibility Composition），返回合成字符。所谓“兼容等价”指的是语义上存在等价，但视觉上不等价，比如“囍”和“喜喜”。（这只是用来举例，normalize方法不能识别中文。）</li>
+<li>NFKD，表示“兼容等价分解”（Normalization Form Compatibility Decomposition），即在兼容等价的前提下，返回合成字符分解的多个简单字符。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#39;\u004F\u030C&#39;.normalize(&#39;NFC&#39;).length &#x2F;&#x2F; 1   &quot;Ǒ&quot;</span><br><span class="line">&#39;\u004F\u030C&#39;.normalize(&#39;NFD&#39;).length &#x2F;&#x2F; 2</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>上面代码表示，NFC参数返回字符的合成形式，NFD参数返回字符的分解形式。</p>
+<p>不过，normalize方法目前不能识别三个或三个以上字符的合成。这种情况下，还是只能使用正则表达式，通过 Unicode 编号区间判断。</p>
+<h2 id="实例方法：includes-startsWith-endsWith"><a href="#实例方法：includes-startsWith-endsWith" class="headerlink" title="实例方法：includes(), startsWith(), endsWith()"></a>实例方法：includes(), startsWith(), endsWith()</h2><p>传统上，JavaScript 只有<code>indexOf</code>方法，可以用来确定一个字符串是否包含在另一个字符串中。<strong>ES6 又提供了三种新方法。</strong></p>
+<ul>
+<li><code>includes()</code>：返回布尔值，表示是否找到了参数字符串。</li>
+<li><code>startsWith()</code>：返回布尔值，表示参数字符串是否在原字符串的头部。</li>
+<li><code>endsWith()</code>：返回布尔值，表示参数字符串是否在原字符串的尾部。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let s &#x3D; &#39;Hello world!&#39;;</span><br><span class="line"></span><br><span class="line">s.startsWith(&#39;Hello&#39;) &#x2F;&#x2F; true</span><br><span class="line">s.endsWith(&#39;!&#39;) &#x2F;&#x2F; true</span><br><span class="line">s.includes(&#39;o&#39;) &#x2F;&#x2F; true</span><br></pre></td></tr></table></figure>
+
+<p><strong>这三个方法都支持第二个参数，表示开始搜索的位置。</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let s &#x3D; &#39;Hello world!&#39;;</span><br><span class="line"></span><br><span class="line">s.startsWith(&#39;world&#39;, 6) &#x2F;&#x2F; true</span><br><span class="line">s.endsWith(&#39;Hello&#39;, 5) &#x2F;&#x2F; true</span><br><span class="line">s.includes(&#39;Hello&#39;, 6) &#x2F;&#x2F; false</span><br></pre></td></tr></table></figure>
+
+<p>上面代码表示，使用第二个参数n时，<strong>endsWith的行为与其他两个方法有所不同。它针对前n个字符</strong>，而其他两个方法针对从第n个位置直到字符串结束。</p>
+<h2 id="实例方法：repeat"><a href="#实例方法：repeat" class="headerlink" title="实例方法：repeat()"></a>实例方法：repeat()</h2><p><strong>repeat方法返回一个新字符串，表示将原字符串重复n次。</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#39;x&#39;.repeat(3) &#x2F;&#x2F; &quot;xxx&quot;</span><br><span class="line">&#39;hello&#39;.repeat(2) &#x2F;&#x2F; &quot;hellohello&quot;</span><br><span class="line">&#39;na&#39;.repeat(0) &#x2F;&#x2F; &quot;&quot;</span><br></pre></td></tr></table></figure>
+
+<p><strong>参数如果是小数，会被取整。</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#39;na&#39;.repeat(2.9) &#x2F;&#x2F; &quot;nana&quot;</span><br><span class="line">如果repeat的参数是负数或者Infinity，会报错。</span><br><span class="line"></span><br><span class="line">&#39;na&#39;.repeat(Infinity)</span><br><span class="line">&#x2F;&#x2F; RangeError</span><br><span class="line">&#39;na&#39;.repeat(-1)</span><br><span class="line">&#x2F;&#x2F; RangeError</span><br></pre></td></tr></table></figure>
+
+<p>但是，如果参数是 0 到-1 之间的小数，则等同于 0，这是因为会先进行取整运算。0 到-1 之间的小数，取整以后等于-0，repeat视同为 0。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#39;na&#39;.repeat(-0.9) &#x2F;&#x2F; &quot;&quot;</span><br><span class="line">参数NaN等同于 0。</span><br><span class="line"></span><br><span class="line">&#39;na&#39;.repeat(NaN) &#x2F;&#x2F; &quot;&quot;</span><br><span class="line">如果repeat的参数是字符串，则会先转换成数字。</span><br><span class="line"></span><br><span class="line">&#39;na&#39;.repeat(&#39;na&#39;) &#x2F;&#x2F; &quot;&quot;</span><br><span class="line">&#39;na&#39;.repeat(&#39;3&#39;) &#x2F;&#x2F; &quot;nanana&quot;</span><br></pre></td></tr></table></figure>
+
+<h2 id="实例方法：padStart-，padEnd"><a href="#实例方法：padStart-，padEnd" class="headerlink" title="实例方法：padStart()，padEnd()"></a>实例方法：padStart()，padEnd()</h2><p>ES2017 引入了字符串补全长度的功能。如果某个字符串不够指定长度，会在头部或尾部补全。<strong>padStart()用于头部补全，padEnd()用于尾部补全。</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#39;x&#39;.padStart(5, &#39;ab&#39;) &#x2F;&#x2F; &#39;ababx&#39;</span><br><span class="line">&#39;x&#39;.padStart(4, &#39;ab&#39;) &#x2F;&#x2F; &#39;abax&#39;</span><br><span class="line"></span><br><span class="line">&#39;x&#39;.padEnd(5, &#39;ab&#39;) &#x2F;&#x2F; &#39;xabab&#39;</span><br><span class="line">&#39;x&#39;.padEnd(4, &#39;ab&#39;) &#x2F;&#x2F; &#39;xaba&#39;</span><br></pre></td></tr></table></figure>
+
+<p>上面代码中，<code>padStart()</code>和<code>padEnd()</code>一共接受两个参数，第一个参数是字符串补全生效的最大长度，第二个参数是用来补全的字符串。</p>
+<p>如果原字符串的长度，等于或大于最大长度，则字符串补全不生效，返回原字符串。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#39;xxx&#39;.padStart(2, &#39;ab&#39;) &#x2F;&#x2F; &#39;xxx&#39;</span><br><span class="line">&#39;xxx&#39;.padEnd(2, &#39;ab&#39;) &#x2F;&#x2F; &#39;xxx&#39;</span><br></pre></td></tr></table></figure>
+
+<p>如果用来补全的字符串与原字符串，两者的长度之和超过了最大长度，则会截去超出位数的补全字符串。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#39;abc&#39;.padStart(10, &#39;0123456789&#39;)</span><br><span class="line">&#x2F;&#x2F; &#39;0123456abc&#39;</span><br></pre></td></tr></table></figure>
+
+<p><strong>如果省略第二个参数，默认使用空格补全长度。</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#39;x&#39;.padStart(4) &#x2F;&#x2F; &#39;   x&#39;</span><br><span class="line">&#39;x&#39;.padEnd(4) &#x2F;&#x2F; &#39;x   &#39;</span><br></pre></td></tr></table></figure>
+
+<p><code>padStart()</code>的常见用途是为数值补全指定位数。下面代码生成 10 位的数值字符串。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#39;1&#39;.padStart(10, &#39;0&#39;) &#x2F;&#x2F; &quot;0000000001&quot;</span><br><span class="line">&#39;12&#39;.padStart(10, &#39;0&#39;) &#x2F;&#x2F; &quot;0000000012&quot;</span><br><span class="line">&#39;123456&#39;.padStart(10, &#39;0&#39;) &#x2F;&#x2F; &quot;0000123456&quot;</span><br></pre></td></tr></table></figure>
+
+<p>另一个用途是提示字符串格式。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#39;12&#39;.padStart(10, &#39;YYYY-MM-DD&#39;) &#x2F;&#x2F; &quot;YYYY-MM-12&quot;</span><br><span class="line">&#39;09-12&#39;.padStart(10, &#39;YYYY-MM-DD&#39;) &#x2F;&#x2F; &quot;YYYY-09-12&quot;</span><br></pre></td></tr></table></figure>
+
+<h2 id="实例方法：trimStart-，trimEnd"><a href="#实例方法：trimStart-，trimEnd" class="headerlink" title="实例方法：trimStart()，trimEnd()"></a>实例方法：trimStart()，trimEnd()</h2><p>ES2019 对字符串实例新增了<code>trimStart()</code>和<code>trimEnd()</code>这两个方法。它们的行为与trim()一致，<strong>trimStart()消除字符串头部的空格，trimEnd()消除尾部的空格。它们返回的都是新字符串，不会修改原始字符串</strong>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">const s &#x3D; &#39;  abc  &#39;;</span><br><span class="line"></span><br><span class="line">s.trim() &#x2F;&#x2F; &quot;abc&quot;</span><br><span class="line">s.trimStart() &#x2F;&#x2F; &quot;abc  &quot;</span><br><span class="line">s.trimEnd() &#x2F;&#x2F; &quot;  abc&quot;</span><br></pre></td></tr></table></figure>
+
+<p>上面代码中，<code>trimStart()</code>只消除头部的空格，保留尾部的空格。<code>trimEnd()</code>也是类似行为。</p>
+<p>除了空格键，这两个方法对字符串头部（或尾部）的 <code>tab</code> 键、换行符等不可见的空白符号也有效。</p>
+<p>浏览器还部署了额外的两个方法，<code>trimLeft()</code>是<code>trimStart()</code>的别名，<code>trimRight()</code>是<code>trimEnd()</code>的别名。</p>
+<h2 id="实例方法：matchAll"><a href="#实例方法：matchAll" class="headerlink" title="实例方法：matchAll()"></a>实例方法：matchAll()</h2><p><code>matchAll()</code>方法返回一个正则表达式在当前字符串的所有匹配，详见《正则的扩展》的一章。</p>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章推荐</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/04/22/24-Module的语法/" rel="bookmark">Module的语法</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/04/22/25-Module的加载实现/" rel="bookmark">Module的加载实现</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/04/18/03-let和const/" rel="bookmark">let和const</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/04/18/04-变量的解构赋值/" rel="bookmark">变量的解构赋值</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/04/18/05-字符串的扩展/" rel="bookmark">字符串的拓展</a></div>
+    </li>
+  </ul>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>lyy
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://yoursite.com/2020/04/18/06-%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%96%B0%E5%A2%9E%E6%96%B9%E6%B3%95/" title="字符串的新增方法">http://yoursite.com/2020/04/18/06-字符串的新增方法/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/ES6/" rel="tag"># ES6</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/04/18/06-JavaScript%E5%BC%B9%E5%87%BA%E6%A1%86/" rel="prev" title="JavaScript弹出框">
+      <i class="fa fa-chevron-left"></i> JavaScript弹出框
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/04/18/07-Timing%E4%BA%8B%E4%BB%B6/" rel="next" title="Timing事件">
+      Timing事件 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#String-fromCodePoint"><span class="nav-number">1.1.</span> <span class="nav-text">String.fromCodePoint()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#String-raw"><span class="nav-number">1.2.</span> <span class="nav-text">String.raw()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实例方法：codePointAt"><span class="nav-number">1.3.</span> <span class="nav-text">实例方法：codePointAt()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实例方法：normalize"><span class="nav-number">1.4.</span> <span class="nav-text">实例方法：normalize()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实例方法：includes-startsWith-endsWith"><span class="nav-number">1.5.</span> <span class="nav-text">实例方法：includes(), startsWith(), endsWith()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实例方法：repeat"><span class="nav-number">1.6.</span> <span class="nav-text">实例方法：repeat()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实例方法：padStart-，padEnd"><span class="nav-number">1.7.</span> <span class="nav-text">实例方法：padStart()，padEnd()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实例方法：trimStart-，trimEnd"><span class="nav-number">1.8.</span> <span class="nav-text">实例方法：trimStart()，trimEnd()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实例方法：matchAll"><span class="nav-number">1.9.</span> <span class="nav-text">实例方法：matchAll()</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="lyy"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">lyy</p>
+  <div class="site-description" itemprop="description">世间所有的相遇，都是久别重逢</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">117</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/lyylyylyylyy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;lyylyylyylyy" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zju.edu.cn/" title="ZJU → https:&#x2F;&#x2F;www.zju.edu.cn&#x2F;" rel="noopener" target="_blank"><i class="fa fa-graduation-cap fa-fw"></i>ZJU</a>
+      </span>
+  </div>
+
+
+
+    <div class="links-of-blogroll motion-element links-of-blogroll-block">
+      <div class="links-of-blogroll-title">
+        <!-- modify icon to fire by szw -->
+        <i class="fa fa-history fa-" aria-hidden="true"></i>
+        近期文章
+      </div>
+      <ul class="links-of-blogroll-list">
+        
+        
+          <li>
+            <a href="/2020/07/25/29.%20Divide%20Two%20Integers/" title="29. Divide Two Integers## 题目描述" target="_blank">29. Divide Two Integers## 题目描述</a>
+          </li>
+        
+          <li>
+            <a href="/2020/07/25/31.%20Next%20Permutation/" title="31. Next Permutation" target="_blank">31. Next Permutation</a>
+          </li>
+        
+          <li>
+            <a href="/2020/07/25/%E5%BC%82%E6%AD%A5IO/" title="异步I/O" target="_blank">异步I/O</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/24/02-JSX%E7%AE%80%E4%BB%8B/" title="JSX简介" target="_blank">JSX简介</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/24/03-%E5%85%83%E7%B4%A0%E6%B8%B2%E6%9F%93&%E7%BB%84%E4%BB%B6&props/" title="元素渲染&组件&props" target="_blank">元素渲染&组件&props</a>
+          </li>
+        
+      </ul>
+    </div>
+
+      </div>
+      <a href="https://clustrmaps.com/site/1b75d" target="_blank" rel="noopener"  title="Visit tracker"><img src="//www.clustrmaps.com/map_v2.png?d=MSgeNXm-y8DMM6r6hBqJa2IyTlI7gYrIkTQGt57lgv8&cl=ffffff" /></a>
+  </aside>
+    </div>
+    
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fab fa-android"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lyy</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-nest@1/canvas-nest.min.js"></script>
+  <script size="300" alpha="0.6" zIndex="-1" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : true,
+      appId      : 'mxQ2lQFuJOjoaYkjNciana8G-gzGzoHsz',
+      appKey     : 'AWuAvmWCK2rLASObQlsdeX2W',
+      placeholder: "Your comment makes this site better!",
+      avatar     : 'identicon',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

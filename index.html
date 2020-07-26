@@ -212,7 +212,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/07/25/29.%20Divide%20Two%20Integers/" class="post-title-link" itemprop="url">29. Divide Two Integers## 题目描述</a>
+            <a href="/2020/07/25/29.%20Divide%20Two%20Integers/" class="post-title-link" itemprop="url">29. Divide Two Integers</a>
         </h2>
 
         <div class="post-meta">
@@ -229,7 +229,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-07-26 16:25:34" itemprop="dateModified" datetime="2020-07-26T16:25:34Z">2020-07-26</time>
+                <time title="修改时间：2020-07-26 16:30:34" itemprop="dateModified" datetime="2020-07-26T16:30:34Z">2020-07-26</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -279,21 +279,20 @@
 
       
           <hr>
-<p>Given two integers dividend and divisor, divide two integers without using multiplication, division and mod operator.</p>
+<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>Given two integers dividend and divisor, divide two integers without using multiplication, division and mod operator.</p>
 <p>Return the quotient after dividing dividend by divisor.</p>
 <p>The integer division should truncate toward zero, which means losing its fractional part. For example, truncate(8.345) = 8 and truncate(-2.7335) = -2.</p>
 <p>Example 1:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Input: dividend &#x3D; 10, divisor &#x3D; 3</span><br><span class="line">Output: 3</span><br><span class="line">Explanation: 10&#x2F;3 &#x3D; truncate(3.33333..) &#x3D; 3.</span><br><span class="line">Example 2:</span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: dividend &#x3D; 7, divisor &#x3D; -3</span><br><span class="line">Output: -2</span><br><span class="line">Explanation: 7&#x2F;-3 &#x3D; truncate(-2.33333..) &#x3D; -2.</span><br></pre></td></tr></table></figure>
-
-<p>Note:</p>
-<ul>
-<li>Both dividend and divisor will be 32-bit signed integers.</li>
-<li>The divisor will never be 0.</li>
-<li>Assume we are dealing with an environment which could only store integers within the 32-bit signed integer range: [−231,  231 − 1]. For the purpose of this problem, assume that your function returns 231 − 1 when the division result overflows.</li>
-</ul>
-<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>二分法<br>时间复杂度：O(lg(n))</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">var divide &#x3D; function(dividend, divisor) &#123;</span><br><span class="line"></span><br><span class="line">    if (dividend&#x3D;&#x3D;&#x3D;2147483647 &amp;&amp; divisor&#x3D;&#x3D;1) return 2147483647;</span><br><span class="line">    if (dividend&#x3D;&#x3D;&#x3D;-2147483648 &amp;&amp; divisor&#x3D;&#x3D;1) return -2147483648;</span><br><span class="line">    if (dividend&#x3D;&#x3D;0) return 0;</span><br><span class="line">    if (Math.abs(dividend) &lt; Math.abs(divisor)) return 0;</span><br><span class="line">    if (dividend*divisor&gt;0) &#123;</span><br><span class="line">        var isPositive &#x3D; 1;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        var isPositive &#x3D; -1;</span><br><span class="line">    &#125;</span><br><span class="line">    var result &#x3D; 1;</span><br><span class="line">    var left &#x3D; 0;</span><br><span class="line">    var right &#x3D; Math.abs(dividend);</span><br><span class="line">    dividend &#x3D; Math.abs(dividend);</span><br><span class="line">    divisor &#x3D; Math.abs(divisor);</span><br><span class="line">    var middle &#x3D; Math.floor((left+right)&#x2F;2);</span><br><span class="line"></span><br><span class="line">    while(left+1&lt;right) &#123;</span><br><span class="line">        if (divisor*middle &#x3D;&#x3D; dividend) return isPositive*middle;</span><br><span class="line">        if(divisor*middle &lt; dividend) &#123;</span><br><span class="line">            left &#x3D; middle;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            right &#x3D; middle;</span><br><span class="line">        &#125;</span><br><span class="line">        result &#x3D; middle;</span><br><span class="line">        if(right-left &lt;&#x3D; 1) &#123;</span><br><span class="line">            result &#x3D; left;</span><br><span class="line">        &#125;</span><br><span class="line">        middle &#x3D; Math.floor((left+right)&#x2F;2);</span><br><span class="line">    &#125;</span><br><span class="line">    return isPositive*result;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/07/25/29.%20Divide%20Two%20Integers/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1472,7 +1471,7 @@
         
         
           <li>
-            <a href="/2020/07/25/29.%20Divide%20Two%20Integers/" title="29. Divide Two Integers## 题目描述" target="_blank">29. Divide Two Integers## 题目描述</a>
+            <a href="/2020/07/25/29.%20Divide%20Two%20Integers/" title="29. Divide Two Integers" target="_blank">29. Divide Two Integers</a>
           </li>
         
           <li>

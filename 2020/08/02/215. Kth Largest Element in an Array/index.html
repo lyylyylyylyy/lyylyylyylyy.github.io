@@ -21,17 +21,20 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="世间所有的相遇，都是久别重逢">
-<meta property="og:type" content="website">
-<meta property="og:title" content="若只如初见">
-<meta property="og:url" content="http://yoursite.com/archives/2020/04/page/9/index.html">
+  <meta name="description" content="问题描述Find the kth largest element in an unsorted array. Note that it is the kth largest element in the sorted order, not the kth distinct element. 1234Example 1:Input: [3,2,1,5,6,4] and k &#x3D; 2Outpu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="215. Kth Largest Element in an Array">
+<meta property="og:url" content="http://yoursite.com/2020/08/02/215.%20Kth%20Largest%20Element%20in%20an%20Array/index.html">
 <meta property="og:site_name" content="若只如初见">
-<meta property="og:description" content="世间所有的相遇，都是久别重逢">
+<meta property="og:description" content="问题描述Find the kth largest element in an unsorted array. Note that it is the kth largest element in the sorted order, not the kth distinct element. 1234Example 1:Input: [3,2,1,5,6,4] and k &#x3D; 2Outpu">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-08-02T00:00:00.000Z">
+<meta property="article:modified_time" content="2020-08-02T12:42:48.190Z">
 <meta property="article:author" content="lyy">
+<meta property="article:tag" content="Leetcode">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yoursite.com/archives/2020/04/page/9/">
+<link rel="canonical" href="http://yoursite.com/2020/08/02/215.%20Kth%20Largest%20Element%20in%20an%20Array/">
 
 
 <script id="page-configurations">
@@ -39,12 +42,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>归档 | 若只如初见</title>
+  <title>215. Kth Largest Element in an Array | 若只如初见</title>
   
 
 
@@ -192,240 +195,178 @@
         <div class="content-wrap">
           
 
-          <div class="content archive">
+          <div class="content post posts-expand">
             
 
+    
   
   
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/02/215.%20Kth%20Largest%20Element%20in%20an%20Array/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="lyy">
+      <meta itemprop="description" content="世间所有的相遇，都是久别重逢">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="若只如初见">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          215. Kth Largest Element in an Array
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-08-02 00:00:00 / 修改时间：12:42:48" itemprop="dateCreated datePublished" datetime="2020-08-02T00:00:00Z">2020-08-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Leetcode/" itemprop="url" rel="index"><span itemprop="name">Leetcode</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
   
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        
-        <span class="collection-header">很好! 目前共计 124 篇日志。 继续努力。</span>
-      </div>
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/08/02/215.%20Kth%20Largest%20Element%20in%20an%20Array/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/08/02/215.%20Kth%20Largest%20Element%20in%20an%20Array/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>562</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2020</span>
-    </div>
+        <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>Find the kth largest element in an unsorted array. Note that it is the kth largest element in the sorted order, not the kth distinct element.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Example 1:</span><br><span class="line"></span><br><span class="line">Input: [3,2,1,5,6,4] and k &#x3D; 2</span><br><span class="line">Output: 5</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+<p>Example 2:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: [3,2,3,1,2,4,5,5,6] and k &#x3D; 4</span><br><span class="line">Output: 4</span><br></pre></td></tr></table></figure>
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-04-18T00:00:00Z"
-              content="2020-04-18">
-          04-18
-        </time>
-      </div>
+<p>Note:<br>You may assume k is always valid, 1 ≤ k ≤ array’s length.</p>
+<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>排序后，第k-1个元素即是目标元素。</p>
+<p>代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * @param &#123;number[]&#125; nums</span><br><span class="line"> * @param &#123;number&#125; k</span><br><span class="line"> * @return &#123;number&#125;</span><br><span class="line"> *&#x2F;</span><br><span class="line">var findKthLargest &#x3D; function(nums, k) &#123;</span><br><span class="line">    nums.sort((a, b) &#x3D;&gt; &#123;return b-a&#125;);</span><br><span class="line">    console.log(nums)</span><br><span class="line">    return nums[k-1]</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/04/18/29-scroll%E7%9B%B8%E5%85%B3%E5%B1%9E%E6%80%A7%E5%92%8C%E7%BC%93%E5%8A%A8%E5%8A%A8%E7%94%BB/" itemprop="url">
-            <span itemprop="name">29-scroll相关属性和缓动动画</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-04-18T00:00:00Z"
-              content="2020-04-18">
-          04-18
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/04/18/30-client-%E5%8F%AF%E8%A7%86%E5%8C%BA/" itemprop="url">
-            <span itemprop="name">client相关属性</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-04-18T00:00:00Z"
-              content="2020-04-18">
-          04-18
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/04/18/31-%E4%BA%8B%E4%BB%B6%E7%9A%84%E7%BB%91%E5%AE%9A%E5%92%8C%E4%BA%8B%E4%BB%B6%E5%AF%B9%E8%B1%A1Event/" itemprop="url">
-            <span itemprop="name">事件绑定和事件对象Event</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-04-18T00:00:00Z"
-              content="2020-04-18">
-          04-18
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/04/18/32-%E4%BA%8B%E4%BB%B6%E7%9A%84%E4%BC%A0%E6%92%AD%E5%92%8C%E4%BA%8B%E4%BB%B6%E5%86%92%E6%B3%A1/" itemprop="url">
-            <span itemprop="name">事件的传播和事件冒泡</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-04-18T00:00:00Z"
-              content="2020-04-18">
-          04-18
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/04/18/33-%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98/" itemprop="url">
-            <span itemprop="name">事件委托</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-04-18T00:00:00Z"
-              content="2020-04-18">
-          04-18
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/04/18/34-%E9%94%AE%E7%9B%98%E4%BA%8B%E4%BB%B6/" itemprop="url">
-            <span itemprop="name">键盘事件</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-04-18T00:00:00Z"
-              content="2020-04-18">
-          04-18
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/04/18/36-%E5%AE%9A%E6%97%B6%E5%99%A8/" itemprop="url">
-            <span itemprop="name">定时器typeof和数据类型转换</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-04-18T00:00:00Z"
-              content="2020-04-18">
-          04-18
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/04/18/35-BOM%E7%AE%80%E4%BB%8B%E5%92%8Cnavigator.userAgent&History&Location/" itemprop="url">
-            <span itemprop="name">BOM简介</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-04-18T00:00:00Z"
-              content="2020-04-18">
-          04-18
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/04/18/37-BOM%E7%9A%84%E5%B8%B8%E8%A7%81%E5%86%85%E7%BD%AE%E6%96%B9%E6%B3%95%E5%92%8C%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1/" itemprop="url">
-            <span itemprop="name">BOM的常见内置方法和内置对象</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-04-18T00:00:00Z"
-              content="2020-04-18">
-          04-18
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/04/18/38-%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1/" itemprop="url">
-            <span itemprop="name">创建对象</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
+<p>时间复杂度：//<br>空间复杂度：O(1)</p>
 
     </div>
-  </div>
-  
-  
-  
 
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章推荐</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/08/02/653. Two Sum IV - Input is a BST/" rel="bookmark">653. Two Sum IV - Input is a BST</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/07/31/1395. Count Number of Teams /" rel="bookmark">1395. Count Number of Teams</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/07/30/287. Find the Duplicate Number/" rel="bookmark">287. Find the Duplicate Number</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/07/30/53-Maximum-Subarray/" rel="bookmark">53. Maximum Subarray</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/07/28/55. Jump Game/" rel="bookmark">55. Jump Game</a></div>
+    </li>
+  </ul>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>lyy
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://yoursite.com/2020/08/02/215.%20Kth%20Largest%20Element%20in%20an%20Array/" title="215. Kth Largest Element in an Array">http://yoursite.com/2020/08/02/215. Kth Largest Element in an Array/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Leetcode/" rel="tag"># Leetcode</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/08/02/653.%20Two%20Sum%20IV%20-%20Input%20is%20a%20BST/" rel="prev" title="653. Two Sum IV - Input is a BST">
+      <i class="fa fa-chevron-left"></i> 653. Two Sum IV - Input is a BST
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
   
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/archives/2020/04/page/8/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/archives/2020/04/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/2020/04/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/archives/2020/04/page/10/">10</a><a class="page-number" href="/archives/2020/04/page/11/">11</a><a class="extend next" rel="next" href="/archives/2020/04/page/10/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
-  </nav>
+  
+  
 
 
 
           </div>
           
+    <div class="comments" id="valine-comments"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -472,6 +413,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题描述"><span class="nav-number">1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解题思路"><span class="nav-number">2.</span> <span class="nav-text">解题思路</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

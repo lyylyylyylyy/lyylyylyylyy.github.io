@@ -135,7 +135,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档<span class="badge">134</span></a>
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档<span class="badge">135</span></a>
 
   </li>
         <li class="menu-item menu-item-疫情地图">
@@ -194,6 +194,212 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/25/%E5%BC%82%E6%AD%A5IO/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="lyy">
+      <meta itemprop="description" content="世间所有的相遇，都是久别重逢">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="若只如初见">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/07/25/%E5%BC%82%E6%AD%A5IO/" class="post-title-link" itemprop="url">异步I/O</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-07-25 00:00:00" itemprop="dateCreated datePublished" datetime="2020-07-25T00:00:00Z">2020-07-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-07-26 16:26:52" itemprop="dateModified" datetime="2020-07-26T16:26:52Z">2020-07-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Node/" itemprop="url" rel="index"><span itemprop="name">Node</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/07/25/%E5%BC%82%E6%AD%A5IO/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/07/25/%E5%BC%82%E6%AD%A5IO/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>5 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <hr>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在众多高级编程语言或运行平台中，将异步作为主要编程方式和设计理念的Node是首个。</p>
+<p><strong>伴随着异步I/O的还有事件驱动和单线程，他们构成Node的基调。</strong></p>
+<p>Node是全方位的，既可以作为服务器端去处理客户端带来的大量并发请求，也能作为客户端向网络中的各个应用进行并发请求。</p>
+<h2 id="异步I-O的原因"><a href="#异步I-O的原因" class="headerlink" title="异步I/O的原因"></a>异步I/O的原因</h2><p>这与Node面向网络设计有关。</p>
+<h3 id="用户体验"><a href="#用户体验" class="headerlink" title="用户体验"></a>用户体验</h3><p>在浏览器中，JavaScript在单线程上执行，而且它还与UI渲染共用一个线程。这意味着，JavaScript在执行的时候UI渲染和响应是处于停滞状态的。</p>
+<p>通过异步可以消除UI阻塞的现象，但是前端获取资源的速度也取决于后端响应的速度。</p>
+<p>只有后端能够快速响应资源，才能让前端的体验更好。</p>
+<h3 id="资源分配"><a href="#资源分配" class="headerlink" title="资源分配"></a>资源分配</h3><p>假设业务场景中有一组互不相关的任务需要完成，现行的主流方法有以下两种。</p>
+<ul>
+<li>单线程串行依次执行</li>
+<li>多线程并行完成</li>
+</ul>
+<p>多线程的代价在于，创建线程和执行期线程上下文的切换开销较大。此外，在复杂的业务中，多线程编程经常面临死锁、状态同步等问题，但是多线程在多核CPU上能够有效提升CPU的利用率。</p>
+<p>单线程同步编程模型会因阻塞I/O导致硬件资源得不到更优的使用。</p>
+<p>添加硬件资源是一种提升服务质量的方式，但它不是唯一的方式。</p>
+<p><strong>Node在两者之间给出了它的方案：利用单线程，远离多线程死锁、状态同步等问题；利用异步I/O，让单线程远离阻塞，以更好的使用CPU。</strong></p>
+<p>为了弥补单线程无法利用多核cpu的缺点，Node提供了类似前端浏览器中Web Workers的子进程，该子进程可以通过工作进程高效的利用CPU和I/O。</p>
+<h2 id="异步I-O实现"><a href="#异步I-O实现" class="headerlink" title="异步I/O实现"></a>异步I/O实现</h2><h3 id="异步I-O与非阻塞I-O"><a href="#异步I-O与非阻塞I-O" class="headerlink" title="异步I/O与非阻塞I/O"></a>异步I/O与非阻塞I/O</h3><p>从计算机内核I/O而言，异步/同步和阻塞/非阻塞实际上是两回事。</p>
+<p>操作系统内核对于I/O只有两种方式：阻塞与非阻塞。在调用阻塞I/O时，应用程序需要等待I/O完成才返回结果。<strong>非阻塞I/O和阻塞I/O的差别为调用后会立即返回。</strong></p>
+<p><em>操作系统对计算机进行了抽象，将所有输入输出设备抽象为文件。内核在进行文件I/O操作时，通过文件描述符进行管理，而文件描述符类似于应用程序与系统内核之间的凭证。应用程序如果需要进行I/O调用，需要先打开文件描述符，然后再根据文件描述符去实现文件的数据读写。*</em>此处非阻塞I/O与阻塞I/O的区别在于阻塞I/O完成整个获取数据的过程，而非阻塞I/O则不带数据直接返回，要获取数据，还需要通过文件描述符再次读取。***</p>
+<p>非阻塞I/O返回后，CPU的时间片可以用来处理其他事物，此时的性能提升是明显的。</p>
+<p><img src="https://github.com/highsea/diveintonode_figures/blob/master/03/async_io.png?raw=true" alt="非阻塞"></p>
+<p>由于完成的I/O并没有完成，立即返回的并不是业务层期望的数据，而仅仅是当前调用的状态。<strong>为了获取完整的数据，应用程序需要重复调用I/O操作来确认是否完成。</strong></p>
+<p>这种重复调用判断操作是否完成的技术叫做<strong>轮询</strong>。</p>
+<p><strong>非阻塞带来的麻烦却是需要轮询去确认是否完全完成数据获取，它会让CPU处理状态判断，是对CPU资源的浪费</strong>。</p>
+<p>现存的轮询技术主要有以下这些：</p>
+<ul>
+<li>read</li>
+</ul>
+<p>它是最原始，性能最低的一种，通过反复调用来检查I/O的状态来完成数据饿读取。在得到最终数据前，CPU一直耗用在等待上。</p>
+<ul>
+<li>select</li>
+</ul>
+<p>它是在read基础上改进的一种方案，通过对文件描述符上的事件状态来进行判断。</p>
+<ul>
+<li>poll</li>
+</ul>
+<p>该方案较select有所改进，采用链表的方式避免数组长度的限制，其次他能避免不必要的检查。</p>
+<ul>
+<li><strong>epoll</strong></li>
+</ul>
+<p><strong>该方案是Linux下效率最高的I/O事件通知机制，在进入轮询的时候如果没有检查到I/O事件，将会进行休眠，直到事件发生将它唤醒。它是真实利用了事件通知、执行回调的方式，而不是遍历查询，所以不会浪费CPU，执行效率较高。</strong></p>
+<p><img src="https://github.com/highsea/diveintonode_figures/blob/master/03/epoll_io.png?raw=true" alt="epoll"></p>
+<p>轮询技术满足了非阻塞I/O确保获取完整数据的需求，但是对于应用程序来说，它仍然只能算是一种同步，因为应用程序仍然需要等待I/O完全返回。</p>
+<h3 id="理想的非阻塞异步I-O"><a href="#理想的非阻塞异步I-O" class="headerlink" title="理想的非阻塞异步I/O"></a>理想的非阻塞异步I/O</h3><h3 id="现实的非阻塞异步I-O"><a href="#现实的非阻塞异步I-O" class="headerlink" title="现实的非阻塞异步I/O"></a>现实的非阻塞异步I/O</h3><p><strong>通过让部分线程进行阻塞I/O或者非阻塞I/O加轮询技术来完成数据获取，让一个线程进行计算处理，通过线程之间的通信将I/O得到的数据进行传递，这就轻松实现了异步I/O。</strong></p>
+<p><img src="https://github.com/highsea/diveintonode_figures/blob/master/03/simulate_async_io.png?raw=true" alt=""></p>
+<p>glibc的AIO是典型的线程池模拟异步I/O，但是它存在一些难以忍受的缺陷和bug。</p>
+<p>Windows下的<strong>IOCP</strong>，也是一种异步I/O解决方案，它在某种程度上提供了理想的异步I/O：调用异步方法，等待I/O完成之后的通知，执行回调，用户无需考虑轮询。它的内部依旧是线程池原理。</p>
+<p>由于Windows和<em>nix平台的差异，*</em>node提供了libuv作为抽象封装层**，使得所有平台兼容性的判断都由这一层来完成，并保证上层的node与下层的自定义线程池及IOCP之间各自独立。</p>
+<p><img src="https://github.com/highsea/diveintonode_figures/blob/master/03/async_io_arch.png?raw=true" alt="基于libuv的架构示意图"></p>
+<blockquote>
+<p>注意⚠️：</p>
+</blockquote>
+<p><strong>我们时常提到Node是单线程的，这里的单线程指的仅仅只是JavaScript执行在单线程中，在Node中，无论是Windows还是*nix，内部完成I/O任务的另有线程池。</strong></p>
+<h2 id="Node的异步I-O"><a href="#Node的异步I-O" class="headerlink" title="Node的异步I/O"></a>Node的异步I/O</h2><h3 id="事件循环"><a href="#事件循环" class="headerlink" title="事件循环"></a>事件循环</h3><p><strong>Node自身的执行模型——事件循环</strong>，正是它使得回调函数十分普遍。</p>
+<p><strong>在进程启动时，Node便会创建一个类似于while(true)的循环，每执行一次循环体的过程成为Tick。每个Tick的过程就是查看是否有事件待处理，如果有，就取出事件及其相关的回调函数。。如果存在关联的回调函数，就执行它们。然后进入下个循环，如果不再有事件处理，就退出进程。</strong></p>
+<p><img src="https://github.com/highsea/diveintonode_figures/blob/master/03/loop.png?raw=true" alt="Tick流程图"></p>
+<h3 id="观察者"><a href="#观察者" class="headerlink" title="观察者"></a>观察者</h3><blockquote>
+<p>引入一个概念：观察者</p>
+</blockquote>
+<p>每个事件循环中有一个或者多个观察者，而判断是否有事件要处理的过程就是向这些观察者询问是否有要处理的事件。</p>
+<p>浏览器采用了类似的机制。事件可能来自用户的点击或家在某些文件时产生，这些事件都由对应的观察者。</p>
+<p>在Node中，事件主要来源于网络请求、文件I/O等，这些事件对应的观察者有文件I/O观察者、网络I/O观察者等。</p>
+<p>观察者将事件进行了分类。</p>
+<h3 id="请求对象"><a href="#请求对象" class="headerlink" title="请求对象"></a>请求对象</h3><p>JavaScript代码到系统内核之间发生了什么。</p>
+<p>对于一般的回调函数，函数由我们自行调用，对于Node的异步I/O来说，回调函数却不由开发者来调用。<strong>从Javascipt发起调用到内核执行完I/O操作的过渡过程中，存在一种中间产物，它叫做请求对象。</strong></p>
+<p><strong>JavaScript层面的代码通过调用C++核心模块进行下层的操作。</strong></p>
+<p><strong>从JavaScript调用Node的核心模块，核心模块调用C++内建模块，内建模块通过libuv进行系统调用，这是Node里经典的调用方式。</strong></p>
+<p>至此，JavaScript调用立即返回，由JavaScript层面发起的异步调用的第一阶段就此结束。JavaScript线程可以继续执行当前任务的后续操作。当前I/O操作在线程池中等待执行，不管是否阻塞I/O，都不会影响到JavaScript的后续执行，如此就达到了异步的目的。</p>
+<p><strong>请求对象是异步I/O过程中的重要产物，所有的状态都保存在这个对象中，包括送入线程池等待执行以及I/O操作完毕后的回调处理。</strong></p>
+<h3 id="执行回调"><a href="#执行回调" class="headerlink" title="执行回调"></a>执行回调</h3><p>组装好请求对象、送入I/O线程池等待执行，实际上完成了异步I/O的第一部分，回调通知是第二部分。</p>
+<p><strong>线程池中的I/O操作调用完毕后</strong>，会将获取的结果储存在<code>req-&gt;result</code>属性上，然后调用<code>PostQueuedCompletionStatus()</code>通知IOCP，告知当前对象操作以已经完成。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PostQueuedCompletionStatus((loop) -&gt; iocp, 0, 0, &amp;((req)-&gt;overlapped))</span><br></pre></td></tr></table></figure>
+
+<p><code>PostQueuedCompletionStatus()</code>方法的作用是向IOCP提交执行状态，并将线程归还线程池，可以通过<code>GetQueuedCompletionStatus()</code>获取提交的状态。</p>
+<p>此过程中，还动用了事件循环的I/O观察者。<strong>在每次Tick的执行中，它会调用IOCP相关的<code>GetQueuedCompletionStatus()</code>方法检查线程池中是否有执行完的请求，若有，会将请求对象加入到I/O观察者的队列中，然后将其当作事件处理。</strong></p>
+<p><strong>I/O观察者回调函数的行为</strong>就是取出请求对象的<code>result</code>属性作为参数，取出<code>oncomplete_sym</code>属性作为方法，然后调用执行，以此达到调用JavaScript中传入的回调函数的目的。</p>
+<p><img src="https://github.com/highsea/diveintonode_figures/blob/master/03/io_model.png?raw=true" alt="整个异步I/O 的流程"></p>
+<p><strong>事件循环、观察者、请求对象、I/O线程池这四者构成了Node异步I/O模型的基本要素。</strong></p>
+<h2 id="非I-O的异步API"><a href="#非I-O的异步API" class="headerlink" title="非I/O的异步API"></a>非I/O的异步API</h2><p><code>setTimeout()</code>、<code>setInterval()</code>、<code>setImmediate()</code>、<code>process.nextTick()</code></p>
+<h3 id="定时器"><a href="#定时器" class="headerlink" title="定时器"></a>定时器</h3><p><code>setTimeout()</code>和<code>setInterval()</code>的实现原理与异步I/O的实现比较类似，但是没有线程池的参与。</p>
+<p><code>setTimeout()</code>和<code>setInterval()</code>创建的定时器会被插入到定时器观察者内部的一个<strong>红黑树</strong>中。每次Tick执行时，会从该红黑树中迭代取出定时器对象，检查超过是否超过定时时间，如果超过，就形成一个事件，它的回调函数立即执行。</p>
+<p>定时器的问题在于，它并非精确的（在容忍范围内）。</p>
+<p><img src="https://github.com/highsea/diveintonode_figures/blob/master/03/timer.png?raw=true" alt="setTimeout的行为"></p>
+<h3 id="process-nextTick"><a href="#process-nextTick" class="headerlink" title="process.nextTick()"></a>process.nextTick()</h3><p><code>process.nextTick()</code>的操作相比<code>setTimeout()</code>较为轻量。</p>
+<p>具体代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">process.nextTick &#x3D; function(callback) &#123;</span><br><span class="line">    if(process._exiting) return;</span><br><span class="line"></span><br><span class="line">    if(tickDepth &gt;&#x3D; process.maxTickDepth) maxTickWarn();</span><br><span class="line"></span><br><span class="line">    var tock &#x3D; &#123;callback: callback&#125;;</span><br><span class="line">    if(process.domain) rock.domain &#x3D; process.domain;</span><br><span class="line"></span><br><span class="line">    nextTickQueue.push(tock);</span><br><span class="line">    if(nextTickQueue.length) &#123;</span><br><span class="line">        process._needTickCallback();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>每次调用<code>process.nextTick()</code>方法，只会将回调函数放入队列中，在下一轮Tick中取出执行。定时器中采用红黑树时间复杂度为O(lg(n))，<code>process.nextTick()</code>的是O(1)，更高效。</p>
+<h3 id="setImmediate"><a href="#setImmediate" class="headerlink" title="setImmediate()"></a>setImmediate()</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">process.nextTick(function() &#123;</span><br><span class="line">    console.log(&#39;nextTick延迟执行&#39;)</span><br><span class="line">&#125;);</span><br><span class="line">setImmediate(function() &#123;</span><br><span class="line">    console.log(&#39;setImmediate延迟执行&#39;)</span><br><span class="line">&#125;);</span><br><span class="line">console.log(&#39;正常执行&#39;)</span><br></pre></td></tr></table></figure>
+
+<p>执行结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">正常执行</span><br><span class="line">nextTick延迟执行</span><br><span class="line">setImmediate延迟执行</span><br></pre></td></tr></table></figure>
+
+<p>从执行结果来看，<code>process.nextTick()</code>的回调函数执行优先级高于<code>setImmediate()</code>，这是因为，<strong>事件循环对于观察者的检查是有先后顺序的</strong>，<code>process.nextTick()</code>属于idle观察者，<code>setImmediate()</code>属于check观察者。在每一个轮循环检查中idle观察者先于I/O观察者，I/O观察者先于check观察者。</p>
+<p>在具体实现上，<code>process.nextTick()</code>的回调函数保存在一个数组中，<code>setImmediate()</code>的结果保存在链表中。在行为上，<code>process.nextTick()</code>在每轮循环中会将数组中的回调函数全部执行，<code>setImmediate()</code>在每轮循环中执行链表中的一个回调函数。</p>
+<h2 id="事件驱动和高性能服务器"><a href="#事件驱动和高性能服务器" class="headerlink" title="事件驱动和高性能服务器"></a>事件驱动和高性能服务器</h2><p><strong>事件驱动的本质，通过祝循环加事件触发的方式来运行程序。</strong></p>
+<p>对于网络套接字的处理，Node也用到了异步I/O，网络套接字侦听到的请求都会形成事件交给I/O观察者。事件循环会不停的处理这些网络I/O事件。如果JavaScript有传入回调函数，这些事件将会最终传递到业务逻辑层进行处理。利用Node构建Web服务器，正是在这一个基础上实现的。</p>
+<p><img src="https://github.com/highsea/diveintonode_figures/blob/master/03/server.png?raw=true" alt="利用Node构建Web服务器流程图"></p>
+<p>经典的服务器模型：</p>
+<ul>
+<li>同步式</li>
+<li>每进程/每请求</li>
+<li>每线程/每请求</li>
+</ul>
+<p>Node通过事件驱动的方式处理请求，无需为每一个请求创建额外的对应线程，可以省掉创建线程和销毁线程的开销，同时操作系统在调度任务时，因为线程较少，上下文切换的代价很低。<strong>这是Node高性能的一个原因</strong>。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -278,6 +484,110 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2020/05/24/02-JSX%E7%AE%80%E4%BB%8B/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/24/04-State&%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="lyy">
+      <meta itemprop="description" content="世间所有的相遇，都是久别重逢">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="若只如初见">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/24/04-State&%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" class="post-title-link" itemprop="url">State&生命周期</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-05-24 00:00:00 / 修改时间：08:39:02" itemprop="dateCreated datePublished" datetime="2020-05-24T00:00:00Z">2020-05-24</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/React/" itemprop="url" rel="index"><span itemprop="name">React</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/05/24/04-State&%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/05/24/04-State&%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>7k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>6 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <hr>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文介绍了 React 组件中 state 和生命周期的概念。</p>
+<p>在元素渲染章节中，我们只了解了一种更新 UI 界面的方法。通过调用 <code>ReactDOM.render()</code> 来修改我们想要渲染的元素：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">function tick() &#123;</span><br><span class="line">  const element &#x3D; (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;h1&gt;Hello, world!&lt;&#x2F;h1&gt;</span><br><span class="line">      &lt;h2&gt;It is &#123;new Date().toLocaleTimeString()&#125;.&lt;&#x2F;h2&gt;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line">  );</span><br><span class="line">  ReactDOM.render(</span><br><span class="line">    element,</span><br><span class="line">    document.getElementById(&#39;root&#39;)</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">setInterval(tick, 1000);</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/05/24/04-State&%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -408,110 +718,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/24/04-State&%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="lyy">
-      <meta itemprop="description" content="世间所有的相遇，都是久别重逢">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="若只如初见">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/24/04-State&%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" class="post-title-link" itemprop="url">State&生命周期</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-05-24 00:00:00 / 修改时间：08:39:02" itemprop="dateCreated datePublished" datetime="2020-05-24T00:00:00Z">2020-05-24</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/React/" itemprop="url" rel="index"><span itemprop="name">React</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/05/24/04-State&%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/05/24/04-State&%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-              <span>7k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-              <span>6 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <hr>
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文介绍了 React 组件中 state 和生命周期的概念。</p>
-<p>在元素渲染章节中，我们只了解了一种更新 UI 界面的方法。通过调用 <code>ReactDOM.render()</code> 来修改我们想要渲染的元素：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">function tick() &#123;</span><br><span class="line">  const element &#x3D; (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;h1&gt;Hello, world!&lt;&#x2F;h1&gt;</span><br><span class="line">      &lt;h2&gt;It is &#123;new Date().toLocaleTimeString()&#125;.&lt;&#x2F;h2&gt;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line">  );</span><br><span class="line">  ReactDOM.render(</span><br><span class="line">    element,</span><br><span class="line">    document.getElementById(&#39;root&#39;)</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">setInterval(tick, 1000);</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/05/24/04-State&%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/21/02-http1.0%E5%92%8Chttp2.0%E7%9A%84%E5%8C%BA%E5%88%AB/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -594,109 +800,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2020/05/21/02-http1.0%E5%92%8Chttp2.0%E7%9A%84%E5%8C%BA%E5%88%AB/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/21/19-%E6%B0%B4%E5%B9%B3%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="lyy">
-      <meta itemprop="description" content="世间所有的相遇，都是久别重逢">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="若只如初见">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/21/19-%E6%B0%B4%E5%B9%B3%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD/" class="post-title-link" itemprop="url">水平垂直居中</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-05-21 00:00:00 / 修改时间：09:47:34" itemprop="dateCreated datePublished" datetime="2020-05-21T00:00:00Z">2020-05-21</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/CSS/" itemprop="url" rel="index"><span itemprop="name">CSS</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/05/21/19-%E6%B0%B4%E5%B9%B3%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/05/21/19-%E6%B0%B4%E5%B9%B3%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-              <span>3.1k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-              <span>3 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <hr>
-<h1 id="水平居中"><a href="#水平居中" class="headerlink" title="水平居中"></a>水平居中</h1><h2 id="行内元素水平居中"><a href="#行内元素水平居中" class="headerlink" title="行内元素水平居中"></a>行内元素水平居中</h2><p>这里行内元素是指文本text、图像img、按钮超链接等，只需给父元素设置<code>text-align:center</code>即可实现。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.center&#123;</span><br><span class="line">        text-align:center;</span><br><span class="line">&#125;</span><br><span class="line">&lt;div class&#x3D;&quot;center&quot;&gt;水平居中&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/05/21/19-%E6%B0%B4%E5%B9%B3%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -809,6 +912,109 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2020/05/21/20-%E6%A0%8F%E5%BC%8F%E5%B8%83%E5%B1%80/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/21/19-%E6%B0%B4%E5%B9%B3%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="lyy">
+      <meta itemprop="description" content="世间所有的相遇，都是久别重逢">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="若只如初见">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/21/19-%E6%B0%B4%E5%B9%B3%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD/" class="post-title-link" itemprop="url">水平垂直居中</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-05-21 00:00:00 / 修改时间：09:47:34" itemprop="dateCreated datePublished" datetime="2020-05-21T00:00:00Z">2020-05-21</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CSS/" itemprop="url" rel="index"><span itemprop="name">CSS</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/05/21/19-%E6%B0%B4%E5%B9%B3%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/05/21/19-%E6%B0%B4%E5%B9%B3%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>3.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <hr>
+<h1 id="水平居中"><a href="#水平居中" class="headerlink" title="水平居中"></a>水平居中</h1><h2 id="行内元素水平居中"><a href="#行内元素水平居中" class="headerlink" title="行内元素水平居中"></a>行内元素水平居中</h2><p>这里行内元素是指文本text、图像img、按钮超链接等，只需给父元素设置<code>text-align:center</code>即可实现。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.center&#123;</span><br><span class="line">        text-align:center;</span><br><span class="line">&#125;</span><br><span class="line">&lt;div class&#x3D;&quot;center&quot;&gt;水平居中&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/05/21/19-%E6%B0%B4%E5%B9%B3%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1155,119 +1361,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/22/24-Module%E7%9A%84%E8%AF%AD%E6%B3%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="lyy">
-      <meta itemprop="description" content="世间所有的相遇，都是久别重逢">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="若只如初见">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/22/24-Module%E7%9A%84%E8%AF%AD%E6%B3%95/" class="post-title-link" itemprop="url">Module的语法</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-04-22 00:00:00 / 修改时间：09:23:08" itemprop="dateCreated datePublished" datetime="2020-04-22T00:00:00Z">2020-04-22</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/ES6/" itemprop="url" rel="index"><span itemprop="name">ES6</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/04/22/24-Module%E7%9A%84%E8%AF%AD%E6%B3%95/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/04/22/24-Module%E7%9A%84%E8%AF%AD%E6%B3%95/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-              <span>15k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-              <span>14 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <hr>
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本文主要内容：</p>
-<ul>
-<li>概述</li>
-<li>严格模式</li>
-<li>export 命令</li>
-<li>import 命令</li>
-<li>模块的整体加载</li>
-<li>export default 命令</li>
-<li>export 与 import 的复合写法</li>
-<li>模块的继承</li>
-<li>跨模块常量</li>
-<li>import()
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/04/22/24-Module%E7%9A%84%E8%AF%AD%E6%B3%95/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1339,7 +1432,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">134</span>
+          <span class="site-state-item-count">135</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1378,6 +1471,10 @@
         
         
           <li>
+            <a href="/2020/08/16/121.%20Best%20Time%20to%20Buy%20and%20Sell%20Stock/" title="121. Best Time to Buy and Sell Stock" target="_blank">121. Best Time to Buy and Sell Stock</a>
+          </li>
+        
+          <li>
             <a href="/2020/08/16/113.%20Path%20Sum%20II/" title="113. Path Sum II" target="_blank">113. Path Sum II</a>
           </li>
         
@@ -1391,10 +1488,6 @@
         
           <li>
             <a href="/2020/08/13/83.%20Remove%20Duplicates%20from%20Sorted%20List/" title="83. Remove Duplicates from Sorted List" target="_blank">83. Remove Duplicates from Sorted List</a>
-          </li>
-        
-          <li>
-            <a href="/2020/08/12/62.%20Unique%20Paths/" title="62. Unique Paths" target="_blank">62. Unique Paths</a>
           </li>
         
       </ul>

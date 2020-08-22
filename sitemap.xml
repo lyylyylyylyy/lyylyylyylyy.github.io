@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2020/08/22/125.%20Valid%20Palindrome/</loc>
+    
+    <lastmod>2020-08-22T14:29:07.258Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2020/08/21/437.%20Path%20Sum%20III/</loc>
     
     <lastmod>2020-08-21T14:13:10.140Z</lastmod>

@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2020/08/23/70.%20Climbing%20Stairs/</loc>
+    
+    <lastmod>2020-08-23T13:54:51.532Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2020/08/22/125.%20Valid%20Palindrome/</loc>
     
     <lastmod>2020-08-22T14:29:07.258Z</lastmod>
@@ -261,14 +268,14 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/categories/index.html</loc>
+    <loc>http://yoursite.com/tags/index.html</loc>
     
     <lastmod>2020-04-21T04:34:24.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://yoursite.com/tags/index.html</loc>
+    <loc>http://yoursite.com/categories/index.html</loc>
     
     <lastmod>2020-04-21T04:34:24.000Z</lastmod>
     

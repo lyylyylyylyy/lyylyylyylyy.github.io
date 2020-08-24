@@ -135,7 +135,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档<span class="badge">141</span></a>
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档<span class="badge">142</span></a>
 
   </li>
         <li class="menu-item menu-item-疫情地图">
@@ -198,7 +198,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/18/12-%E9%A2%84%E7%BC%96%E8%AF%91/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/18/12-%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%96%B0%E5%A2%9E%E6%96%B9%E6%B3%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -212,7 +212,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/04/18/12-%E9%A2%84%E7%BC%96%E8%AF%91/" class="post-title-link" itemprop="url">预编译</a>
+            <a href="/2020/04/18/12-%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%96%B0%E5%A2%9E%E6%96%B9%E6%B3%95/" class="post-title-link" itemprop="url">对象的新增方法</a>
         </h2>
 
         <div class="post-meta">
@@ -229,7 +229,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-04-19 09:55:24" itemprop="dateModified" datetime="2020-04-19T09:55:24Z">2020-04-19</time>
+                <time title="修改时间：2020-04-19 09:55:38" itemprop="dateModified" datetime="2020-04-19T09:55:38Z">2020-04-19</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -237,7 +237,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+                  <a href="/categories/ES6/" itemprop="url" rel="index"><span itemprop="name">ES6</span></a>
                 </span>
             </span>
 
@@ -250,8 +250,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2020/04/18/12-%E9%A2%84%E7%BC%96%E8%AF%91/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/04/18/12-%E9%A2%84%E7%BC%96%E8%AF%91/" itemprop="commentCount"></span>
+    <a title="valine" href="/2020/04/18/12-%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%96%B0%E5%A2%9E%E6%96%B9%E6%B3%95/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/04/18/12-%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%96%B0%E5%A2%9E%E6%96%B9%E6%B3%95/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -260,13 +260,13 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span>1.3k</span>
+              <span>4.5k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-              <span>1 分钟</span>
+              <span>4 分钟</span>
             </span>
 
         </div>
@@ -279,15 +279,132 @@
 
       
           <hr>
-<h2 id="JavaScript-运行三部曲"><a href="#JavaScript-运行三部曲" class="headerlink" title="JavaScript 运行三部曲"></a>JavaScript 运行三部曲</h2><ul>
-<li><p>语法分析</p>
-</li>
-<li><p>预编译</p>
-</li>
-<li><p>解释执行</p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本文主要内容：</p>
+<ul>
+<li>Object.is()</li>
+<li>Object.assign()</li>
+<li><code>__proto__</code>属性，<code>Object.setPrototypeOf()</code>，<code>Object.getPrototypeOf()</code></li>
+<li><code>Object.keys()</code>，<code>Object.values()</code>，<code>Object.entries()</code>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/04/18/12-%E9%A2%84%E7%BC%96%E8%AF%91/#more" rel="contents">
+              <a class="btn" href="/2020/04/18/12-%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%96%B0%E5%A2%9E%E6%96%B9%E6%B3%95/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/18/11-%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%89%A9%E5%B1%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="lyy">
+      <meta itemprop="description" content="世间所有的相遇，都是久别重逢">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="若只如初见">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/18/11-%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%89%A9%E5%B1%95/" class="post-title-link" itemprop="url">对象的拓展</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-04-18 00:00:00" itemprop="dateCreated datePublished" datetime="2020-04-18T00:00:00Z">2020-04-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-19 09:53:28" itemprop="dateModified" datetime="2020-04-19T09:53:28Z">2020-04-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ES6/" itemprop="url" rel="index"><span itemprop="name">ES6</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/04/18/11-%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%89%A9%E5%B1%95/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/04/18/11-%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%89%A9%E5%B1%95/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>8.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>8 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <hr>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本文主要内容：</p>
+<ul>
+<li>属性的简洁表示法</li>
+<li>属性名表达式</li>
+<li>方法的 name 属性</li>
+<li>属性的可枚举性和遍历</li>
+<li><code>super</code> 关键字</li>
+<li>对象的扩展运算符</li>
+<li>链判断运算符</li>
+<li>Null 判断运算符
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/04/18/11-%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%89%A9%E5%B1%95/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -420,7 +537,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/18/11-CSS3%E5%B1%9E%E6%80%A7%E8%AF%A6%E8%A7%A3%EF%BC%9A%E5%8A%A8%E7%94%BB%E8%AF%A6%E8%A7%A3/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/18/12-%E9%A2%84%E7%BC%96%E8%AF%91/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -434,7 +551,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/04/18/11-CSS3%E5%B1%9E%E6%80%A7%E8%AF%A6%E8%A7%A3%EF%BC%9A%E5%8A%A8%E7%94%BB%E8%AF%A6%E8%A7%A3/" class="post-title-link" itemprop="url">CSS3属性：动画</a>
+            <a href="/2020/04/18/12-%E9%A2%84%E7%BC%96%E8%AF%91/" class="post-title-link" itemprop="url">预编译</a>
         </h2>
 
         <div class="post-meta">
@@ -451,7 +568,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-04-19 09:53:38" itemprop="dateModified" datetime="2020-04-19T09:53:38Z">2020-04-19</time>
+                <time title="修改时间：2020-04-19 09:55:24" itemprop="dateModified" datetime="2020-04-19T09:55:24Z">2020-04-19</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -459,7 +576,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/CSS/" itemprop="url" rel="index"><span itemprop="name">CSS</span></a>
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
                 </span>
             </span>
 
@@ -472,8 +589,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2020/04/18/11-CSS3%E5%B1%9E%E6%80%A7%E8%AF%A6%E8%A7%A3%EF%BC%9A%E5%8A%A8%E7%94%BB%E8%AF%A6%E8%A7%A3/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/04/18/11-CSS3%E5%B1%9E%E6%80%A7%E8%AF%A6%E8%A7%A3%EF%BC%9A%E5%8A%A8%E7%94%BB%E8%AF%A6%E8%A7%A3/" itemprop="commentCount"></span>
+    <a title="valine" href="/2020/04/18/12-%E9%A2%84%E7%BC%96%E8%AF%91/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/04/18/12-%E9%A2%84%E7%BC%96%E8%AF%91/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -482,13 +599,13 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span>6.3k</span>
+              <span>1.3k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-              <span>6 分钟</span>
+              <span>1 分钟</span>
             </span>
 
         </div>
@@ -500,18 +617,129 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>—## 本文主要内容：</p>
-<ul>
-<li><p>过渡：transition</p>
+          <hr>
+<h2 id="JavaScript-运行三部曲"><a href="#JavaScript-运行三部曲" class="headerlink" title="JavaScript 运行三部曲"></a>JavaScript 运行三部曲</h2><ul>
+<li><p>语法分析</p>
 </li>
-<li><p>2D 转换 transform</p>
+<li><p>预编译</p>
 </li>
-<li><p>3D 转换 transform</p>
-</li>
-<li><p>动画：animation</p>
+<li><p>解释执行</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/04/18/11-CSS3%E5%B1%9E%E6%80%A7%E8%AF%A6%E8%A7%A3%EF%BC%9A%E5%8A%A8%E7%94%BB%E8%AF%A6%E8%A7%A3/#more" rel="contents">
+              <a class="btn" href="/2020/04/18/12-%E9%A2%84%E7%BC%96%E8%AF%91/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/18/13-Symbol/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="lyy">
+      <meta itemprop="description" content="世间所有的相遇，都是久别重逢">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="若只如初见">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/18/13-Symbol/" class="post-title-link" itemprop="url">Symbol</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-04-18 00:00:00" itemprop="dateCreated datePublished" datetime="2020-04-18T00:00:00Z">2020-04-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-19 09:56:34" itemprop="dateModified" datetime="2020-04-19T09:56:34Z">2020-04-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ES6/" itemprop="url" rel="index"><span itemprop="name">ES6</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/04/18/13-Symbol/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/04/18/13-Symbol/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>3.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <hr>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本文主要内容：</p>
+<ul>
+<li>概述</li>
+<li>作为属性名的 Symbol</li>
+<li>属性名的遍历</li>
+<li>Symbol.for()，Symbol.keyFor()
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/04/18/13-Symbol/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -656,7 +884,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/18/14-Set%E5%92%8CMap%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/18/14-%E9%97%AD%E5%8C%85/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -670,7 +898,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/04/18/14-Set%E5%92%8CMap%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="post-title-link" itemprop="url">Set和Map数据结构</a>
+            <a href="/2020/04/18/14-%E9%97%AD%E5%8C%85/" class="post-title-link" itemprop="url">闭包</a>
         </h2>
 
         <div class="post-meta">
@@ -687,7 +915,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-04-19 09:56:24" itemprop="dateModified" datetime="2020-04-19T09:56:24Z">2020-04-19</time>
+                <time title="修改时间：2020-04-19 09:56:02" itemprop="dateModified" datetime="2020-04-19T09:56:02Z">2020-04-19</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -695,7 +923,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/ES6/" itemprop="url" rel="index"><span itemprop="name">ES6</span></a>
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
                 </span>
             </span>
 
@@ -708,8 +936,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2020/04/18/14-Set%E5%92%8CMap%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/04/18/14-Set%E5%92%8CMap%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="commentCount"></span>
+    <a title="valine" href="/2020/04/18/14-%E9%97%AD%E5%8C%85/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/04/18/14-%E9%97%AD%E5%8C%85/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -718,13 +946,13 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span>6.7k</span>
+              <span>1.8k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-              <span>6 分钟</span>
+              <span>2 分钟</span>
             </span>
 
         </div>
@@ -737,14 +965,12 @@
 
       
           <hr>
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本文主要内容：</p>
-<ul>
-<li>Set</li>
-<li>WeakSet</li>
-<li>Map
+<h2 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h2><blockquote>
+<p>函数和对其周围状态（lexical environment，词法环境）的引用捆绑在一起构成闭包（closure）。也就是说，<strong>闭包可以让你从内部函数访问外部函数作用域</strong>。在 <code>JavaScript</code> 中，每当函数被创建，就会在函数生成时生成闭包。</p>
+</blockquote>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/04/18/14-Set%E5%92%8CMap%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/#more" rel="contents">
+              <a class="btn" href="/2020/04/18/14-%E9%97%AD%E5%8C%85/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -868,7 +1094,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/18/13-Symbol/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/18/14-Set%E5%92%8CMap%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -882,7 +1108,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/04/18/13-Symbol/" class="post-title-link" itemprop="url">Symbol</a>
+            <a href="/2020/04/18/14-Set%E5%92%8CMap%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="post-title-link" itemprop="url">Set和Map数据结构</a>
         </h2>
 
         <div class="post-meta">
@@ -899,7 +1125,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-04-19 09:56:34" itemprop="dateModified" datetime="2020-04-19T09:56:34Z">2020-04-19</time>
+                <time title="修改时间：2020-04-19 09:56:24" itemprop="dateModified" datetime="2020-04-19T09:56:24Z">2020-04-19</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -920,8 +1146,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2020/04/18/13-Symbol/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/04/18/13-Symbol/" itemprop="commentCount"></span>
+    <a title="valine" href="/2020/04/18/14-Set%E5%92%8CMap%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/04/18/14-Set%E5%92%8CMap%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -930,13 +1156,13 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span>3.2k</span>
+              <span>6.7k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-              <span>3 分钟</span>
+              <span>6 分钟</span>
             </span>
 
         </div>
@@ -951,13 +1177,12 @@
           <hr>
 <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本文主要内容：</p>
 <ul>
-<li>概述</li>
-<li>作为属性名的 Symbol</li>
-<li>属性名的遍历</li>
-<li>Symbol.for()，Symbol.keyFor()
+<li>Set</li>
+<li>WeakSet</li>
+<li>Map
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/04/18/13-Symbol/#more" rel="contents">
+              <a class="btn" href="/2020/04/18/14-Set%E5%92%8CMap%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -981,7 +1206,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/18/14-%E9%97%AD%E5%8C%85/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/18/15-%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%88%9B%E5%BB%BA&%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -995,7 +1220,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/04/18/14-%E9%97%AD%E5%8C%85/" class="post-title-link" itemprop="url">闭包</a>
+            <a href="/2020/04/18/15-%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%88%9B%E5%BB%BA&%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/" class="post-title-link" itemprop="url">对象的创建&构造函数</a>
         </h2>
 
         <div class="post-meta">
@@ -1012,7 +1237,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-04-19 09:56:02" itemprop="dateModified" datetime="2020-04-19T09:56:02Z">2020-04-19</time>
+                <time title="修改时间：2020-04-19 09:56:50" itemprop="dateModified" datetime="2020-04-19T09:56:50Z">2020-04-19</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1033,8 +1258,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2020/04/18/14-%E9%97%AD%E5%8C%85/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/04/18/14-%E9%97%AD%E5%8C%85/" itemprop="commentCount"></span>
+    <a title="valine" href="/2020/04/18/15-%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%88%9B%E5%BB%BA&%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/04/18/15-%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%88%9B%E5%BB%BA&%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -1043,117 +1268,7 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span>1.8k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <hr>
-<h2 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h2><blockquote>
-<p>函数和对其周围状态（lexical environment，词法环境）的引用捆绑在一起构成闭包（closure）。也就是说，<strong>闭包可以让你从内部函数访问外部函数作用域</strong>。在 <code>JavaScript</code> 中，每当函数被创建，就会在函数生成时生成闭包。</p>
-</blockquote>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/04/18/14-%E9%97%AD%E5%8C%85/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/18/15-Proxy/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="lyy">
-      <meta itemprop="description" content="世间所有的相遇，都是久别重逢">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="若只如初见">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/18/15-Proxy/" class="post-title-link" itemprop="url">Proxy</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-04-18 00:00:00" itemprop="dateCreated datePublished" datetime="2020-04-18T00:00:00Z">2020-04-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-04-19 09:56:56" itemprop="dateModified" datetime="2020-04-19T09:56:56Z">2020-04-19</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/ES6/" itemprop="url" rel="index"><span itemprop="name">ES6</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/04/18/15-Proxy/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/04/18/15-Proxy/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-              <span>3.7k</span>
+              <span>3.5k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -1172,121 +1287,14 @@
 
       
           <hr>
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本文主要内容：</p>
+<h2 id="创建自定义对象的几种方法"><a href="#创建自定义对象的几种方法" class="headerlink" title="创建自定义对象的几种方法"></a>创建自定义对象的几种方法</h2><h3 id="方式一：对象字面量"><a href="#方式一：对象字面量" class="headerlink" title="方式一：对象字面量"></a>方式一：对象字面量</h3><p><strong>对象的字面量</strong>就是一个{}。里面的属性和方法均是<strong>键值对</strong>：</p>
 <ul>
-<li>概述</li>
-<li>this 问题
+<li><p>键：相当于属性名。</p>
+</li>
+<li><p>值：相当于属性值，可以是任意类型的值（数字类型、字符串类型、布尔类型，函数类型等）。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/04/18/15-Proxy/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/18/15-CSS3%E7%9A%84%E5%B8%B8%E8%A7%81%E8%BE%B9%E6%A1%86%E4%B8%BE%E4%BE%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="lyy">
-      <meta itemprop="description" content="世间所有的相遇，都是久别重逢">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="若只如初见">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/18/15-CSS3%E7%9A%84%E5%B8%B8%E8%A7%81%E8%BE%B9%E6%A1%86%E4%B8%BE%E4%BE%8B/" class="post-title-link" itemprop="url">CSS常见边框举例</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-04-18 00:00:00" itemprop="dateCreated datePublished" datetime="2020-04-18T00:00:00Z">2020-04-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-04-19 09:57:18" itemprop="dateModified" datetime="2020-04-19T09:57:18Z">2020-04-19</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/CSS/" itemprop="url" rel="index"><span itemprop="name">CSS</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/04/18/15-CSS3%E7%9A%84%E5%B8%B8%E8%A7%81%E8%BE%B9%E6%A1%86%E4%B8%BE%E4%BE%8B/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/04/18/15-CSS3%E7%9A%84%E5%B8%B8%E8%A7%81%E8%BE%B9%E6%A1%86%E4%B8%BE%E4%BE%8B/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-              <span>11k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-              <span>10 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <hr>
-<h2 id="CSS3-常见边框汇总"><a href="#CSS3-常见边框汇总" class="headerlink" title="CSS3 常见边框汇总"></a>CSS3 常见边框汇总</h2>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/04/18/15-CSS3%E7%9A%84%E5%B8%B8%E8%A7%81%E8%BE%B9%E6%A1%86%E4%B8%BE%E4%BE%8B/#more" rel="contents">
+              <a class="btn" href="/2020/04/18/15-%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%88%9B%E5%BB%BA&%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1377,7 +1385,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">141</span>
+          <span class="site-state-item-count">142</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1416,6 +1424,10 @@
         
         
           <li>
+            <a href="/2020/08/24/120.%20Triangle/" title="120. Triangle" target="_blank">120. Triangle</a>
+          </li>
+        
+          <li>
             <a href="/2020/08/23/70.%20Climbing%20Stairs/" title="70. Climbing Stairs" target="_blank">70. Climbing Stairs</a>
           </li>
         
@@ -1429,10 +1441,6 @@
         
           <li>
             <a href="/2020/08/19/140.%20Word%20Break%20II/" title="140. Word Break II" target="_blank">140. Word Break II</a>
-          </li>
-        
-          <li>
-            <a href="/2020/08/18/139.%20Word%20Break/" title="139. Word Break" target="_blank">139. Word Break</a>
           </li>
         
       </ul>

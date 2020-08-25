@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2020/08/25/56.%20Merge%20Intervals/</loc>
+    
+    <lastmod>2020-08-25T14:33:52.072Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2020/08/24/120.%20Triangle/</loc>
     
     <lastmod>2020-08-24T13:28:54.977Z</lastmod>
@@ -275,14 +282,14 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/categories/index.html</loc>
+    <loc>http://yoursite.com/tags/index.html</loc>
     
     <lastmod>2020-04-21T04:34:24.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://yoursite.com/tags/index.html</loc>
+    <loc>http://yoursite.com/categories/index.html</loc>
     
     <lastmod>2020-04-21T04:34:24.000Z</lastmod>
     

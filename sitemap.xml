@@ -2,13 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://yoursite.com/baidu_verify_NmmDaFGzay.html</loc>
-    
-    <lastmod>2020-08-28</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://yoursite.com/2020/08/29/347.%20Top%20K%20Frequent%20Elementsa/</loc>
     
     <lastmod>2020-08-28</lastmod>
@@ -1068,14 +1061,14 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/tags/JavaScript/</loc>
+    <loc>http://yoursite.com/tags/BOM/</loc>
     <lastmod>2020-08-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://yoursite.com/tags/BOM/</loc>
+    <loc>http://yoursite.com/tags/JavaScript/</loc>
     <lastmod>2020-08-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1175,14 +1168,14 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/categories/JavaScript/</loc>
+    <loc>http://yoursite.com/categories/BOM/</loc>
     <lastmod>2020-08-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://yoursite.com/categories/BOM/</loc>
+    <loc>http://yoursite.com/categories/JavaScript/</loc>
     <lastmod>2020-08-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>

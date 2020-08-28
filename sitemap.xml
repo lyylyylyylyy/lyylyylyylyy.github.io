@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/baidu_verify_NmmDaFGzay.html</loc>
+    
+    <lastmod>2020-08-28</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2020/08/29/347.%20Top%20K%20Frequent%20Elementsa/</loc>
     
     <lastmod>2020-08-28</lastmod>
@@ -1054,7 +1061,7 @@
 
   
   <url>
-    <loc>http://yoursite.com/tags/CSS/</loc>
+    <loc>http://yoursite.com/tags/JavaScript/</loc>
     <lastmod>2020-08-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1068,14 +1075,7 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/tags/JavaScript/</loc>
-    <lastmod>2020-08-28</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/tags/JS%E9%AB%98%E7%BA%A7/</loc>
+    <loc>http://yoursite.com/tags/CSS/</loc>
     <lastmod>2020-08-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1083,6 +1083,13 @@
   
   <url>
     <loc>http://yoursite.com/tags/React/</loc>
+    <lastmod>2020-08-28</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/tags/JS%E9%AB%98%E7%BA%A7/</loc>
     <lastmod>2020-08-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1161,7 +1168,7 @@
 
   
   <url>
-    <loc>http://yoursite.com/categories/CSS/</loc>
+    <loc>http://yoursite.com/categories/JavaScript/</loc>
     <lastmod>2020-08-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1175,14 +1182,7 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/categories/JavaScript/</loc>
-    <lastmod>2020-08-28</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/categories/JS%E9%AB%98%E7%BA%A7/</loc>
+    <loc>http://yoursite.com/categories/CSS/</loc>
     <lastmod>2020-08-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1190,6 +1190,13 @@
   
   <url>
     <loc>http://yoursite.com/categories/React/</loc>
+    <lastmod>2020-08-28</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/categories/JS%E9%AB%98%E7%BA%A7/</loc>
     <lastmod>2020-08-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>

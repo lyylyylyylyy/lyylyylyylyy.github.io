@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://joyli.net.cn/2020/08/30/vue%E4%B8%AD%E7%9A%84%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1%E6%96%B9%E5%BC%8F/</loc>
+    
+    <lastmod>2020-08-30</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://joyli.net.cn/2020/08/31/%E4%B8%80%E4%B8%AA%E5%9F%BA%E4%BA%8EVue-Node-Mongodb%E7%9A%84%E7%AE%80%E5%8D%95%E5%85%A8%E6%A0%88%E9%A1%B9%E7%9B%AE-pocket/</loc>
     
     <lastmod>2020-08-30</lastmod>
@@ -1228,6 +1235,13 @@
     <priority>0.6</priority>
   </url>
   
+  <url>
+    <loc>https://joyli.net.cn/tags/Vue/</loc>
+    <lastmod>2020-08-30</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
 
   
   <url>
@@ -1323,6 +1337,13 @@
   
   <url>
     <loc>https://joyli.net.cn/categories/JavaScript%E9%AB%98%E7%BA%A7/</loc>
+    <lastmod>2020-08-30</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://joyli.net.cn/categories/Vue/</loc>
     <lastmod>2020-08-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>

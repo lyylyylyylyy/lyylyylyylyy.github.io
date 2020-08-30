@@ -441,12 +441,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/04/18/22-Class%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/" rel="prev" title="Class的基本语法">
-      <i class="fa fa-chevron-left"></i> Class的基本语法
+    <a href="/2020/04/18/21-async%E5%87%BD%E6%95%B0/" rel="prev" title="async函数">
+      <i class="fa fa-chevron-left"></i> async函数
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/04/18/20-%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1%EF%BC%9AMath/" rel="next" title="内置对象Math">
-      内置对象Math <i class="fa fa-chevron-right"></i>
+    <a href="/2020/04/18/20-Generator%E5%87%BD%E6%95%B0%E7%9A%84%E5%BC%82%E6%AD%A5%E5%BA%94%E7%94%A8/" rel="next" title="Generator函数的异步应用">
+      Generator函数的异步应用 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -672,12 +672,28 @@
   
   <script>
     (function(){
-      var bp = document.createElement('script');
-      var curProtocol = window.location.protocol.split(':')[0];
-      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(bp, s);
-    })();
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
   </script>
 
 

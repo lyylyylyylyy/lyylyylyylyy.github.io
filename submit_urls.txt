@@ -1,10 +1,10 @@
+https://joyli.net.cn/2020/09/01/24-Swap-Nodes-in-Pairs/
+https://joyli.net.cn/2020/09/01/%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/
 https://joyli.net.cn/2020/08/30/JumpGameII/
 https://joyli.net.cn/2020/08/30/vue%E4%B8%AD%E7%9A%84%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1%E6%96%B9%E5%BC%8F/
 https://joyli.net.cn/2020/08/31/%E4%B8%80%E4%B8%AA%E5%9F%BA%E4%BA%8EVue-Node-Mongodb%E7%9A%84%E7%AE%80%E5%8D%95%E5%85%A8%E6%A0%88%E9%A1%B9%E7%9B%AE-pocket/
+https://joyli.net.cn/2020/07/30/287.%20Find%20the%20Duplicate%20Number/
 https://joyli.net.cn/2020/08/30/217.%20Contains%20Duplicate/
 https://joyli.net.cn/2020/08/29/347.%20Top%20K%20Frequent%20Elementsa/
 https://joyli.net.cn/2020/08/27/64.%20Minimum%20Path%20Sum/
 https://joyli.net.cn/2020/08/26/%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/
-https://joyli.net.cn/2020/07/25/%E5%BC%82%E6%AD%A5IO/
-https://joyli.net.cn/2020/08/25/56.%20Merge%20Intervals/
-https://joyli.net.cn/2020/08/24/120.%20Triangle/

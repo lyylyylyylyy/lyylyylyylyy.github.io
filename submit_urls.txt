@@ -1,3 +1,5 @@
+https://joyli.net.cn/2020/09/04/79-Word-Search/
+https://joyli.net.cn/2020/09/02/%E5%86%85%E5%AD%98%E6%8E%A7%E5%88%B6/
 https://joyli.net.cn/2020/09/01/24-Swap-Nodes-in-Pairs/
 https://joyli.net.cn/2020/09/01/%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/
 https://joyli.net.cn/2020/08/30/JumpGameII/
@@ -6,5 +8,3 @@ https://joyli.net.cn/2020/08/31/%E4%B8%80%E4%B8%AA%E5%9F%BA%E4%BA%8EVue-Node-Mon
 https://joyli.net.cn/2020/07/30/287.%20Find%20the%20Duplicate%20Number/
 https://joyli.net.cn/2020/08/30/217.%20Contains%20Duplicate/
 https://joyli.net.cn/2020/08/29/347.%20Top%20K%20Frequent%20Elementsa/
-https://joyli.net.cn/2020/08/27/64.%20Minimum%20Path%20Sum/
-https://joyli.net.cn/2020/08/26/%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/

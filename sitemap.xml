@@ -1124,14 +1124,14 @@
 
   
   <url>
-    <loc>https://joyli.net.cn/tags/BOM/</loc>
+    <loc>https://joyli.net.cn/tags/CSS/</loc>
     <lastmod>2020-09-06</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://joyli.net.cn/tags/CSS/</loc>
+    <loc>https://joyli.net.cn/tags/BOM/</loc>
     <lastmod>2020-09-06</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1278,14 +1278,14 @@
   </url>
   
   <url>
-    <loc>https://joyli.net.cn/tags/JavaScript%E9%AB%98%E7%BA%A7/</loc>
+    <loc>https://joyli.net.cn/tags/JavaScript%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/</loc>
     <lastmod>2020-09-06</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://joyli.net.cn/tags/JavaScript%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/</loc>
+    <loc>https://joyli.net.cn/tags/JavaScript%E9%AB%98%E7%BA%A7/</loc>
     <lastmod>2020-09-06</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1294,14 +1294,14 @@
 
   
   <url>
-    <loc>https://joyli.net.cn/categories/BOM/</loc>
+    <loc>https://joyli.net.cn/categories/CSS/</loc>
     <lastmod>2020-09-06</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://joyli.net.cn/categories/CSS/</loc>
+    <loc>https://joyli.net.cn/categories/BOM/</loc>
     <lastmod>2020-09-06</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1378,13 +1378,6 @@
   </url>
   
   <url>
-    <loc>https://joyli.net.cn/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/</loc>
-    <lastmod>2020-09-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://joyli.net.cn/categories/Node/</loc>
     <lastmod>2020-09-06</lastmod>
     <changefreq>daily</changefreq>
@@ -1392,7 +1385,7 @@
   </url>
   
   <url>
-    <loc>https://joyli.net.cn/categories/JavaScript%E9%AB%98%E7%BA%A7/</loc>
+    <loc>https://joyli.net.cn/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/</loc>
     <lastmod>2020-09-06</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1400,6 +1393,13 @@
   
   <url>
     <loc>https://joyli.net.cn/categories/JavaScript%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/</loc>
+    <lastmod>2020-09-06</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://joyli.net.cn/categories/JavaScript%E9%AB%98%E7%BA%A7/</loc>
     <lastmod>2020-09-06</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>

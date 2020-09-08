@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://joyli.net.cn/2020/09/09/98-Validate-Binary-Search-Tree/</loc>
+    
+    <lastmod>2020-09-08</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://joyli.net.cn/2020/09/08/96-Unique-Binary-Search-Trees/</loc>
     
     <lastmod>2020-09-07</lastmod>
@@ -1131,7 +1138,7 @@
 
   <url>
     <loc>https://joyli.net.cn/</loc>
-    <lastmod>2020-09-07</lastmod>
+    <lastmod>2020-09-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -1139,168 +1146,168 @@
   
   <url>
     <loc>https://joyli.net.cn/tags/CSS/</loc>
-    <lastmod>2020-09-07</lastmod>
+    <lastmod>2020-09-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://joyli.net.cn/tags/JavaScript/</loc>
-    <lastmod>2020-09-07</lastmod>
+    <lastmod>2020-09-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://joyli.net.cn/tags/BOM/</loc>
-    <lastmod>2020-09-07</lastmod>
+    <lastmod>2020-09-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://joyli.net.cn/tags/JS%E9%AB%98%E7%BA%A7/</loc>
-    <lastmod>2020-09-07</lastmod>
+    <lastmod>2020-09-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://joyli.net.cn/tags/React/</loc>
-    <lastmod>2020-09-07</lastmod>
+    <lastmod>2020-09-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://joyli.net.cn/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/</loc>
-    <lastmod>2020-09-07</lastmod>
+    <lastmod>2020-09-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://joyli.net.cn/tags/ES6/</loc>
-    <lastmod>2020-09-07</lastmod>
+    <lastmod>2020-09-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://joyli.net.cn/tags/Leetcode/</loc>
-    <lastmod>2020-09-07</lastmod>
+    <lastmod>2020-09-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://joyli.net.cn/tags/Leetcode-JavaScript/</loc>
-    <lastmod>2020-09-07</lastmod>
+    <lastmod>2020-09-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://joyli.net.cn/tags/Leetcode-Javascript-Java/</loc>
-    <lastmod>2020-09-07</lastmod>
+    <lastmod>2020-09-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://joyli.net.cn/tags/Leetcode-javascript/</loc>
-    <lastmod>2020-09-07</lastmod>
+    <lastmod>2020-09-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://joyli.net.cn/tags/Leetcode-JavaScript/</loc>
-    <lastmod>2020-09-07</lastmod>
+    <lastmod>2020-09-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://joyli.net.cn/tags/HTML/</loc>
-    <lastmod>2020-09-07</lastmod>
+    <lastmod>2020-09-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://joyli.net.cn/tags/Vue/</loc>
-    <lastmod>2020-09-07</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://joyli.net.cn/tags/%E5%85%A8%E6%A0%88/</loc>
-    <lastmod>2020-09-07</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://joyli.net.cn/tags/vue/</loc>
-    <lastmod>2020-09-07</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://joyli.net.cn/tags/%E6%B3%A8%E5%86%8C%E7%99%BB%E5%BD%95/</loc>
-    <lastmod>2020-09-07</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://joyli.net.cn/tags/node/</loc>
-    <lastmod>2020-09-07</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://joyli.net.cn/tags/mongodb/</loc>
-    <lastmod>2020-09-07</lastmod>
+    <lastmod>2020-09-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://joyli.net.cn/tags/Node/</loc>
-    <lastmod>2020-09-07</lastmod>
+    <lastmod>2020-09-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://joyli.net.cn/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/</loc>
-    <lastmod>2020-09-07</lastmod>
+    <lastmod>2020-09-08</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://joyli.net.cn/tags/%E5%85%A8%E6%A0%88/</loc>
+    <lastmod>2020-09-08</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://joyli.net.cn/tags/vue/</loc>
+    <lastmod>2020-09-08</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://joyli.net.cn/tags/%E6%B3%A8%E5%86%8C%E7%99%BB%E5%BD%95/</loc>
+    <lastmod>2020-09-08</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://joyli.net.cn/tags/node/</loc>
+    <lastmod>2020-09-08</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://joyli.net.cn/tags/mongodb/</loc>
+    <lastmod>2020-09-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://joyli.net.cn/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</loc>
-    <lastmod>2020-09-07</lastmod>
+    <lastmod>2020-09-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://joyli.net.cn/tags/JavaScript%E9%AB%98%E7%BA%A7/</loc>
-    <lastmod>2020-09-07</lastmod>
+    <lastmod>2020-09-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://joyli.net.cn/tags/JavaScript%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/</loc>
-    <lastmod>2020-09-07</lastmod>
+    <lastmod>2020-09-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
@@ -1309,112 +1316,112 @@
   
   <url>
     <loc>https://joyli.net.cn/categories/CSS/</loc>
-    <lastmod>2020-09-07</lastmod>
+    <lastmod>2020-09-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://joyli.net.cn/categories/JavaScript/</loc>
-    <lastmod>2020-09-07</lastmod>
+    <lastmod>2020-09-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://joyli.net.cn/categories/BOM/</loc>
-    <lastmod>2020-09-07</lastmod>
+    <lastmod>2020-09-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://joyli.net.cn/categories/JS%E9%AB%98%E7%BA%A7/</loc>
-    <lastmod>2020-09-07</lastmod>
+    <lastmod>2020-09-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://joyli.net.cn/categories/React/</loc>
-    <lastmod>2020-09-07</lastmod>
+    <lastmod>2020-09-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://joyli.net.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/</loc>
-    <lastmod>2020-09-07</lastmod>
+    <lastmod>2020-09-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://joyli.net.cn/categories/ES6/</loc>
-    <lastmod>2020-09-07</lastmod>
+    <lastmod>2020-09-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://joyli.net.cn/categories/Leetcode/</loc>
-    <lastmod>2020-09-07</lastmod>
+    <lastmod>2020-09-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://joyli.net.cn/categories/Leetcode-javascript/</loc>
-    <lastmod>2020-09-07</lastmod>
+    <lastmod>2020-09-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://joyli.net.cn/categories/Leetcode-JavaScript/</loc>
-    <lastmod>2020-09-07</lastmod>
+    <lastmod>2020-09-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://joyli.net.cn/categories/HTML/</loc>
-    <lastmod>2020-09-07</lastmod>
+    <lastmod>2020-09-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://joyli.net.cn/categories/Vue/</loc>
-    <lastmod>2020-09-07</lastmod>
+    <lastmod>2020-09-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://joyli.net.cn/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/</loc>
-    <lastmod>2020-09-07</lastmod>
+    <lastmod>2020-09-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://joyli.net.cn/categories/Node/</loc>
-    <lastmod>2020-09-07</lastmod>
+    <lastmod>2020-09-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://joyli.net.cn/categories/JavaScript%E9%AB%98%E7%BA%A7/</loc>
-    <lastmod>2020-09-07</lastmod>
+    <lastmod>2020-09-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://joyli.net.cn/categories/JavaScript%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/</loc>
-    <lastmod>2020-09-07</lastmod>
+    <lastmod>2020-09-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>

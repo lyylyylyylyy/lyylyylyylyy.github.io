@@ -21,25 +21,24 @@
     var CONFIG = {"hostname":"joyli.net.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="执行消耗 时间复杂度 空间复杂度    时间复杂度 「 大O符号表示法 」，即T(n) &#x3D; O(f(n)) 在 大O符号表示法中，时间复杂度的公式是： T(n) &#x3D; O( f(n) )，其中f(n) 表示每行代码执行次数之和，而 O 表示正比例关系，这个公式的全称是：算法的渐进时间复杂度。">
+  <meta name="description" content="问题描述Given two binary trees, write a function to check if they are the same or not. Two binary trees are considered the same if they are structurally identical and the nodes have the same value. Exampl">
 <meta property="og:type" content="article">
-<meta property="og:title" content="时间复杂度">
-<meta property="og:url" content="https://joyli.net.cn/2020/09/01/%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/index.html">
+<meta property="og:title" content="100-Same-Tree">
+<meta property="og:url" content="https://joyli.net.cn/2020/09/18/100-Same-Tree/index.html">
 <meta property="og:site_name" content="若只如初见">
-<meta property="og:description" content="执行消耗 时间复杂度 空间复杂度    时间复杂度 「 大O符号表示法 」，即T(n) &#x3D; O(f(n)) 在 大O符号表示法中，时间复杂度的公式是： T(n) &#x3D; O( f(n) )，其中f(n) 表示每行代码执行次数之和，而 O 表示正比例关系，这个公式的全称是：算法的渐进时间复杂度。">
+<meta property="og:description" content="问题描述Given two binary trees, write a function to check if they are the same or not. Two binary trees are considered the same if they are structurally identical and the nodes have the same value. Exampl">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://joyli.net.cn/2020/09/01/%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/loops2_1.png">
-<meta property="og:image" content="https://joyli.net.cn/2020/09/01/%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/loops2_4.png">
-<meta property="og:image" content="https://joyli.net.cn/2020/09/01/%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/loops2_2.png">
-<meta property="og:image" content="https://joyli.net.cn/2020/09/01/%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/asymptotics2_tree.png">
-<meta property="article:published_time" content="2020-08-31T21:47:51.000Z">
-<meta property="article:modified_time" content="2020-08-31T13:58:47.184Z">
+<meta property="article:published_time" content="2020-09-17T21:20:45.000Z">
+<meta property="article:modified_time" content="2020-09-17T13:30:34.041Z">
 <meta property="article:author" content="lyy">
-<meta property="article:tag" content="数据结构">
+<meta property="article:tag" content="javascript">
+<meta property="article:tag" content="java">
+<meta property="article:tag" content="c++">
+<meta property="article:tag" content="tree">
+<meta property="article:tag" content="dfs">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://joyli.net.cn/2020/09/01/%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/loops2_1.png">
 
-<link rel="canonical" href="https://joyli.net.cn/2020/09/01/%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/">
+<link rel="canonical" href="https://joyli.net.cn/2020/09/18/100-Same-Tree/">
 
 
 <script id="page-configurations">
@@ -52,7 +51,7 @@
   };
 </script>
 
-  <title>时间复杂度 | 若只如初见</title>
+  <title>100-Same-Tree | 若只如初见</title>
   
 
 
@@ -212,7 +211,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://joyli.net.cn/2020/09/01/%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/">
+    <link itemprop="mainEntityOfPage" href="https://joyli.net.cn/2020/09/18/100-Same-Tree/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -225,7 +224,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          时间复杂度
+          100-Same-Tree
         </h1>
 
         <div class="post-meta">
@@ -236,7 +235,16 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-08-31 21:47:51 / 修改时间：13:58:47" itemprop="dateCreated datePublished" datetime="2020-08-31T21:47:51Z">2020-08-31</time>
+              <time title="创建时间：2020-09-17 21:20:45 / 修改时间：13:30:34" itemprop="dateCreated datePublished" datetime="2020-09-17T21:20:45Z">2020-09-17</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Leetcode/" itemprop="url" rel="index"><span itemprop="name">Leetcode</span></a>
+                </span>
             </span>
 
           
@@ -255,8 +263,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2020/09/01/%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/09/01/%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/" itemprop="commentCount"></span>
+    <a title="valine" href="/2020/09/18/100-Same-Tree/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/09/18/100-Same-Tree/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -265,7 +273,7 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span>2k</span>
+              <span>2.2k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -283,67 +291,30 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <ul>
-<li>执行消耗<ul>
-<li>时间复杂度</li>
-<li>空间复杂度</li>
+        <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>Given two binary trees, write a function to check if they are the same or not.</p>
+<p>Two binary trees are considered the same if they are structurally identical and the nodes have the same value.</p>
+<p>Example 1:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Input:     1         1</span><br><span class="line">          &#x2F; \       &#x2F; \</span><br><span class="line">         2   3     2   3</span><br><span class="line"></span><br><span class="line">        [1,2,3],   [1,2,3]</span><br><span class="line"></span><br><span class="line">Output: true</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>Example 2:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Input:     1         1</span><br><span class="line">          &#x2F;           \</span><br><span class="line">         2             2</span><br><span class="line"></span><br><span class="line">        [1,2],     [1,null,2]</span><br><span class="line"></span><br><span class="line">Output: false</span><br></pre></td></tr></table></figure>
+
+<p>Example 3:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Input:     1         1</span><br><span class="line">          &#x2F; \       &#x2F; \</span><br><span class="line">         2   1     1   2</span><br><span class="line"></span><br><span class="line">        [1,2,1],   [1,1,2]</span><br><span class="line"></span><br><span class="line">Output: false</span><br></pre></td></tr></table></figure>
+
+<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><ul>
+<li>若是p，q均为空，则是相同的树；</li>
+<li>若p，q中一个空，一个不空，又或者p，q的val不相等，则不是相同的树；</li>
+<li>进行遍历，分别比较根结点的左子树，右子树。</li>
 </ul>
-</li>
-</ul>
-<h2 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h2><ul>
-<li>「 大O符号表示法 」，即<code>T(n) = O(f(n))</code></li>
-<li>在 大O符号表示法中，时间复杂度的公式是： <code>T(n) = O( f(n) )</code>，其中<code>f(n)</code> 表示每行代码执行次数之和，而 <code>O</code> 表示正比例关系，这个公式的全称是：<strong>算法的渐进时间复杂度</strong>。<a id="more"></a></li>
-<li>常见的时间复杂度量级有：<ul>
-<li>常数阶O(1)</li>
-<li>对数阶O(logN)</li>
-<li>线性阶O(n)</li>
-<li>线性对数阶O(nlogN)</li>
-<li>平方阶O(n²)</li>
-<li>立方阶O(n³)</li>
-<li>K次方阶O(n^k)</li>
-<li>指数阶(2^n)</li>
-</ul>
-</li>
-</ul>
-<h3 id="寻找重复元素"><a href="#寻找重复元素" class="headerlink" title="寻找重复元素"></a>寻找重复元素</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> N = A.length;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i += <span class="number">1</span>)</span><br><span class="line">   <span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt; N; j += <span class="number">1</span>)</span><br><span class="line">      <span class="keyword">if</span> (A[i] == A[j])</span><br><span class="line">         <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line"><span class="keyword">return</span> <span class="keyword">false</span>;</span><br></pre></td></tr></table></figure>
+<p>代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * function TreeNode(val, left, right) &#123;</span></span><br><span class="line"><span class="comment"> *     this.val = (val===undefined ? 0 : val)</span></span><br><span class="line"><span class="comment"> *     this.left = (left===undefined ? null : left)</span></span><br><span class="line"><span class="comment"> *     this.right = (right===undefined ? null : right)</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;TreeNode&#125;</span> <span class="variable">p</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;TreeNode&#125;</span> <span class="variable">q</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return <span class="type">&#123;boolean&#125;</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> isSameTree = <span class="function"><span class="keyword">function</span>(<span class="params">p, q</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!p &amp;&amp; !q) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (!p || !q || p.val !== q.val) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> isSameTree(p.left, q.left) &amp;&amp; isSameTree(p.right, q.right);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>主要操作是比较器，所以我们主要查看一定会发生的<code>===</code>操作，外层的第1次循环，内部循环运行<code>N-1</code>次；外层的第2次循环，内部循环运行<code>N-2</code>次……</p>
-<p>最坏的情况，我们需要遍历每个元素。</p>
-<p>最后，我们发现比较的次数是：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C&#x3D;1+2+3+...+(N−3)+(N−2)+(N−1)&#x3D;N(N−1)&#x2F;2</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * public class TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode left;</span></span><br><span class="line"><span class="comment"> *     TreeNode right;</span></span><br><span class="line"><span class="comment"> *     TreeNode() &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int val) &#123; this.val = val; &#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int val, TreeNode left, TreeNode right) &#123;</span></span><br><span class="line"><span class="comment"> *         this.val = val;</span></span><br><span class="line"><span class="comment"> *         this.left = left;</span></span><br><span class="line"><span class="comment"> *         this.right = right;</span></span><br><span class="line"><span class="comment"> *     &#125;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isSameTree</span><span class="params">(TreeNode p, TreeNode q)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (p==<span class="keyword">null</span> &amp;&amp; q==<span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (p==<span class="keyword">null</span> || q==<span class="keyword">null</span> || p.val != q.val) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> isSameTree(p.left, q.left) &amp;&amp; isSameTree(p.right, q.right);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><code>N(N−1)/2</code>属于N2的范畴，因为<code>===</code>是一个常数时间操作，最坏情况下的整体运行时间是<code>θ(N2)</code>。</p>
-<h3 id="例2"><a href="#例2" class="headerlink" title="例2"></a>例2</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printParty</span><span class="params">(<span class="keyword">int</span> N)</span> </span>&#123;</span><br><span class="line">   <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= N; i = i * <span class="number">2</span>) &#123;</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; i; j += <span class="number">1</span>) &#123;</span><br><span class="line">         System.out.println(<span class="string">"hello"</span>);   </span><br><span class="line">         <span class="keyword">int</span> ZUG = <span class="number">1</span> + <span class="number">1</span>;</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     TreeNode *right;</span></span><br><span class="line"><span class="comment"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isSameTree</span><span class="params">(TreeNode* p, TreeNode* q)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (p==<span class="literal">NULL</span> &amp;&amp; q==<span class="literal">NULL</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (p==<span class="literal">NULL</span> || q==<span class="literal">NULL</span> || p-&gt;val != q-&gt;val) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> isSameTree(p-&gt;left, q-&gt;left) &amp;&amp; isSameTree(p-&gt;right, q-&gt;right);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<p>第一层循环每次<code>i*2</code>前进，内层循环从0到<code>i</code>，循环内部的两个操作都是常数时间的，所以我们观察，<code>print</code>操作一共执行了多少次。</p>
-<p>N是1时：<code>print</code>执行了1次。</p>
-<p><img src="./%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/loops2_1.png" alt=""></p>
-<p>N是2时：循环<code>i</code>执行了<code>1∗2=2</code>次， <code>j</code>可以到1，<code>print</code>执行次数为3。</p>
-<p><img src="./%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/loops2_4.png" alt=""><br>.<br>.<br>.<br>.<br>.<br>.<br>N=18时，</p>
-<p><img src="./%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/loops2_2.png" alt=""></p>
-<p>如果我们将循环各阶段的所有计数加起来，则打印语句的数量为：</p>
-<p><code>C(N) = 1 + 2 + 4 + ... + N =2N−1  (if N is a power of 2)</code></p>
-<p>通过去除较小的项和乘法常数，我们知道2N-1在线性族中。 所以，此过程的时间复杂度是O(n)。</p>
-<ul>
-<li>这是经常看到的两个重要总和，并且应记住：</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1+2+3+...+Q&#x3D;Q(Q+1)&#x2F;2&#x3D;Θ(Q2) (Sum of First Natural Numbers)</span><br><span class="line"></span><br><span class="line">1 + 2 + 4 + 8 + ... + Q &#x3D; 2Q - 1 &#x3D; Θ(Q) (Sum of First Powers of 2)</span><br></pre></td></tr></table></figure>
-
-<h3 id="递归示例"><a href="#递归示例" class="headerlink" title="递归示例"></a>递归示例</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">f3</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">   <span class="keyword">if</span> (n &lt;= <span class="number">1</span>) </span><br><span class="line">      <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">   <span class="keyword">return</span> f3(n-<span class="number">1</span>) + f3(n-<span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>如果我们调用<code>f3（4）</code>，它将返回分别为<code>f3（3-1）+ f3（3-1）</code>和<code>f3（2-1）的f3（4-1）+ f3（4-1） + f3（2-1）</code>，每一个返回1。</p>
-<p>因此，我们看到最终<code>f3（2-1）</code>总计为8次，等于8。我们可以将其可视化为树，其中每个级别都是该函数的参数:</p>
-<p><img src="./%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/asymptotics2_tree.png" alt=""></p>
-<p>看到此函数返回<code>2 ^ {N-1}</code> 。这对于了解函数的功能很有用。</p>
-<p>直觉上可以看到，运行次数是<code>2 ^ {N-1}</code>。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">C(1)&#x3D;1 C(2) &#x3D; 1 + 2C(2)&#x3D;1+2 C(3) &#x3D; 1 + 2 + 4C(3)&#x3D;1+2+4 C(N) &#x3D; 1 + 2 + 4 + ... +C(N)&#x3D;1+2+4+...+ ???;</span><br><span class="line"></span><br><span class="line">C(4)&#x3D;1+2+4+8 and C(5) &#x3D; 1 + 2 + 4 + 8 + 16C(5)&#x3D;1+2+4+8+16;</span><br><span class="line"></span><br><span class="line">C(N)&#x3D;1+2+4+...+2^(N−1);</span><br><span class="line">​​</span><br></pre></td></tr></table></figure>
-
-<p><code>1+2+4+8+...+Q=2Q−1</code>, 此时，<code>Q = 2^(N−1)</code>, 所以，<code>C(N)=2Q−1=2(2^(N−1))−1=2^N−1</code>，时间复杂度是<code>O(2^N)</code>。</p>
-<h3 id="二叉搜索"><a href="#二叉搜索" class="headerlink" title="二叉搜索"></a>二叉搜索</h3><p>二进制搜索是一种在列表中搜索特定项目的好方法。它要求列表按排序顺序，并使用该事实快速查找元素。</p>
-<p>要进行二进制搜索，我们从列表的中间开始，然后检查这是否是我们想要的元素。如果不是，我们问：这个元素比我们的元素大还是小。</p>
-<p>如果它更大，那么我们知道只需要查看包含较小元素的列表的一半即可。如果它太小，那么我们只看具有较大元素的那一半。这样，我们可以将每一步剩下的选项数量减少一半，直到找到它为止。</p>
-<p>最糟糕的情况是什么？当我们想要的元素根本不在列表中时。然后，我们将进行比较，直到我们消除了列表的所有区域，并且不再剩下更大或更小的一半。</p>
-<p>我们从n个选项开始，然后是<code>n/2</code>，然后是<code>n/4</code> …，直到只有1。每次将数组切成两半，所以最后我们必须执行总共<code>log_2(n)</code>次操作。因此，整体运行时是<code>log_2(n)</code>。</p>
+<p>时间复杂度：O(n)<br>空间复杂度：O(1)</p>
 
     </div>
 
@@ -351,6 +322,24 @@
     
     
       
+  <div class="popular-posts-header">相关文章推荐</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/09/17/77-Combinations/" rel="bookmark">77-Combinations</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/09/16/74-Search-a-2D-Matrix/" rel="bookmark">74-Search-a-2D-Matrix</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/09/15/90-Subsets-II/" rel="bookmark">90-Subsets-II</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/09/14/101-Symmetric-Tree/" rel="bookmark">101-Symmetric-Tree</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/09/09/98-Validate-Binary-Search-Tree/" rel="bookmark">98-Validate-Binary-Search-Tree</a></div>
+    </li>
+  </ul>
 
         
 
@@ -361,7 +350,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://joyli.net.cn/2020/09/01/%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/" title="时间复杂度">https://joyli.net.cn/2020/09/01/时间复杂度/</a>
+    <a href="https://joyli.net.cn/2020/09/18/100-Same-Tree/" title="100-Same-Tree">https://joyli.net.cn/2020/09/18/100-Same-Tree/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -372,7 +361,11 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag"># 数据结构</a>
+              <a href="/tags/javascript/" rel="tag"># javascript</a>
+              <a href="/tags/java/" rel="tag"># java</a>
+              <a href="/tags/c/" rel="tag"># c++</a>
+              <a href="/tags/tree/" rel="tag"># tree</a>
+              <a href="/tags/dfs/" rel="tag"># dfs</a>
           </div>
 
         
@@ -381,13 +374,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/08/31/%E4%B8%80%E4%B8%AA%E5%9F%BA%E4%BA%8EVue-Node-Mongodb%E7%9A%84%E7%AE%80%E5%8D%95%E5%85%A8%E6%A0%88%E9%A1%B9%E7%9B%AE-pocket/" rel="prev" title="一个基于Vue+Node+Mongodb的简单全栈项目--pocket">
-      <i class="fa fa-chevron-left"></i> 一个基于Vue+Node+Mongodb的简单全栈项目--pocket
+    <a href="/2020/09/17/77-Combinations/" rel="prev" title="77-Combinations">
+      <i class="fa fa-chevron-left"></i> 77-Combinations
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/09/01/24-Swap-Nodes-in-Pairs/" rel="next" title="24.Swap-Nodes-in-Pairs">
-      24.Swap-Nodes-in-Pairs <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -447,7 +437,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#时间复杂度"><span class="nav-number">1.</span> <span class="nav-text">时间复杂度</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#寻找重复元素"><span class="nav-number">1.1.</span> <span class="nav-text">寻找重复元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例2"><span class="nav-number">1.2.</span> <span class="nav-text">例2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#递归示例"><span class="nav-number">1.3.</span> <span class="nav-text">递归示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二叉搜索"><span class="nav-number">1.4.</span> <span class="nav-text">二叉搜索</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题描述"><span class="nav-number">1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解题思路"><span class="nav-number">2.</span> <span class="nav-text">解题思路</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

@@ -1,3 +1,4 @@
+https://joyli.net.cn/2020/09/22/136-Single-Number/
 https://joyli.net.cn/2020/09/20/75-Sort-Colors/
 https://joyli.net.cn/2020/09/18/100-Same-Tree/
 https://joyli.net.cn/2020/09/17/77-Combinations/
@@ -7,4 +8,3 @@ https://joyli.net.cn/2020/09/16/74-Search-a-2D-Matrix/
 https://joyli.net.cn/2020/07/28/73.%20Set%20Matrix%20Zeroes%20/
 https://joyli.net.cn/2020/09/14/101-Symmetric-Tree/
 https://joyli.net.cn/2020/07/28/55.%20Jump%20Game/
-https://joyli.net.cn/2020/09/06/82-Remove-Duplicates-from-Sorted-List-II/

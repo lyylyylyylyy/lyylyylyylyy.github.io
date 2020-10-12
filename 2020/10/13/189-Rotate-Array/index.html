@@ -21,20 +21,23 @@
     var CONFIG = {"hostname":"joyli.net.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="前言JavaScript 有三种类型的弹出框：警告框、确认框和提示框。">
+  <meta name="description" content="问题描述Given an array, rotate the array to the right by k steps, where k is non-negative. Follow up: Try to come up as many solutions as you can, there are at least 3 different ways to solve this problem">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JavaScript弹出框">
-<meta property="og:url" content="https://joyli.net.cn/2020/04/18/06-JavaScript%E5%BC%B9%E5%87%BA%E6%A1%86/index.html">
+<meta property="og:title" content="189-Rotate-Array">
+<meta property="og:url" content="https://joyli.net.cn/2020/10/13/189-Rotate-Array/index.html">
 <meta property="og:site_name" content="若只如初见">
-<meta property="og:description" content="前言JavaScript 有三种类型的弹出框：警告框、确认框和提示框。">
+<meta property="og:description" content="问题描述Given an array, rotate the array to the right by k steps, where k is non-negative. Follow up: Try to come up as many solutions as you can, there are at least 3 different ways to solve this problem">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-04-18T00:00:00.000Z">
-<meta property="article:modified_time" content="2020-04-19T09:48:38.000Z">
+<meta property="article:published_time" content="2020-10-12T21:17:41.000Z">
+<meta property="article:modified_time" content="2020-10-12T13:26:40.550Z">
 <meta property="article:author" content="lyy">
-<meta property="article:tag" content="BOM">
+<meta property="article:tag" content="javascript">
+<meta property="article:tag" content="c++">
+<meta property="article:tag" content="Leetcode">
+<meta property="article:tag" content="array">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://joyli.net.cn/2020/04/18/06-JavaScript%E5%BC%B9%E5%87%BA%E6%A1%86/">
+<link rel="canonical" href="https://joyli.net.cn/2020/10/13/189-Rotate-Array/">
 
 
 <script id="page-configurations">
@@ -47,7 +50,7 @@
   };
 </script>
 
-  <title>JavaScript弹出框 | 若只如初见</title>
+  <title>189-Rotate-Array | 若只如初见</title>
   
 
 
@@ -207,7 +210,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://joyli.net.cn/2020/04/18/06-JavaScript%E5%BC%B9%E5%87%BA%E6%A1%86/">
+    <link itemprop="mainEntityOfPage" href="https://joyli.net.cn/2020/10/13/189-Rotate-Array/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -220,7 +223,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          JavaScript弹出框
+          189-Rotate-Array
         </h1>
 
         <div class="post-meta">
@@ -229,23 +232,17 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2020-04-18 00:00:00" itemprop="dateCreated datePublished" datetime="2020-04-18T00:00:00Z">2020-04-18</time>
+              <time title="创建时间：2020-10-12 21:17:41 / 修改时间：13:26:40" itemprop="dateCreated datePublished" datetime="2020-10-12T21:17:41Z">2020-10-12</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-04-19 09:48:38" itemprop="dateModified" datetime="2020-04-19T09:48:38Z">2020-04-19</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/BOM/" itemprop="url" rel="index"><span itemprop="name">BOM</span></a>
+                  <a href="/categories/Leetcode/" itemprop="url" rel="index"><span itemprop="name">Leetcode</span></a>
                 </span>
             </span>
 
@@ -265,8 +262,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2020/04/18/06-JavaScript%E5%BC%B9%E5%87%BA%E6%A1%86/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/04/18/06-JavaScript%E5%BC%B9%E5%87%BA%E6%A1%86/" itemprop="commentCount"></span>
+    <a title="valine" href="/2020/10/13/189-Rotate-Array/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/10/13/189-Rotate-Array/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -275,7 +272,7 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span>968</span>
+              <span>1.6k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -293,33 +290,47 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <hr>
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>JavaScript 有三种类型的弹出框：<strong>警告框、确认框和提示框</strong>。</p>
+        <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>Given an array, rotate the array to the right by k steps, where k is non-negative.</p>
+<p>Follow up:</p>
+<p>Try to come up as many solutions as you can, there are at least 3 different ways to solve this problem.<br>Could you do it in-place with O(1) extra space?</p>
 <a id="more"></a>
-<h2 id="警告框"><a href="#警告框" class="headerlink" title="警告框"></a>警告框</h2><p>如果要确保信息传递给用户，通常会使用警告框。</p>
-<p><strong>当警告框弹出时，用户将需要单击“确定”来继续。</strong></p>
-<p>语法<br><code>window.alert(&quot;sometext&quot;);</code></p>
-<p>window.alert() 方法可以不带 window 前缀来写。</p>
-<p>实例<br><code>alert(&quot;我是一个警告框！&quot;);</code></p>
-<h2 id="确认框"><a href="#确认框" class="headerlink" title="确认框"></a>确认框</h2><p>如果<strong>您希望用户验证或接受某个东西，则通常使用“确认”框</strong>。</p>
-<p>当确认框弹出时，用户将不得不单击“确定”或“取消”来继续进行。</p>
-<p>如果用户单击“确定”，该框返回 <code>true</code>。如果用户单击“取消”，该框返回 <code>false</code>。</p>
-<p>语法<br><code>window.confirm(&quot;sometext&quot;);</code></p>
-<p><code>window.confirm()</code> 方法可以不带 window 前缀来编写。</p>
-<p>实例</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var r &#x3D; confirm(&quot;请按按钮&quot;);</span><br><span class="line">if (r &#x3D;&#x3D; true) &#123;</span><br><span class="line">    x &#x3D; &quot;您按了确认！&quot;;</span><br><span class="line">&#125; else &#123;</span><br><span class="line">    x &#x3D; &quot;您按了取消！&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Example 1:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Input: nums &#x3D; [1,2,3,4,5,6,7], k &#x3D; 3</span><br><span class="line">Output: [5,6,7,1,2,3,4]</span><br><span class="line">Explanation:</span><br><span class="line">rotate 1 steps to the right: [7,1,2,3,4,5,6]</span><br><span class="line">rotate 2 steps to the right: [6,7,1,2,3,4,5]</span><br><span class="line">rotate 3 steps to the right: [5,6,7,1,2,3,4]</span><br></pre></td></tr></table></figure>
 
-<h2 id="提示框"><a href="#提示框" class="headerlink" title="提示框"></a>提示框</h2><p>如果您希望用户在进入页面前输入值，通常会使用提示框。</p>
-<p><strong>当提示框弹出时，用户将不得不输入值后单击“确定”或点击“取消”来继续进行</strong>。</p>
-<p>如果用户单击“确定”，该框返回输入值。如果用户单击“取消”，该框返回 NULL。</p>
-<p>语法<br><code>window.prompt(&quot;sometext&quot;,&quot;defaultText&quot;)</code>;</p>
-<p>window.prompt() 方法可以不带 window 前缀来编写。</p>
-<p>实例</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var person &#x3D; prompt(&quot;请输入您的姓名&quot;, &quot;比尔盖茨&quot;);</span><br><span class="line">if (person !&#x3D; null) &#123;</span><br><span class="line">    document.getElementById(&quot;demo&quot;).innerHTML &#x3D; &quot;你好 &quot; + person + &quot;！今天过的怎么样？&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Example 2:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Input: nums &#x3D; [-1,-100,3,99], k &#x3D; 2</span><br><span class="line">Output: [3,99,-1,-100]</span><br><span class="line">Explanation: </span><br><span class="line">rotate 1 steps to the right: [99,-1,-100,3]</span><br><span class="line">rotate 2 steps to the right: [3,99,-1,-100]</span><br></pre></td></tr></table></figure>
 
-<h2 id="折行"><a href="#折行" class="headerlink" title="折行"></a>折行</h2><p>如需在弹出框中显示折行，请在反斜杠后面加一个字符 <code>n</code>。</p>
-<p>实例</p>
-<p><code>alert(&quot;Hello\nHow are you?&quot;);</code></p>
+<p>Constraints:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1 &lt;&#x3D; nums.length &lt;&#x3D; 2 * 104</span><br><span class="line">-231 &lt;&#x3D; nums[i] &lt;&#x3D; 231 - 1</span><br><span class="line">0 &lt;&#x3D; k &lt;&#x3D; 105</span><br></pre></td></tr></table></figure>
+
+<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><ul>
+<li>rotate一次的操作实际是，数组整体后移一位，然后最后一位放到0位处；</li>
+<li>所以，record记录最后一位，数组依次后移，最后将record放在nums[0]位置处；</li>
+<li>上述操作执行k次即可得到正确结果。</li>
+</ul>
+<ul>
+<li><p>代码如下：</p>
+</li>
+<li><p>JavaScript</p>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> rotate = <span class="function"><span class="keyword">function</span>(<span class="params">nums, k</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> record = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">var</span> len = nums.length;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span>(k &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        record = nums[len<span class="number">-1</span>];</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i = len - <span class="number">2</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">            nums[i+<span class="number">1</span>] = nums[i];</span><br><span class="line">        &#125;</span><br><span class="line">        nums[<span class="number">0</span>] = record;</span><br><span class="line">        k--;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> nums;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Java</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">rotate</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> record = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> len = nums.length;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(k &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            record = nums[len-<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = len - <span class="number">2</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">                nums[i+<span class="number">1</span>] = nums[i];</span><br><span class="line">            &#125;</span><br><span class="line">            nums[<span class="number">0</span>] = record;</span><br><span class="line">            k--;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>C++</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">rotate</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> record = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> len = nums.size();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(k &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            record = nums[len<span class="number">-1</span>];</span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = len - <span class="number">2</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">                nums[i+<span class="number">1</span>] = nums[i];</span><br><span class="line">            &#125;</span><br><span class="line">            nums[<span class="number">0</span>] = record;</span><br><span class="line">            k--;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+<ul>
+<li>时间复杂度：O(n)</li>
+<li>空间复杂度：O(1)</li>
+</ul>
 
     </div>
 
@@ -330,19 +341,19 @@
   <div class="popular-posts-header">相关文章推荐</div>
   <ul class="popular-posts">
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/2020/04/18/01-JavaScriptWindow-浏览器对象模型/" rel="bookmark">JavaScriptWindow-浏览器对象模型</a></div>
+      <div class="popular-posts-title"><a href="/2020/10/12/80-Remove-Duplicates-from-Sorted-Array-II/" rel="bookmark">80-Remove-Duplicates-from-Sorted-Array-II</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/2020/04/18/02-JavaScriptWindowScreen/" rel="bookmark">JavaScriptWindowScreen</a></div>
+      <div class="popular-posts-title"><a href="/2020/10/03/123-Best-Time-to-Buy-and-Sell-Stock-III/" rel="bookmark">123-Best-Time-to-Buy-and-Sell-Stock-III</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/2020/04/18/03-JavaScriptWindowLocation/" rel="bookmark">JavaScriptWindowLocation</a></div>
+      <div class="popular-posts-title"><a href="/2020/09/26/142-Linked-List-Cycle-II/" rel="bookmark">142-Linked-List-Cycle-II</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/2020/04/18/04-WindowHistory/" rel="bookmark">WindowHistory</a></div>
+      <div class="popular-posts-title"><a href="/2020/09/23/141-Linked-List-Cycle/" rel="bookmark">141-Linked-List-Cycle</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/2020/04/18/05-WindowNavigator/" rel="bookmark">WindowNavigator</a></div>
+      <div class="popular-posts-title"><a href="/2020/09/22/136-Single-Number/" rel="bookmark">136-Single-Number</a></div>
     </li>
   </ul>
 
@@ -355,7 +366,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://joyli.net.cn/2020/04/18/06-JavaScript%E5%BC%B9%E5%87%BA%E6%A1%86/" title="JavaScript弹出框">https://joyli.net.cn/2020/04/18/06-JavaScript弹出框/</a>
+    <a href="https://joyli.net.cn/2020/10/13/189-Rotate-Array/" title="189-Rotate-Array">https://joyli.net.cn/2020/10/13/189-Rotate-Array/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -366,7 +377,10 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/BOM/" rel="tag"># BOM</a>
+              <a href="/tags/javascript/" rel="tag"># javascript</a>
+              <a href="/tags/c/" rel="tag"># c++</a>
+              <a href="/tags/Leetcode/" rel="tag"># Leetcode</a>
+              <a href="/tags/array/" rel="tag"># array</a>
           </div>
 
         
@@ -375,13 +389,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/04/18/06-CSS%E7%9B%92%E6%A8%A1%E5%9E%8B%E8%AF%A6%E8%A7%A3/" rel="prev" title="CSS盒模型">
-      <i class="fa fa-chevron-left"></i> CSS盒模型
+    <a href="/2020/10/13/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" rel="prev" title="面向对象的程序设计">
+      <i class="fa fa-chevron-left"></i> 面向对象的程序设计
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/04/18/05-typeof%E5%92%8C%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/" rel="next" title="typeof和数据类型转换">
-      typeof和数据类型转换 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -441,7 +452,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#警告框"><span class="nav-number">1.1.</span> <span class="nav-text">警告框</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#确认框"><span class="nav-number">1.2.</span> <span class="nav-text">确认框</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#提示框"><span class="nav-number">1.3.</span> <span class="nav-text">提示框</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#折行"><span class="nav-number">1.4.</span> <span class="nav-text">折行</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题描述"><span class="nav-number">1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解题思路"><span class="nav-number">2.</span> <span class="nav-text">解题思路</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

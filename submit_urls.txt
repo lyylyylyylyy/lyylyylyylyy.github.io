@@ -1,5 +1,5 @@
+https://joyli.net.cn/2020/10/13/object/
 https://joyli.net.cn/2020/10/13/189-Rotate-Array/
-https://joyli.net.cn/2020/10/13/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/
 https://joyli.net.cn/2020/10/12/80-Remove-Duplicates-from-Sorted-Array-II/
 https://joyli.net.cn/2020/09/30/116-Populating-Next-Right-Pointers-in-Each-Node/
 https://joyli.net.cn/2020/09/06/82-Remove-Duplicates-from-Sorted-List-II/

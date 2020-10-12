@@ -24,24 +24,24 @@
   <meta name="description" content="本文内容 对象属性 创建对象 继承  面向对象的语言有一个标志，那就是他们都有类的概念，而通过类可以创建任意多个具有相同属性和方法的对象，但是ECMAScript中，没有类的概念。 可以把ECMAScript的对象想像成散列表。 每个对象都是基于一个引用类型创建的，这个引用类型可以是第5章讨论的原生类型，也可以是开发人员定义的类型。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="面向对象的程序设计">
-<meta property="og:url" content="https://joyli.net.cn/2020/10/13/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/index.html">
+<meta property="og:url" content="https://joyli.net.cn/2020/10/13/object/index.html">
 <meta property="og:site_name" content="若只如初见">
 <meta property="og:description" content="本文内容 对象属性 创建对象 继承  面向对象的语言有一个标志，那就是他们都有类的概念，而通过类可以创建任意多个具有相同属性和方法的对象，但是ECMAScript中，没有类的概念。 可以把ECMAScript的对象想像成散列表。 每个对象都是基于一个引用类型创建的，这个引用类型可以是第5章讨论的原生类型，也可以是开发人员定义的类型。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://joyli.net.cn/2020/10/13/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/6-1.png">
-<meta property="og:image" content="https://joyli.net.cn/2020/10/13/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/6-2.png">
-<meta property="og:image" content="https://joyli.net.cn/2020/10/13/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/6-3.png">
-<meta property="og:image" content="https://joyli.net.cn/2020/10/13/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/prototype.webp">
-<meta property="og:image" content="https://joyli.net.cn/2020/10/13/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/6-4.png">
-<meta property="og:image" content="https://joyli.net.cn/2020/10/13/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/6-5.png">
+<meta property="og:image" content="https://joyli.net.cn/2020/10/13/object/object/6-1.png">
+<meta property="og:image" content="https://joyli.net.cn/2020/10/13/object/object/6-2.png">
+<meta property="og:image" content="https://joyli.net.cn/2020/10/13/object/object/6-3.png">
+<meta property="og:image" content="https://joyli.net.cn/2020/10/13/object/object/prototype.webp">
+<meta property="og:image" content="https://joyli.net.cn/2020/10/13/object/object/6-4.png">
+<meta property="og:image" content="https://joyli.net.cn/2020/10/13/object/object/6-5.png">
 <meta property="article:published_time" content="2020-10-12T19:59:32.000Z">
-<meta property="article:modified_time" content="2020-10-12T12:07:09.712Z">
+<meta property="article:modified_time" content="2020-10-12T13:50:00.823Z">
 <meta property="article:author" content="lyy">
 <meta property="article:tag" content="JavaScript高级程序设计">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://joyli.net.cn/2020/10/13/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/6-1.png">
+<meta name="twitter:image" content="https://joyli.net.cn/2020/10/13/object/object/6-1.png">
 
-<link rel="canonical" href="https://joyli.net.cn/2020/10/13/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/">
+<link rel="canonical" href="https://joyli.net.cn/2020/10/13/object/">
 
 
 <script id="page-configurations">
@@ -214,7 +214,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://joyli.net.cn/2020/10/13/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/">
+    <link itemprop="mainEntityOfPage" href="https://joyli.net.cn/2020/10/13/object/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -238,7 +238,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-10-12 19:59:32 / 修改时间：12:07:09" itemprop="dateCreated datePublished" datetime="2020-10-12T19:59:32Z">2020-10-12</time>
+              <time title="创建时间：2020-10-12 19:59:32 / 修改时间：13:50:00" itemprop="dateCreated datePublished" datetime="2020-10-12T19:59:32Z">2020-10-12</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -266,8 +266,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2020/10/13/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/10/13/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" itemprop="commentCount"></span>
+    <a title="valine" href="/2020/10/13/object/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/10/13/object/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -422,7 +422,7 @@
 <li><p>默认情况下，所有原型对象都会自动获得一个constructor属性，指向prototype属性所在函数的指针。</p>
 </li>
 </ul>
-<p><img src="./%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/6-1.png" alt="图6-1"></p>
+<p><img src="./object/6-1.png" alt="图6-1"></p>
 <ul>
 <li>可以通过<code>isPrototypeOf()</code>来确定对象之间是否存在这种关系</li>
 <li>ECMAScript5新增方法：<code>getPrototypeOf()</code>，返回[[PrototypeOf]]的值</li>
@@ -442,7 +442,7 @@
 <li>若是添加重复的实例属性，会<strong>屏蔽(不是修改)</strong>原型中原来的属性。</li>
 <li>delete操作符可以删除实例属性。</li>
 </ul>
-<p><img src="./%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/6-2.png" alt="图6-2"></p>
+<p><img src="./object/6-2.png" alt="图6-2"></p>
 <hr>
 <ul>
 <li><code>hasOwnProperty()</code>可以检测一个属性存在雨实例中，还是存在于原型中。</li>
@@ -486,7 +486,7 @@
 <p>例：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Person.prototype = &#123;</span><br><span class="line">    <span class="keyword">constructor</span> : Person </span><br><span class="line">    name : name;</span><br><span class="line">    age : age;</span><br><span class="line">    job : job;</span><br><span class="line">    sayName : function() &#123;</span><br><span class="line">        alert(<span class="keyword">this</span>.name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">friend.sayName();   <span class="comment">// error</span></span><br></pre></td></tr></table></figure>
 
-<p><img src="./%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/6-3.png" alt="图6-3"></p>
+<p><img src="./object/6-3.png" alt="图6-3"></p>
 <h4 id="原生对象的原型"><a href="#原生对象的原型" class="headerlink" title="原生对象的原型"></a>原生对象的原型</h4><p>所有原生饮用类型（Object、Array等等）都在其构造函数的原型上定义了方法。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alert(<span class="keyword">typeof</span> <span class="built_in">Array</span>.prototype.sort);  <span class="comment">// "function"</span></span><br></pre></td></tr></table></figure>
 
@@ -523,18 +523,18 @@
 <p><strong>ECMAScript只支持实现继承，而且其实现继承主要是依靠原型链来实现的。</strong></p>
 <h3 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h3><p>原型链继承：其基本思想是利用原型让一个引用类型继承另一个引用类型的属性和方法。</p>
 <p>原型链：实例与原型的链条</p>
-<p><img src="./%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/prototype.webp" alt="原型链"></p>
+<p><img src="./object/prototype.webp" alt="原型链"></p>
 <p>构造函数、原型和实例的关系：</p>
 <p>每个构造函数都有一个原型对象，原型对象都包含一个指向构造函数的指针，而实例都包含一个指向原型对象的内部指针。若是让原型对象等于另一个类型的实例，则可以层层递进，构成实例与原型的链条，具体见下面例子。</p>
 <p>eg:</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">SuperType</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.property = <span class="literal">true</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">SuperType.prototype.getSuperValue() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.property;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">SubType</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.subproperty = <span class="literal">false</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 继承了SuperType</span></span><br><span class="line">SubType.prototype = <span class="keyword">new</span> SuperType();</span><br><span class="line"></span><br><span class="line">SubType.prototype.getSubValue = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.subproperty;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> instance = <span class="keyword">new</span> SubType();</span><br><span class="line">alert(instance.getSuperValue());   <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
 
-<p><img src="./%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/6-4.png" alt="图6-4"></p>
+<p><img src="./object/6-4.png" alt="图6-4"></p>
 <blockquote>
 <p>注意⚠️：<code>getSuperValue()</code>方法仍在<code>SuperType.prototype</code>中，但是<code>property</code>却在<code>SubType.prototype</code>中，这是因为<code>property</code>是一个实例属性，而<code>getSuperValue()</code>则是一个原型方法。既然<code>SubType.prototype</code>现在是<code>SuperType</code>的实例，那么<code>property</code>当然就位于该实例中了。</p>
 </blockquote>
 <h4 id="默认原型"><a href="#默认原型" class="headerlink" title="默认原型"></a>默认原型</h4><p>所有函数的默认原型都<code>Object.prototype</code>，这也正是所有自定义类型都会继承toString、valueOf等默认方法的根本原因。</p>
-<p><img src="./%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/6-5.png" alt="图6-5"></p>
+<p><img src="./object/6-5.png" alt="图6-5"></p>
 <h4 id="确定原型和实例的关系"><a href="#确定原型和实例的关系" class="headerlink" title="确定原型和实例的关系"></a>确定原型和实例的关系</h4><p>有两种方式来确定原型和实例之间的关系：</p>
 <ul>
 <li><code>instanceof</code>：用这个操作符来测试实例与原型链中出现过的构造函数，结果就会返回true。</li>
@@ -606,7 +606,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://joyli.net.cn/2020/10/13/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" title="面向对象的程序设计">https://joyli.net.cn/2020/10/13/面向对象的程序设计/</a>
+    <a href="https://joyli.net.cn/2020/10/13/object/" title="面向对象的程序设计">https://joyli.net.cn/2020/10/13/object/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -751,7 +751,7 @@
           </li>
         
           <li>
-            <a href="/2020/10/13/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" title="面向对象的程序设计" target="_blank">面向对象的程序设计</a>
+            <a href="/2020/10/13/object/" title="面向对象的程序设计" target="_blank">面向对象的程序设计</a>
           </li>
         
           <li>

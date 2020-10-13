@@ -1,3 +1,4 @@
+https://joyli.net.cn/2020/10/14/299-Bulls-and-Cows/
 https://joyli.net.cn/2020/10/13/object/
 https://joyli.net.cn/2020/10/13/189-Rotate-Array/
 https://joyli.net.cn/2020/10/12/80-Remove-Duplicates-from-Sorted-Array-II/
@@ -7,4 +8,3 @@ https://joyli.net.cn/2020/10/03/123-Best-Time-to-Buy-and-Sell-Stock-III/
 https://joyli.net.cn/2020/09/04/79-Word-Search/
 https://joyli.net.cn/2020/09/01/24-Swap-Nodes-in-Pairs/
 https://joyli.net.cn/2020/08/21/437.%20Path%20Sum%20III/
-https://joyli.net.cn/2020/09/26/142-Linked-List-Cycle-II/

@@ -1,3 +1,4 @@
+https://joyli.net.cn/2020/10/19/119-Pascals-Triangle-II/
 https://joyli.net.cn/2020/10/17/118-Pascals-Triangle/
 https://joyli.net.cn/2020/10/17/B-O-M/
 https://joyli.net.cn/2020/10/16/134-Gas-Station/
@@ -7,4 +8,3 @@ https://joyli.net.cn/2020/10/13/object/
 https://joyli.net.cn/2020/10/13/189-Rotate-Array/
 https://joyli.net.cn/2020/10/12/80-Remove-Duplicates-from-Sorted-Array-II/
 https://joyli.net.cn/2020/09/30/116-Populating-Next-Right-Pointers-in-Each-Node/
-https://joyli.net.cn/2020/09/06/82-Remove-Duplicates-from-Sorted-List-II/

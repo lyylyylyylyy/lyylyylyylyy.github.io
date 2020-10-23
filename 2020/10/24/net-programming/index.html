@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noto Serif SC:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"joyli.net.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="前言Node面向网络而生：  事件驱动 无阻塞 单线程 轻量，适合在分布式网络中使用 API贴合网络 对于Node，只需要几行代码即可构建服务器，无需额外的容器 Node提供了net、dgram、http、https4个模块，分别用于处理TCP、UDP、HTTP、HTTPS，适用于服务器端和客户端。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="net-programming">
+<meta property="og:url" content="https://joyli.net.cn/2020/10/24/net-programming/index.html">
+<meta property="og:site_name" content="若只如初见">
+<meta property="og:description" content="前言Node面向网络而生：  事件驱动 无阻塞 单线程 轻量，适合在分布式网络中使用 API贴合网络 对于Node，只需要几行代码即可构建服务器，无需额外的容器 Node提供了net、dgram、http、https4个模块，分别用于处理TCP、UDP、HTTP、HTTPS，适用于服务器端和客户端。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://joyli.net.cn/2020/10/24/net-programming/7.4.png">
+<meta property="og:image" content="https://joyli.net.cn/2020/10/24/net-programming/7.5.png">
+<meta property="og:image" content="https://joyli.net.cn/2020/10/24/net-programming/7-6.png">
+<meta property="og:image" content="https://joyli.net.cn/2020/10/24/net-programming/7-7.png">
+<meta property="og:image" content="https://joyli.net.cn/2020/10/24/net-programming/7-8.png">
+<meta property="og:image" content="https://joyli.net.cn/2020/10/24/net-programming/7-9.png">
+<meta property="article:published_time" content="2020-10-23T21:43:55.000Z">
+<meta property="article:modified_time" content="2020-10-23T13:53:57.063Z">
+<meta property="article:author" content="lyy">
+<meta property="article:tag" content="node">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://joyli.net.cn/2020/10/24/net-programming/7.4.png">
+
+<link rel="canonical" href="https://joyli.net.cn/2020/10/24/net-programming/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>net-programming | 若只如初见</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">若只如初见</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">书籍是人类进步的阶梯</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签<span class="badge">41</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th fa-fw"></i>分类<span class="badge">15</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档<span class="badge">180</span></a>
+
+  </li>
+        <li class="menu-item menu-item-疫情地图">
+
+    <a href="http://joyli.net.cn/covid19-map/" rel="section"><i class="map fa-fw"></i>疫情地图</a>
+
+  </li>
+        <li class="menu-item menu-item-links">
+
+    <a href="/links" rel="section"><i class="link fa-fw"></i>友链</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://joyli.net.cn/2020/10/24/net-programming/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="lyy">
+      <meta itemprop="description" content="世间所有的相遇，都是久别重逢">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="若只如初见">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          net-programming
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-10-23 21:43:55 / 修改时间：13:53:57" itemprop="dateCreated datePublished" datetime="2020-10-23T21:43:55Z">2020-10-23</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/node/" itemprop="url" rel="index"><span itemprop="name">node</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/10/24/net-programming/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/10/24/net-programming/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>13k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>12 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Node面向网络而生：</p>
+<ul>
+<li>事件驱动</li>
+<li>无阻塞</li>
+<li>单线程</li>
+<li>轻量，适合在分布式网络中使用</li>
+<li>API贴合网络</li>
+<li>对于Node，只需要几行代码即可构建服务器，无需额外的容器</li>
+<li>Node提供了<code>net</code>、<code>dgram</code>、<code>http</code>、<code>https</code>4个模块，分别用于处理TCP、UDP、HTTP、HTTPS，适用于服务器端和客户端。<a id="more"></a>
+<h2 id="构建TCP服务"><a href="#构建TCP服务" class="headerlink" title="构建TCP服务"></a>构建TCP服务</h2></li>
+</ul>
+<h3 id="创建TCP服务器"><a href="#创建TCP服务器" class="headerlink" title="创建TCP服务器"></a>创建TCP服务器</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> net  = <span class="built_in">require</span>(<span class="string">'net'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> server = net.createServer(<span class="function"><span class="keyword">function</span> (<span class="params">socket</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 新的连接</span></span><br><span class="line">    socket.on(<span class="string">'data'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span><br><span class="line">        socket.write(<span class="string">"hello"</span>);</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    socket.on(<span class="string">'end'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        socket.write(<span class="string">"disconnect"</span>);</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    socket.write(<span class="string">"Welcome to nodeJS\n"</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">server.listen(<span class="number">8124</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'server bound'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="TCP服务的事件"><a href="#TCP服务的事件" class="headerlink" title="TCP服务的事件"></a>TCP服务的事件</h3><table>
+<thead>
+<tr>
+<th align="center">服务器事件</th>
+<th align="center"></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">listening</td>
+<td align="center">调用<code>server.listen</code>绑定端口或者Domain Socket后触发，<code>server.listen(port, listeningListener)</code></td>
+</tr>
+<tr>
+<td align="center">connection</td>
+<td align="center">每个客户端套接字连接到服务器端时触发，<code>net.createServer()</code>，最后一个参数传递</td>
+</tr>
+<tr>
+<td align="center">close</td>
+<td align="center">服务器关闭时触发，调用<code>server.close</code>后，服务器将停止接收新的套接字连接，但是保持当前存在的连接，等待所有连接都断开后，触发该事件</td>
+</tr>
+<tr>
+<td align="center">error</td>
+<td align="center">服务器发生异常时，将会触发该事件</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="center">连接事件</th>
+<th align="center"></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">data</td>
+<td align="center">一端调用<code>write</code>发送方数据时，另一端会触发data事件，事件传递的数据即是<code>write</code>发送的数据</td>
+</tr>
+<tr>
+<td align="center">end</td>
+<td align="center">连接中的任意一端发送了FIN数据时，将会触发该事件</td>
+</tr>
+<tr>
+<td align="center">connect</td>
+<td align="center">该事件用于客户端，当套接字与服务器端连接成功时会被触发</td>
+</tr>
+<tr>
+<td align="center">drain</td>
+<td align="center">任意一端调用<code>write</code>发送方数据时，当前这端会触发此事件</td>
+</tr>
+<tr>
+<td align="center">error</td>
+<td align="center">发生异常时，将会触发该事件</td>
+</tr>
+<tr>
+<td align="center">close</td>
+<td align="center">套接字完全关闭时，触发该事件</td>
+</tr>
+<tr>
+<td align="center">timeout</td>
+<td align="center">一定时间后连接不再活跃时，该事件将会被触发，通知用户当前此连接已经被闲置了</td>
+</tr>
+</tbody></table>
+<hr>
+<p>TCP套接字是可写可读的Stream对象，可以利用<code>pipe()</code>方法巧妙的实现管道操作。</p>
+<blockquote>
+<p>在Node中，TCP默认开启了Nagle算法，可以调用<code>socket.setNoDelay(true)</code>去掉Nagle算法，使得<code>write</code>可以立即发送数据到网络中。</p>
+</blockquote>
+<blockquote>
+<p>尽管在网络的一端调用<code>write</code>会触发另一端的data事件，但是不意味和每次<code>write</code>都会触发一次data事件，在关闭Nagle算法后，接收端可能接收到多个小数据包的合并，然后只触发一次data事件。</p>
+</blockquote>
+<h2 id="构建UDP服务"><a href="#构建UDP服务" class="headerlink" title="构建UDP服务"></a>构建UDP服务</h2><p>UDP特点：</p>
+<ul>
+<li>不面向连接</li>
+<li>不可靠信息传输服务，网络差时，丢包严重</li>
+<li>无需连接，资源消耗低，处理快速且灵活</li>
+<li>用于丢少量包不会影响的场景，如音频，视频等</li>
+<li>应用广泛，DNS服务基于它实现</li>
+</ul>
+<h3 id="UDP套接字创建"><a href="#UDP套接字创建" class="headerlink" title="UDP套接字创建"></a>UDP套接字创建</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> dgram = <span class="built_in">require</span>(<span class="string">'dgram'</span>);</span><br><span class="line"><span class="keyword">var</span> socket = dgram.createSocket(<span class="string">"udp4"</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="UDP服务器端创建"><a href="#UDP服务器端创建" class="headerlink" title="UDP服务器端创建"></a>UDP服务器端创建</h3><p>UDP套接字接收网络消息，只要调用<code>dgram.bind(port, [address])</code>方法绑定网卡和端口即可。绑定完成后，触发listening事件。</p>
+<p>eg:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> dgram = <span class="built_in">require</span>(<span class="string">'dgram'</span>);</span><br><span class="line"><span class="keyword">var</span> server = dgram.createSocket(<span class="string">"udp4"</span>);</span><br><span class="line"></span><br><span class="line">server.on(<span class="string">"message"</span>, <span class="function"><span class="keyword">function</span> (<span class="params">msg, rinfo</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"server got:"</span> + msg + <span class="string">"from"</span> + rinfo.address + <span class="string">":"</span> + rinfo.port);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">server.on(<span class="string">"listening"</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> address = server.address();</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"server listening "</span> + address.address + <span class="string">":"</span> + address.port);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">server.bind(<span class="number">41234</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="UDP客户端创建"><a href="#UDP客户端创建" class="headerlink" title="UDP客户端创建"></a>UDP客户端创建</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> dgram = <span class="built_in">require</span>(<span class="string">'dgram'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> message = <span class="keyword">new</span> Buffer(<span class="string">"nodeJs"</span>);</span><br><span class="line"><span class="keyword">var</span> client = dgram.createSocket(<span class="string">"udp4"</span>);</span><br><span class="line">client.send(message, <span class="number">0</span>, message.length, <span class="number">41234</span>, <span class="string">"localhost"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">err, bytes</span>) </span>&#123;</span><br><span class="line">    client.close();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>socket.send(buf, offset, length, port, adress, [callback])</p>
+<ul>
+<li>要发送的buffer、buffer的偏移，buffer的长度，目标端口，目标地址，发送完成后的回调</li>
+</ul>
+<h3 id="UDP套接字事件"><a href="#UDP套接字事件" class="headerlink" title="UDP套接字事件"></a>UDP套接字事件</h3><table>
+<thead>
+<tr>
+<th align="center">UDP套接字事件</th>
+<th align="center"></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">message</td>
+<td align="center">UDP套接字侦听网卡端口后，接收到消息时触发该事件，触发携带的数据为消息buffer对象和一个远程地址信息</td>
+</tr>
+<tr>
+<td align="center">listening</td>
+<td align="center">UDP套接字开始侦听时触发该事件</td>
+</tr>
+<tr>
+<td align="center">close</td>
+<td align="center">调用<code>close</code>方法时触发该事件，并不再触发<code>message</code>事件</td>
+</tr>
+<tr>
+<td align="center">error</td>
+<td align="center">发生异常时，将会触发该事件，如果不侦听，异常将直接抛出，使进程退出</td>
+</tr>
+</tbody></table>
+<h2 id="构建HTTP服务"><a href="#构建HTTP服务" class="headerlink" title="构建HTTP服务"></a>构建HTTP服务</h2><h3 id="http模块"><a href="#http模块" class="headerlink" title="http模块"></a>http模块</h3><ul>
+<li>在Node中，HTTP服务继承于TCP服务器（net模块）</li>
+<li>能够与多个客户端保持连接</li>
+<li>采用事件驱动</li>
+<li>不为每一个连接创建额外的线程或进程，保持很低的内存占用，所以能实现高并发</li>
+</ul>
+<p>HTTP服务与TCP服务区别：</p>
+<ul>
+<li>开启keepalive后，一个TCP可以用于多次请请求响应</li>
+<li>TCP服务以connection 为单位服务，HTTP服务以request为单位服务</li>
+</ul>
+<p><strong>http在底层将连接所用套接字的读写抽象为ServerRequest和ServerResponse对象</strong>。请求产生过程中，http拿到连接中传来的数据，调用二进制模块http_parser进行解析，解析请求报文完成后，触发request事件，调用用户的业务逻辑。</p>
+<p><img src="7.4.png" alt="http产生请请求的过程"></p>
+<h4 id="http请求"><a href="#http请求" class="headerlink" title="http请求"></a>http请求</h4><p>对于TCP连接的读操作，http将其封装为ServerRequest，报文头通过http_parser进行解析。</p>
+<p>请求报文：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; GET &#x2F; HTTP&#x2F;1.1</span><br><span class="line">&gt; User-Agent: curl&#x2F;7.24.0 (x86_64-apple-darwin12.0) libcurl&#x2F;7.24.0 OpenSSL&#x2F;0.9.8r zlib&#x2F;1.2.5 2</span><br><span class="line">&gt; Host: 127.0.0.1:1337 &gt; Accept: *&#x2F;*</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+
+<p>报文头第一行GET/HTTP/1.1被解析之后分解为如下属性。</p>
+<ul>
+<li><p>req.method：值为GET，为请求方法，常见的请求方法有有GET、POST、DELETE、PUT、CONNECT等。</p>
+</li>
+<li><p>eq.ur：值为/。</p>
+</li>
+<li><p>req.httpVersion：值为1.1。</p>
+<p>其余报头是规律的的Key: Value格式，解析后放在req.headers传给业务逻辑供调用。</p>
+<p>报文体部分抽象为一个只读流对象，若是业务逻辑需要读取报问题中的数据，则要在这个流结束后再操作。</p>
+<h4 id="http响应"><a href="#http响应" class="headerlink" title="http响应"></a>http响应</h4><p>报文头部信息：的API为<code>res.setHeader()</code>和<code>res. writeHead()</code>。</p>
+<p><code>res.writeHead(200, {&#39;Content-Type&#39;: &#39;text/plain&#39;});</code></p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt; HTTP&#x2F;1.1 200 OK</span><br><span class="line">&lt; Content-Type: text&#x2F;plain</span><br></pre></td></tr></table></figure>
+
+<p>可以调用<code>res.setHeader()</code>进行多次设置，但是只有调用<code>res. writeHead()</code>后，报头才会写入连接中。</p>
+<hr>
+<p>报文体部分：则是调用<code>res.write()</code>和<code>res.end()</code>方法实现。</p>
+<p><code>res.end()</code>先调用<code>write()</code>发送数据，然后发送信号告知此次响应结束，响应结束后，HTTP服务器可能将当前连接用于下一次请求或是关闭连接。</p>
+<blockquote>
+<p>报头是在报文体发送前发送的，一旦开始了数据的发送，<code>res.setHeader()</code>和<code>res. writeHead()</code>将不再生效。<br>务必在结束时调用<code>res.end()</code>，否则客户端一直处于等待状态。</p>
+</blockquote>
+<h4 id="http服务事件"><a href="#http服务事件" class="headerlink" title="http服务事件"></a>http服务事件</h4><table>
+<thead>
+<tr>
+<th align="center">http服务事件</th>
+<th align="center"></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">connection事件</td>
+<td align="center">在开始HTTP请求和响应前，客户端与服务端要建立底层的TCP连接，这个连接可能因为开启keep-alive，可以在多次请求和响应之间使用；这个连接建立时，服务端触发一次connection事件。</td>
+</tr>
+<tr>
+<td align="center">request事件</td>
+<td align="center">建当请求发送到服务端，在解析出HTTP请求头后触发该事件。</td>
+</tr>
+<tr>
+<td align="center">close事件</td>
+<td align="center">已有的连接都断开后，触发该事件。</td>
+</tr>
+<tr>
+<td align="center">checkContinue事件</td>
+<td align="center">某些客户端在发送较大的数据时，并不会将数据直接发送，而是先发送一个头部带Expect: 100-continue的请求到服务器，服务器将会触发checkContinue事件；如果没有为服务器监听这个事件，服务器将自动响应客户端100 Continue的状态码，表示接受数据上传；如果不接受的数据较多时，响应客户端400 Bad Request拒绝客户端继续发送数据即可。和request事件互斥。</td>
+</tr>
+<tr>
+<td align="center">connect事件</td>
+<td align="center">客户端发起CONNECT请求时触发。</td>
+</tr>
+<tr>
+<td align="center">upgrade事件</td>
+<td align="center">客户端要求升级连接的协议时，需要和服务器端协商，客户端会在请求头中带上Upgrade字段，服务器端会在接受到这样的请求时触发该事件。</td>
+</tr>
+<tr>
+<td align="center">clientError事件</td>
+<td align="center">发生异常时，将会触发该事件，错误传到服务端</td>
+</tr>
+</tbody></table>
+<h3 id="HTTP客户端"><a href="#HTTP客户端" class="headerlink" title="HTTP客户端"></a>HTTP客户端</h3><ul>
+<li>产生报文头和报文体</li>
+<li><code>http.request(options, connect)</code>构造客户端，options请求头内容。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> options = &#123; </span><br><span class="line">    hostname: <span class="string">'127.0.0.1'</span>, </span><br><span class="line">    port: <span class="number">1334</span>,</span><br><span class="line">    path: <span class="string">'/'</span>,</span><br><span class="line">    method: <span class="string">'GET'</span></span><br><span class="line"> &#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> req = http.request(options, <span class="function"><span class="keyword">function</span>(<span class="params">res</span>) </span>&#123; </span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'STATUS: '</span> + res.statusCode); </span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'HEADERS: '</span> + <span class="built_in">JSON</span>.stringify(res.headers)); res.setEncoding(<span class="string">'utf8'</span>);</span><br><span class="line">    res.on(<span class="string">'data'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">chunk</span>) </span>&#123; <span class="built_in">console</span>.log(chunk);</span><br><span class="line">    &#125;);</span><br><span class="line"> &#125;);</span><br><span class="line">req.end();</span><br><span class="line"></span><br><span class="line">$ node client.js</span><br><span class="line">STATUS: <span class="number">200</span></span><br><span class="line">HEADERS: &#123;<span class="string">"date"</span>:<span class="string">"Sat, 06 Apr 2013 11:08:01 GMT"</span>,<span class="string">"connection"</span>:<span class="string">"keep-alive"</span>,<span class="string">"transfer-encoding"</span>:<span class="string">"chunked"</span>&#125; Hello World</span><br></pre></td></tr></table></figure>
+<h4 id="http代理"><a href="#http代理" class="headerlink" title="http代理"></a>http代理</h4><p>为了重用TCP连接，http模块包含一个默认的客户端代理对象<code>http.globalAgent</code>，它对每个服务端（host+port）创建的连接进行管理，实质是一个连接池。</p>
+<p><img src="7.5.png" alt="HTTP代理对服务器端创建的连接进行管理"></p>
+<p>默认情况，通过ClientRequest对同一个服务端发起的HTTP请求最多可以创建5个连接。若是调用客户端同时对一个服务器发起10次http请求，实质上只有5个请求处于并发状态，后续请求需要等待某个请求完成服务才真正发出。</p>
+<p>可以设置options的agent选项为false，以脱离线程池的管理，使得请求不受并发的限制。</p>
+<h4 id="http客户端事件"><a href="#http客户端事件" class="headerlink" title="http客户端事件"></a>http客户端事件</h4><table>
+<thead>
+<tr>
+<th align="center">http客户端事件</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">response</td>
+</tr>
+<tr>
+<td align="center">socket</td>
+</tr>
+<tr>
+<td align="center">connect</td>
+</tr>
+<tr>
+<td align="center">upgrade</td>
+</tr>
+<tr>
+<td align="center">continue</td>
+</tr>
+</tbody></table>
+<h2 id="构建WebSocket服务"><a href="#构建WebSocket服务" class="headerlink" title="构建WebSocket服务"></a>构建WebSocket服务</h2><ul>
+<li>WebSocket客户端机基于事件驱动，可以与Node应用良好</li>
+<li>WebSocket实现了客户端与服务器端之间的长连接</li>
+<li>客户端与服务器端之间之间只建立一个TCP连接</li>
+<li>WebSocket服务器端可以推送数据到客户端</li>
+<li>更轻量级的协议头，减少数据传送量</li>
+<li>可以双向通信</li>
+<li>WebSocket协议属于应用层协议</li>
+<li>WebSocket握手的部分由HTTP完成，一次握手，握手成功后，数据就直接从TCP通道传输，与Http无关</li>
+<li><strong>WebSocket的协议主要分为两个部分：握手和数据传输</strong></li>
+<li><code>socket.io</code>在此基础上实现</li>
+</ul>
+<p>eg: </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> socket = <span class="keyword">new</span> WebSocket(<span class="string">'ws://127.0.0.1:12010/updates'</span>);</span><br><span class="line">socket.onopen = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 向服务器发送数据</span></span><br><span class="line">    setInterval(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (socket.bufferedAmount == <span class="number">0</span>)</span><br><span class="line">            socket.send(getUpdateData());</span><br><span class="line">        &#125;, <span class="number">50</span>);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 接收服务器端传来的数据</span></span><br><span class="line">socket.onmessage = <span class="function"><span class="keyword">function</span> (<span class="params">event</span>) </span>&#123;</span><br><span class="line"><span class="comment">// <span class="doctag">TODO:</span>event.data </span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>WebSocket之前，Comet：</p>
+<ul>
+<li>长轮询或iframe流</li>
+<li><strong>长轮询</strong><ul>
+<li>客户端向服务端发起请求，服务器端只在超时或有数据响应时断开连接(<code>res.send()</code>)；客户端在收到数据或者超时后重新发起请求。</li>
+</ul>
+</li>
+</ul>
+<h3 id="WebSocket握手"><a href="#WebSocket握手" class="headerlink" title="WebSocket握手"></a>WebSocket握手</h3><ul>
+<li>客户端建立连接时，通过HTTP发起请求报文，如下所示：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">GET &#x2F;chat HTTP&#x2F;1.1</span><br><span class="line">Host: server.example.com</span><br><span class="line">Upgrade: websocket   &#x2F;&#x2F; 表示请求服务器端升级协议为Websocket</span><br><span class="line">Connection: Upgrade</span><br><span class="line">Sec-WebSocket-Key: dGhlIHNhbXBsZSBub25jZQ&#x3D;&#x3D;  &#x2F;&#x2F; 用于安全校验</span><br><span class="line">Sec-WebSocket-Protocol: chat, superchat  &#x2F;&#x2F; 指定子协议和版本号</span><br><span class="line">Sec-WebSocket-Version: 13</span><br></pre></td></tr></table></figure>
+<hr>
+<ul>
+<li>服务器端在处理完请求后，响应如下报文</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">HTTP&#x2F;1.1 101 Switching Protocols</span><br><span class="line">Upgrade: websocket</span><br><span class="line">Connection: Upgrade </span><br><span class="line">Sec-WebSocket-Accept: s3pPLMBiTxaQ9kYGzzhZRbK+xOo&#x3D;</span><br><span class="line">Sec-WebSocket-Protocol: chat</span><br></pre></td></tr></table></figure>
+<p>告知客户端正在更换协议，更新应用层协议为WebSocket协议，并在当前的套接字连接上应用新协议。客户端将会校验<code>Sec-WebSocket-Accept</code>的值，如果成功，将开始数据传输。</p>
+<p><strong>一旦WebSocket握手成功后，服务器端与客户端将会呈现对等的效果，都能接收和发送消息。</strong></p>
+<h3 id="WebSocket数据传输"><a href="#WebSocket数据传输" class="headerlink" title="WebSocket数据传输"></a>WebSocket数据传输</h3><p>握手顺利完成后，当前连接不再进行HTTP的交互，而是开始WebSocket的数据帧协议。</p>
+<p><img src="7-6.png" alt="图7-6 协议升级过程示意图"></p>
+<p>握手完成后，客户端的<code>onopen()</code>将会被触发。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">socket.onopen = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; </span><br><span class="line">    <span class="comment">// <span class="doctag">TODO:</span> opened()</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<hr>
+<p>为了完成TCP套接字事件到WebSocket事件的封装，需要在<strong>接收数据时进行处理</strong>，WebSocket数据帧协议即是在底层data事件上封装完成的。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">WebSocket.prototype.setSocket = <span class="function"><span class="keyword">function</span> (<span class="params">socket</span>) </span>&#123; </span><br><span class="line">    <span class="keyword">this</span>.socket = socket;</span><br><span class="line">    <span class="keyword">this</span>.socket.on(<span class="string">'data'</span>, <span class="keyword">this</span>.receiver);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>发送数据时，也要封装：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">WebSocket.prototype.send = <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123; </span><br><span class="line">    <span class="keyword">this</span>._send(data);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<hr>
+<ul>
+<li>客户端调用<code>send</code>发送数据时，服务端触发<code>onmessage</code>，反之亦然。</li>
+<li>调用<code>send</code>发送1条数据时，协议可能将这个数据封装为一帧或多帧数据，然后逐帧发送。</li>
+<li>为了安全考虑，客户端需要对发送的数据帧进行掩码处理，服务器一旦收到无掩码帧（比如中间拦截破坏），连接将关闭。</li>
+<li>服务器发送到客户端的数据帧则无需做掩码处理，若是客户端收到带掩码的数据帧，连接也会关闭。</li>
+</ul>
+<p>WebSocket数据帧定义，8位为一列：</p>
+<p><img src="7-7.png" alt="WebSocket数据的定义"></p>
+<table>
+<thead>
+<tr>
+<th align="center">WebSocket数据的定义</th>
+<th align="center"></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">fin</td>
+<td align="center">如果这个数据帧是最后一帧，这个fin位为1，其余情况为0。当一个数据没有被分为多帧时，它既是第一帧也是最后一帧。</td>
+</tr>
+<tr>
+<td align="center">rsv1、rsv2、rsv3</td>
+<td align="center">rsv1、rsv2、rsv3：各为1位长，3个标识用于扩展，当有已协商的扩展时，这些值可能为1，其余情况为0。</td>
+</tr>
+<tr>
+<td align="center">opcode</td>
+<td align="center">长为4位的操作码，可以用来表示0到15的值，用于解释当前数据帧。0表示附加数据帧，1表示文本数据帧，2表示二进制数据帧，8表示发送一个连接关闭的数据帧，9表示ping数据帧，10表示pong数据帧，其余值暂时没有定义。ping数据帧和pong数据帧用于心跳检测，当一端发送ping数据帧时，另一端必须发送pong数据帧作为响应，告知对方这一端仍然处于响应状态。</td>
+</tr>
+<tr>
+<td align="center">masked</td>
+<td align="center">表示是否进行掩码处理，长度为1。客户端发送给服务器端时为1，服务器端发送给客户端时为0</td>
+</tr>
+<tr>
+<td align="center">payload length</td>
+<td align="center">一个7、7+16或7+64位长的数据位，标识数据的长度，如果值在0~125之间，那么该值就是数据的真实长度；如果值是126，则后面16位的值是数据的真实长度；如果值是127，则后面64位的值是数据的真实长度</td>
+</tr>
+<tr>
+<td align="center">masking key</td>
+<td align="center">当masked为1时存在，是一个32位长的数据位，用于解密数据</td>
+</tr>
+<tr>
+<td align="center">payload data</td>
+<td align="center">我们的目标数据，位数为8的倍数</td>
+</tr>
+</tbody></table>
+<p>客户端发送消息时，需要构造一个或多个数据帧协议报文。由于hello  world!较短，不存在分割为多个数据帧的情况，又由于hello  world!会以文本的方式发送，它的payload  length长度为96（12字节x8位/字节），二进制表示为1100000。所以报文应当如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fin(1) + res(000) + opcode(0001) + masked(1) + payload length(1100000) +  masking  key(32位) + payload data(hello world!加密后的二进制)</span><br></pre></td></tr></table></figure>
+
+<p>客户端发送消息后，服务器端在data事件中接收到这些编码数据，然后解析为相应的数据帧，再以数据帧的格式，通过掩码将真正的数据解密出来，然后触发<code>onmessage()</code>执行，如下所示：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">socket.onmessage  =  <span class="function"><span class="keyword">function</span>  (<span class="params">event</span>)  </span>&#123;</span><br><span class="line"><span class="comment">// <span class="doctag">TODO:</span> event.data</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>回复：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fin(1)  +  res(000)  +  opcode(0001)  +  masked(0)  +  payload  length(1100000)  +  payload  data(yakexi的二进制)</span><br></pre></td></tr></table></figure>
+
+<p>如何解析数据帧和触发<code>onmessage()</code>，请参考ws模块的实现。</p>
+<h2 id="网络服务与安全"><a href="#网络服务与安全" class="headerlink" title="网络服务与安全"></a>网络服务与安全</h2><p>SSL协议（Secure Sockets Layer，安全套接层）</p>
+<ul>
+<li>一种安全协议，在传输层提供对网络连接加密的功能</li>
+<li>对于应用层而言，是透明的，数据在传递到应用层之前就已经就已经完成了加密和解密的过程</li>
+<li>IETF标准化后，称为TLS(Transport Layer Security，安全传输层协议)</li>
+</ul>
+<p>Node在网络安全方面提供了3个模块</p>
+<ul>
+<li>crypto：主要用于加密解密，SHA1、MD5等加密算法都在其中有体现</li>
+<li>tls：建立在TLS/SSL加密的tcp连接之上</li>
+<li>https</li>
+</ul>
+<h3 id="TLS-SSL"><a href="#TLS-SSL" class="headerlink" title="TLS/SSL"></a>TLS/SSL</h3><ol>
+<li>密钥</li>
+</ol>
+<ul>
+<li>TLS/SSL是一个公钥/私钥的结构</li>
+<li>非对称结构</li>
+<li>每个客户端和服务端都有自己的公私钥</li>
+<li><strong>公钥用来加密要传输的数据，私钥用来解密接收到的数据</strong></li>
+<li><strong>公钥和私钥是配对的，通过公钥加密的数据，只有通过私钥才能解密，所以在建立安全传输之前，客户端和服务端之间要先互换公钥</strong></li>
+<li>客户端发送数据时要通过服务端的公钥进行加密，服务端发送数据时则需要客户端公钥加密</li>
+</ul>
+<p><img src="7-8.png" alt="客户端和服务器端交换密钥"></p>
+<hr>
+<ul>
+<li>Node底层采用的是openssl实现TLS/SSL的，生成公钥和私钥可以通过openssl完成</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//  生成服务器端私钥</span></span><br><span class="line">$  openssl  genrsa  -out  server.key  <span class="number">1024</span></span><br><span class="line"><span class="comment">//  生成客户端私钥</span></span><br><span class="line">$  openssl  genrsa  -out  client.key  <span class="number">1024</span><span class="string">"</span></span><br></pre></td></tr></table></figure>
+<p>上述命令生成了两个1024位长的RSA私钥文件，我们可以通过它继续生成公钥，如下所示：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ openssl rsa -<span class="keyword">in</span> server.key -pubout -out server.pem</span><br><span class="line">$ openssl rsa -<span class="keyword">in</span> client.key -pubout -out client.pem</span><br></pre></td></tr></table></figure>
+<hr>
+<p>公私钥的非对称加密虽好，但是网络中依然可能存在窃听的情况，典型的例子是<strong>中间人攻击</strong>。<br>客户端和服务器端在交换公钥的过程中，中间人对客户端扮演服务器端的角色，对服务器端扮演客户端的角色，因此客户端和服务器端几乎感受不到中间人的存在。为了解决这种问题，数据传输过程中还需要对得到的公钥进行认证，以确认得到的公钥是出自目标服务器。如果不能保证这种认证，中间人可能会将伪造的站点响应给用户，从而造成经济损失。图7-9是中间人攻击的示意图。</p>
+<p><img src="7-9.png" alt="中间人攻击示意图"></p>
+<p><strong>为了解决这个问题，TLS/SSL引入了数字证书来认证</strong>。与直接用公钥不同，数字证书中包含了服务器的名称与主机名、服务器的公钥、签名颁发机构的名称、来自签名颁发机构的签名。在连接建立之前，通过证书中的签名确认收到的公钥是来自目标服务器的，从而产生信任关系。</p>
+<ol>
+<li>数字证书</li>
+</ol>
+<p><strong>CA</strong>(Certificate Authority，数字证书认证中心)，为站点颁发证书，且这个证书中具有CA通过自己的公钥和私钥实现的签名。</p>
+<p><strong>为了得到签名证书，服务器端需要通过自己的私钥生成CSR（Certificate Signing Request，证书签名请求）文件。CA机构将通过CSR颁发属于该服务器端的签名证书，只要通过CA机构就能验证证书是否合法。</strong></p>
+<p>通过CA机构颁发证书通常是一个烦琐的过程，需要付出一定的精力和费用。对于中小型企业而言，多半是采用<strong>自签名证书</strong>来构建安全网络的。所谓自签名证书，就是自己扮演CA机构，给自己的服务器端颁发签名证书。以下为生成私钥、生成CSR文件、通过私钥自签名生成证书的过程：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">$ openssl genrsa -out ca.key 1024  &#x2F;&#x2F; 生成私钥</span><br><span class="line">$ openssl req -new -key ca.key -out ca.csr   &#x2F;&#x2F; 生成CSR文件</span><br><span class="line">$ openssl x509 -req -in ca.csr -signkey ca.key -out ca.crt  &#x2F;&#x2F; 通过私钥自签名生成证书</span><br><span class="line">&#96;&#96;&#96; </span><br><span class="line"></span><br><span class="line">![生成自签名证书示意图](7-10.png)</span><br><span class="line"></span><br><span class="line">客户端在发起安全连接前会去获取服务器端的证书，并通过CA的证书验证服务器端证书的真伪。除了验证真伪外，通常还含有对服务器名称、IP地址等进行验证的过程。</span><br><span class="line"></span><br><span class="line">![客户端通过CA验证服务器端证书的真伪过程示意图](7-11.png)</span><br><span class="line"></span><br><span class="line">CA机构将证书颁发给服务器端后，证书在请求的过程中会被发送给客户端，客户端需要通过CA的证书验证真伪。如果是知名的CA机构，它们的证书一般预装在浏览器中。如果是自己扮演CA机构，颁发自有签名证书则不能享受这个福利，客户端需要获取到CA的证书才能进行验证。上述的过程中可以看出，签名证书是一环一环地颁发的，但是在CA那里的证书是不需要上级证书参与签名的，这个证书我们通常称为**根证书**。</span><br><span class="line"></span><br><span class="line">### TLS服务</span><br><span class="line"></span><br><span class="line">#### 创建服务器端</span><br><span class="line"></span><br><span class="line">将构建服务所需要的证书都备齐之后，我们通过Node的tls模块来创建一个安全的TCP服务，这个服务是一个简单的echo服务，代码如下：</span><br><span class="line"></span><br><span class="line">&#96;&#96;&#96;javascript</span><br><span class="line">var tls &#x3D; require(&#39;tls&#39;);</span><br><span class="line">var fs &#x3D; require(&#39;fs&#39;);</span><br><span class="line">var options &#x3D; &#123;</span><br><span class="line">    key: fs.readFileSync(&#39;.&#x2F;keys&#x2F;server.key&#39;),</span><br><span class="line">    cert: fs.readFileSync(&#39;.&#x2F;keys&#x2F;server.crt&#39;),</span><br><span class="line">    requestCert: true,</span><br><span class="line">    ca: [ fs.readFileSync(&#39;.&#x2F;keys&#x2F;ca.crt&#39;) ]</span><br><span class="line">&#125;;</span><br><span class="line">var server &#x3D; tls.createServer(options, function (stream) &#123;</span><br><span class="line">    console.log(&#39;server connected&#39;, stream.authorized ? &#39;authorized&#39; : &#39;unauthorized&#39;);</span><br><span class="line">    stream.write(&quot;welcome!\n&quot;);</span><br><span class="line">    stream.setEncoding(&#39;utf8&#39;);</span><br><span class="line">    stream.pipe(stream);</span><br><span class="line">&#125;);</span><br><span class="line">server.listen(8000, function() &#123;</span><br><span class="line">    console.log(&#39;server bound&#39;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">$ openssl s_client -connect 127.0.0.1:8000</span><br></pre></td></tr></table></figure>
+
+<h4 id="TLS客户端"><a href="#TLS客户端" class="headerlink" title="TLS客户端"></a>TLS客户端</h4><p>在构建我们的客户端之前，需要为客户端生成属于自己的私钥和签名，代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 创建私钥</span><br><span class="line">$  openssl  genrsa  -out  client.key  1024</span><br><span class="line">&#x2F;&#x2F;  生成CSR</span><br><span class="line">$  openssl  req  -new  -key  client.key  -out  client.csr</span><br><span class="line">&#x2F;&#x2F;  生成签名证书</span><br><span class="line">$  openssl  x509  -req  -CA  ca.crt  -CAkey  ca.key  -CAcreateserial  -in  client.csr  -out  client.crt</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> options = &#123;</span><br><span class="line">    key: fs.readFileSync(<span class="string">'./keys/client.key'</span>),</span><br><span class="line">    cert: fs.readFileSync(<span class="string">'./keys/client.crt'</span>),</span><br><span class="line">    ca: [ fs.readFileSync(<span class="string">'./keys/ca.crt'</span>) ]</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> stream = tls.connect(<span class="number">8000</span>, options, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'client connected'</span>, stream.authorized ? <span class="string">'authorized'</span> : <span class="string">'unauthorized'</span>);</span><br><span class="line">    process.stdin.pipe(stream);</span><br><span class="line">&#125;);</span><br><span class="line">stream.setEncoding(<span class="string">'utf8'</span>);</span><br><span class="line">stream.on(<span class="string">'data'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(data);</span><br><span class="line">&#125;);</span><br><span class="line">stream.on(<span class="string">'end'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    server.close();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="HTTPS服务"><a href="#HTTPS服务" class="headerlink" title="HTTPS服务"></a>HTTPS服务</h3><p><strong>HTTPS服务就是工作在TLS/SSL上的HTTP。</strong></p>
+<ul>
+<li>HTTPS服务需要用到私钥和签名证书，我们可以直接用上文生成的私钥和证书。</li>
+<li>创建HTTPS服务<ul>
+<li>创建HTTPS服务只比HTTP服务多一个选项配置</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> https = <span class="built_in">require</span>(<span class="string">'https'</span>);</span><br><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"><span class="keyword">var</span> options = &#123;</span><br><span class="line">    key: fs.readFileSync(<span class="string">'./keys/server.key'</span>),</span><br><span class="line">    cert: fs.readFileSync(<span class="string">'./keys/server.crt'</span>)</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">https.createServer(options, <span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">    res.writeHead(<span class="number">200</span>);</span><br><span class="line">    res.end(<span class="string">"hello world\n"</span>);</span><br><span class="line">&#125;).listen(<span class="number">8000</span>);</span><br></pre></td></tr></table></figure>
+
+<p>启动之后通过curl进行测试，相关代码如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$ curl https:&#x2F;&#x2F;localhost:8000&#x2F;</span><br><span class="line">curl: (60) SSL certificate problem, verify that the CA cert is OK. Details:</span><br><span class="line">error:14090086:SSL routines:SSL3_GET_SERVER_CERTIFICATE:certificate verify failed</span><br><span class="line">More details here: http:&#x2F;&#x2F;curl.haxx.se&#x2F;docs&#x2F;sslcerts.html</span><br><span class="line">curl performs SSL certificate verification by default, using a &quot;bundle&quot;</span><br><span class="line">of Certificate Authority (CA) public keys (CA certs). If the default</span><br><span class="line">bundle file isn&#39;t adequate, you can specify an alternate file</span><br><span class="line">using the --cacert option.</span><br><span class="line">If this HTTPS server uses a certificate signed by a CA represented in</span><br><span class="line">the bundle, the certificate verification probably failed due to a</span><br><span class="line">problem with the certificate (it might be expired, or the name might</span><br><span class="line">not match the domain name in the URL).</span><br><span class="line">If you&#39;d like to turn off curl&#39;s verification of the certificate, use</span><br><span class="line">the -k (or --insecure) option.</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>curl工具尤法验证服务器端证书是否正确，所以出现了上述的抛错，要解决上面的问题有两种方式。一种是加-k选项，让curl工具忽略掉证书的验证，这样的结果是数据依然会通过公钥加密传输，但是无法保证对方是可靠的，会存在中间人攻击的潜在风险。其结果如下所示：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ curl -k https:&#x2F;&#x2F;localhost:8000&#x2F;</span><br><span class="line">hello world</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>另一种解决的方式是给curl设置–cacert选项，告知CA证书使之完成对服务器证书的验证，如下所示：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ curl --cacert keys&#x2F;ca.crt https:&#x2F;&#x2F;localhost:8000&#x2F;</span><br><span class="line">hello world</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="HTTPS客户端"><a href="#HTTPS客户端" class="headerlink" title="HTTPS客户端"></a>HTTPS客户端</h4><p>指定证书和相关参数：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> https = <span class="built_in">require</span>(<span class="string">'https'</span>);</span><br><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"><span class="keyword">var</span> options = &#123;</span><br><span class="line">    hostname: <span class="string">'localhost'</span>,</span><br><span class="line">    port: <span class="number">8000</span>,</span><br><span class="line">    path: <span class="string">'/'</span>,</span><br><span class="line">    method: <span class="string">'GET'</span>,</span><br><span class="line">    key: fs.readFileSync(<span class="string">'./keys/client.key'</span>),</span><br><span class="line">    cert: fs.readFileSync(<span class="string">'./keys/client.crt'</span>),</span><br><span class="line">    ca: [fs.readFileSync(<span class="string">'./keys/ca.crt'</span>)]</span><br><span class="line">&#125;;</span><br><span class="line">options.agent = <span class="keyword">new</span> https.Agent(options);</span><br><span class="line"><span class="keyword">var</span> req = https.request(options, <span class="function"><span class="keyword">function</span>(<span class="params">res</span>) </span>&#123;</span><br><span class="line">    res.setEncoding(<span class="string">'utf-8'</span>);</span><br><span class="line">    res.on(<span class="string">'data'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">d</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(d);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br><span class="line">req.end();</span><br><span class="line">req.on(<span class="string">'error'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(e);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">$ node  client.js</span><br><span class="line">hello  world</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>如果不设置ca选项，将会得到如下异常：<br><code>[Error:  UNABLE_TO_VERIFY_LEAF_SIGNATURE]</code></li>
+<li>解决该异常的方案是添加选项属性<code>rejectUnauthorized</code>为false，它的效果与curl工具加-k一样，都会在数据传输过程中会加密，但是无法保证服务器端的证书不是伪造的.</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章推荐</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/09/17/理解Buffer/" rel="bookmark">理解Buffer</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/09/02/内存控制/" rel="bookmark">内存控制</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/08/31/一个基于Vue-Node-Mongodb的简单全栈项目-pocket/" rel="bookmark">一个基于Vue+Node+Mongodb的简单全栈项目--pocket</a></div>
+    </li>
+  </ul>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>lyy
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://joyli.net.cn/2020/10/24/net-programming/" title="net-programming">https://joyli.net.cn/2020/10/24/net-programming/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/node/" rel="tag"># node</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/10/22/274-H-Index/" rel="prev" title="274-H-Index">
+      <i class="fa fa-chevron-left"></i> 274-H-Index
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构建TCP服务"><span class="nav-number">2.</span> <span class="nav-text">构建TCP服务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建TCP服务器"><span class="nav-number">2.1.</span> <span class="nav-text">创建TCP服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP服务的事件"><span class="nav-number">2.2.</span> <span class="nav-text">TCP服务的事件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构建UDP服务"><span class="nav-number">3.</span> <span class="nav-text">构建UDP服务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#UDP套接字创建"><span class="nav-number">3.1.</span> <span class="nav-text">UDP套接字创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UDP服务器端创建"><span class="nav-number">3.2.</span> <span class="nav-text">UDP服务器端创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UDP客户端创建"><span class="nav-number">3.3.</span> <span class="nav-text">UDP客户端创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UDP套接字事件"><span class="nav-number">3.4.</span> <span class="nav-text">UDP套接字事件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构建HTTP服务"><span class="nav-number">4.</span> <span class="nav-text">构建HTTP服务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#http模块"><span class="nav-number">4.1.</span> <span class="nav-text">http模块</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#http请求"><span class="nav-number">4.1.1.</span> <span class="nav-text">http请求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#http响应"><span class="nav-number">4.1.2.</span> <span class="nav-text">http响应</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#http服务事件"><span class="nav-number">4.1.3.</span> <span class="nav-text">http服务事件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP客户端"><span class="nav-number">4.2.</span> <span class="nav-text">HTTP客户端</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#http代理"><span class="nav-number">4.2.1.</span> <span class="nav-text">http代理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#http客户端事件"><span class="nav-number">4.2.2.</span> <span class="nav-text">http客户端事件</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构建WebSocket服务"><span class="nav-number">5.</span> <span class="nav-text">构建WebSocket服务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#WebSocket握手"><span class="nav-number">5.1.</span> <span class="nav-text">WebSocket握手</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WebSocket数据传输"><span class="nav-number">5.2.</span> <span class="nav-text">WebSocket数据传输</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网络服务与安全"><span class="nav-number">6.</span> <span class="nav-text">网络服务与安全</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#TLS-SSL"><span class="nav-number">6.1.</span> <span class="nav-text">TLS&#x2F;SSL</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#TLS客户端"><span class="nav-number">6.1.1.</span> <span class="nav-text">TLS客户端</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTPS服务"><span class="nav-number">6.2.</span> <span class="nav-text">HTTPS服务</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#HTTPS客户端"><span class="nav-number">6.2.1.</span> <span class="nav-text">HTTPS客户端</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="lyy"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">lyy</p>
+  <div class="site-description" itemprop="description">世间所有的相遇，都是久别重逢</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">180</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">41</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/lyylyylyylyy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;lyylyylyylyy" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zju.edu.cn/" title="ZJU → https:&#x2F;&#x2F;www.zju.edu.cn&#x2F;" rel="noopener" target="_blank"><i class="fa fa-graduation-cap fa-fw"></i>ZJU</a>
+      </span>
+  </div>
+
+
+
+    <div class="links-of-blogroll motion-element links-of-blogroll-block">
+      <div class="links-of-blogroll-title">
+        <!-- modify icon to fire by szw -->
+        <i class="fa fa-history fa-" aria-hidden="true"></i>
+        近期文章
+      </div>
+      <ul class="links-of-blogroll-list">
+        
+        
+          <li>
+            <a href="/2020/10/24/net-programming/" title="net-programming" target="_blank">net-programming</a>
+          </li>
+        
+          <li>
+            <a href="/2020/10/22/274-H-Index/" title="274-H-Index" target="_blank">274-H-Index</a>
+          </li>
+        
+          <li>
+            <a href="/2020/10/19/119-Pascals-Triangle-II/" title="119-Pascals-Triangle-II" target="_blank">119-Pascals-Triangle-II</a>
+          </li>
+        
+          <li>
+            <a href="/2020/10/17/118-Pascals-Triangle/" title="118-Pascals-Triangle" target="_blank">118-Pascals-Triangle</a>
+          </li>
+        
+          <li>
+            <a href="/2020/10/17/B-O-M/" title="B-O-M" target="_blank">B-O-M</a>
+          </li>
+        
+      </ul>
+    </div>
+
+      </div>
+      <a href="https://clustrmaps.com/site/1b75d" target="_blank" rel="noopener"  title="Visit tracker"><img src="//www.clustrmaps.com/map_v2.png?d=MSgeNXm-y8DMM6r6hBqJa2IyTlI7gYrIkTQGt57lgv8&cl=ffffff" /></a>
+  </aside>
+    </div>
+    
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fab fa-android"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lyy</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-nest@1/canvas-nest.min.js"></script>
+  <script size="300" alpha="0.6" zIndex="-1" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : true,
+      appId      : 'mxQ2lQFuJOjoaYkjNciana8G-gzGzoHsz',
+      appKey     : 'AWuAvmWCK2rLASObQlsdeX2W',
+      placeholder: "Your comment makes this site better!",
+      avatar     : 'identicon',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+
+
+
+</body>
+</html>

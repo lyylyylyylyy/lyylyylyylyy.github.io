@@ -1,3 +1,5 @@
+https://joyli.net.cn/2020/10/24/net-programming/
+https://joyli.net.cn/2020/09/02/%E5%86%85%E5%AD%98%E6%8E%A7%E5%88%B6/
 https://joyli.net.cn/2020/10/22/274-H-Index/
 https://joyli.net.cn/2020/10/19/119-Pascals-Triangle-II/
 https://joyli.net.cn/2020/10/17/118-Pascals-Triangle/
@@ -6,5 +8,3 @@ https://joyli.net.cn/2020/10/16/134-Gas-Station/
 https://joyli.net.cn/2020/10/13/%E5%87%BD%E6%95%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F/
 https://joyli.net.cn/2020/10/14/299-Bulls-and-Cows/
 https://joyli.net.cn/2020/10/13/object/
-https://joyli.net.cn/2020/10/13/189-Rotate-Array/
-https://joyli.net.cn/2020/10/12/80-Remove-Duplicates-from-Sorted-Array-II/

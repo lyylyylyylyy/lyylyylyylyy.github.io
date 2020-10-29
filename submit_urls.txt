@@ -1,3 +1,5 @@
+https://joyli.net.cn/2020/10/30/334-Increasing-Triplet-Subsequence/
+https://joyli.net.cn/2020/10/29/%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%A3%80%E6%B5%8B/
 https://joyli.net.cn/2020/10/29/309-Best-Time-to-Buy-and-Sell-Stock-with-Cooldown/
 https://joyli.net.cn/2020/10/24/net-programming/
 https://joyli.net.cn/2020/03/18/%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8/
@@ -6,5 +8,3 @@ https://joyli.net.cn/2020/09/17/%E7%90%86%E8%A7%A3Buffer/
 https://joyli.net.cn/2020/08/26/%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/
 https://joyli.net.cn/2020/10/28/188-Best-Time-to-Buy-and-Sell-Stock-IV/
 https://joyli.net.cn/2020/10/22/274-H-Index/
-https://joyli.net.cn/2020/10/19/119-Pascals-Triangle-II/
-https://joyli.net.cn/2020/10/17/118-Pascals-Triangle/

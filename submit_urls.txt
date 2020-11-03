@@ -1,3 +1,4 @@
+https://joyli.net.cn/2020/11/04/57-Insert-Interval/
 https://joyli.net.cn/2020/11/03/289-Game-of-Life/
 https://joyli.net.cn/2020/11/01/278-First-Bad-Version/
 https://joyli.net.cn/2020/10/30/334-Increasing-Triplet-Subsequence/
@@ -7,4 +8,3 @@ https://joyli.net.cn/2020/10/24/net-programming/
 https://joyli.net.cn/2020/03/18/%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8/
 https://joyli.net.cn/2020/09/02/%E5%86%85%E5%AD%98%E6%8E%A7%E5%88%B6/
 https://joyli.net.cn/2020/09/17/%E7%90%86%E8%A7%A3Buffer/
-https://joyli.net.cn/2020/08/26/%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/

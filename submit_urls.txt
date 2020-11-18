@@ -1,3 +1,5 @@
+https://joyli.net.cn/2020/11/19/376-Wiggle-Subsequence/
+https://joyli.net.cn/2020/11/13/283-Move-Zeroes/
 https://joyli.net.cn/2020/11/13/88-Merge-Sorted-Array/
 https://joyli.net.cn/2020/11/10/152-Maximum-Product-Subarray/
 https://joyli.net.cn/2020/11/09/238-Product-of-Array-Except-Self/
@@ -6,5 +8,3 @@ https://joyli.net.cn/2020/11/06/164-Maximum-Gap/
 https://joyli.net.cn/2020/11/06/295-Find-Median-from-Data-Stream/
 https://joyli.net.cn/2020/11/05/239-Sliding-Window-Maximum/
 https://joyli.net.cn/2020/11/04/57-Insert-Interval/
-https://joyli.net.cn/2020/11/03/289-Game-of-Life/
-https://joyli.net.cn/2020/11/01/278-First-Bad-Version/

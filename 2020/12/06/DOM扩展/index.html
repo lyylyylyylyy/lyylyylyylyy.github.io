@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noto Serif SC:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"joyli.net.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Selectors API(选择符 API) HTML5">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DOM扩展">
+<meta property="og:url" content="https://joyli.net.cn/2020/12/06/DOM%E6%89%A9%E5%B1%95/index.html">
+<meta property="og:site_name" content="若只如初见">
+<meta property="og:description" content="Selectors API(选择符 API) HTML5">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-12-05T19:59:32.000Z">
+<meta property="article:modified_time" content="2020-12-05T13:38:35.802Z">
+<meta property="article:author" content="lyy">
+<meta property="article:tag" content="JavaScript高级程序设计">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://joyli.net.cn/2020/12/06/DOM%E6%89%A9%E5%B1%95/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>DOM扩展 | 若只如初见</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">若只如初见</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">书籍是人类进步的阶梯</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签<span class="badge">43</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th fa-fw"></i>分类<span class="badge">14</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档<span class="badge">203</span></a>
+
+  </li>
+        <li class="menu-item menu-item-疫情地图">
+
+    <a href="http://joyli.net.cn/covid19-map/" rel="section"><i class="map fa-fw"></i>疫情地图</a>
+
+  </li>
+        <li class="menu-item menu-item-links">
+
+    <a href="/links" rel="section"><i class="link fa-fw"></i>友链</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://joyli.net.cn/2020/12/06/DOM%E6%89%A9%E5%B1%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="lyy">
+      <meta itemprop="description" content="世间所有的相遇，都是久别重逢">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="若只如初见">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          DOM扩展
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-12-05 19:59:32 / 修改时间：13:38:35" itemprop="dateCreated datePublished" datetime="2020-12-05T19:59:32Z">2020-12-05</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" itemprop="url" rel="index"><span itemprop="name">JavaScript高级程序设计</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/12/06/DOM%E6%89%A9%E5%B1%95/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/12/06/DOM%E6%89%A9%E5%B1%95/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>4.7k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <ul>
+<li>Selectors API(选择符 API)</li>
+<li>HTML5<a id="more"></a>
+<h2 id="选择符-API"><a href="#选择符-API" class="headerlink" title="选择符 API"></a>选择符 API</h2></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">name</th>
+<th align="center">接收</th>
+<th align="center">返回</th>
+<th align="center">备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>querySelector()</code></td>
+<td align="center">1个 CSS 选择符</td>
+<td align="center">匹配的第1个元素，如果没有找到匹配的元素，返回 null</td>
+<td align="center">通过 Document 类型调用时，会在文档元素的范围内查找匹配的元素。通过 Element 类型调用时，只会在后代元素的范围内查找匹配的元素</td>
+</tr>
+<tr>
+<td align="center"><code>querySelectorAll()</code></td>
+<td align="center">1个 CSS 选择符</td>
+<td align="center">所有匹配的元素，是一个<strong>NodeList</strong>实例</td>
+<td align="center">取得NodeList 中的元素，可以使用 <code>item()</code>和方括号语法｜</td>
+</tr>
+<tr>
+<td align="center"><code>matchesSelector()</code></td>
+<td align="center">1个 CSS 选择符</td>
+<td align="center">调用元素与该选择符匹配，返回 true;否则，返回 false</td>
+<td align="center">使用这个方法能够方便地检测它是否会被 <code>querySelector()</code>或 <code>querySelectorAll()</code>方法返回</td>
+</tr>
+</tbody></table>
+<p>example:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//取得 body 元素</span></span><br><span class="line"><span class="keyword">var</span> body = <span class="built_in">document</span>.querySelector(<span class="string">"body"</span>);</span><br><span class="line"><span class="comment">//取得类为"button"的第一个图像元素</span></span><br><span class="line"><span class="keyword">var</span> img = <span class="built_in">document</span>.body.querySelector(<span class="string">"img.button"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//取得某&lt;div&gt;中的所有&lt;em&gt;元素(类似于 getElementsByTagName("em"))</span></span><br><span class="line"><span class="keyword">var</span> ems = <span class="built_in">document</span>.getElementById(<span class="string">"myDiv"</span>).querySelectorAll(<span class="string">"em"</span>);</span><br><span class="line"><span class="comment">//取得所有&lt;p&gt;元素中的所有&lt;strong&gt;元素</span></span><br><span class="line"><span class="keyword">var</span> strongs = <span class="built_in">document</span>.querySelectorAll(<span class="string">"p strong"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">document</span>.body.matchesSelector(<span class="string">"body.page1"</span>))&#123;</span><br><span class="line">        <span class="comment">//true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="元素遍历"><a href="#元素遍历" class="headerlink" title="元素遍历"></a>元素遍历</h2><p>Element Traversal API 为 DOM 元素添加了以下 5 个属性。</p>
+<ul>
+<li><code>childElementCount</code>:返回子元素(不包括文本节点和注释)的个数。</li>
+<li><code>firstElementChild</code>:指向第一个子元素;firstChild 的元素版。</li>
+<li><code>lastElementChild</code>:指向最后一个子元素;lastChild 的元素版。</li>
+<li><code>previousElementSibling</code>:指向前一个同辈元素;previousSibling 的元素版。 </li>
+<li><code>nextElementSibling</code>:指向后一个同辈元素;nextSibling 的元素版。</li>
+</ul>
+<p>支持的浏览器为 DOM 元素添加了这些属性，利用这些元素不必担心空白文本节点。</p>
+<h2 id="HTML5"><a href="#HTML5" class="headerlink" title="HTML5"></a>HTML5</h2><ul>
+<li><code>getElementsByClassName()</code></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">通过<code>document</code>对象及所有HTML元素调用</td>
+</tr>
+<tr>
+<td align="center">参数:1个包含一或多个类名的字符串</td>
+</tr>
+<tr>
+<td align="center">返回带有指定类的所有元素的 <strong>NodeList</strong></td>
+</tr>
+<tr>
+<td align="center"><strong>只有位于调用元素子树中的元素才会返回</strong></td>
+</tr>
+<tr>
+<td align="center">性能问题</td>
+</tr>
+</tbody></table>
+<ul>
+<li>classList 属性</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">新集合类型 <em>DOMTokenList</em> 的实例</td>
+</tr>
+<tr>
+<td align="center">length 属性</td>
+</tr>
+<tr>
+<td align="center"><code>item()</code>方法，方括号语法</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="center">方法</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>add(value)</code></td>
+<td align="center">将给定的字符串值添加到列表中。如果值已经存在，就不添加了</td>
+</tr>
+<tr>
+<td align="center"><code>contains(value)</code></td>
+<td align="center">表示列表中是否存在给定的值，如果存在则返回 true，否则返回 false</td>
+</tr>
+<tr>
+<td align="center"><code>remove(value)</code></td>
+<td align="center">从列表中删除给定的字符串</td>
+</tr>
+<tr>
+<td align="center"><code>toggle(value)</code></td>
+<td align="center">如果列表中已经存在给定的值，删除它;如果列表中没有给定的值，添加它</td>
+</tr>
+</tbody></table>
+<p>example:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//切换"user"类 div.classList.toggle("user");</span></span><br><span class="line"><span class="comment">//确定元素中是否包含既定的类名</span></span><br><span class="line"><span class="keyword">if</span> (div.classList.contains(<span class="string">"bd"</span>) &amp;&amp; !div.classList.contains(<span class="string">"disabled"</span>))&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//切换"user"类 </span></span><br><span class="line">div.classList.toggle(<span class="string">"user"</span>);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>焦点管理</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center"><code>document.activeElement</code></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">始终会引用 DOM 中当前获得了焦点的元素</td>
+</tr>
+<tr>
+<td align="center"><strong>元素获得焦点的方式有页面加载、用户输入(通常是 通过按 Tab 键)和在代码中调用 focus()方法</strong></td>
+</tr>
+<tr>
+<td align="center">文档刚加载完成时，该属性保存的是<code>document.body</code>元素的引用</td>
+</tr>
+<tr>
+<td align="center">文档加载期间，该属性的值为null</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="center"><code>document.hasFocus()</code></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">用于确定文档是否获得了焦点</td>
+</tr>
+</tbody></table>
+<p>example:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> button = <span class="built_in">document</span>.getElementById(<span class="string">"myButton"</span>);</span><br><span class="line">button.focus();</span><br><span class="line">alert(<span class="built_in">document</span>.activeElement === button);   <span class="comment">//true</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> button = <span class="built_in">document</span>.getElementById(<span class="string">"myButton"</span>);</span><br><span class="line">button.focus();</span><br><span class="line">alert(<span class="built_in">document</span>.hasFocus());  <span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>HTMLDocument的变化</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">readyState 属性</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">document 对象的属性</td>
+</tr>
+<tr>
+<td align="center">两个可能的值｜loading，正在加载文档｜complete，已经加载完文档</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="center">compatMode 的属性</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">告诉开发人员浏览器采用了哪种渲染模式</td>
+</tr>
+<tr>
+<td align="center">标准模式下：”CSS1Compat”，混杂模式：”BackCompat”</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="center">document.head</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">引用文档的<code>&lt;head&gt;</code>元素</td>
+</tr>
+</tbody></table>
+<ul>
+<li>字符集属性</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">charset属性</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">文档中实际使用的字符集，可以用来指定新字符集，默认’utf-16’</td>
+</tr>
+<tr>
+<td align="center">可以通过<code>&lt;meta&gt;</code>元素、响应头部或直接设置 charset 属性修改</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="center">defaultCharset属性</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">根据默认浏览器及操作系统的设置，当前文档默认的字符集是什么</td>
+</tr>
+</tbody></table>
+<ul>
+<li>自定义数据属性</li>
+</ul>
+<p>HTML5 规定可以为元素添加非标准的属性，但要添加前缀 <code>data-</code>，目的是为元素提供与渲染无关的自定义数据属性信息，或者提供语义信息。这些属性可以任意添加、随便命名，只要以 <code>data-</code>开头即可。</p>
+<p>添加了自定义属性之后，可以通过元素的 <code>dataset</code> 属性来访问自定义属性的值。<code>dataset</code> 属性的 值是 DOMStringMap 的一个实例，也就是一个名值对儿的映射。在这个映射中，每个 <code>data-name</code> 形式 的属性都会有一个对应的属性，只不过属性名没有 data-前缀。</p>
+<p>example:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=<span class="string">"myDiv"</span> data-appId=<span class="string">"12345"</span> data-myname=<span class="string">"Nicholas"</span>&gt;&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">/</span><span class="regexp">/设置值</span></span><br><span class="line"><span class="regexp">div.dataset.appId = 23456; </span></span><br><span class="line"><span class="regexp">div.dataset.myname = "Michael";</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">/</span><span class="regexp">/有没有"myname"值呢?</span></span><br><span class="line"><span class="regexp">if (div.dataset.myname)&#123;</span></span><br><span class="line"><span class="regexp">    alert("Hello, " + div.dataset.myname);</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>插入标记</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">innerHTML属性</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">读模式，返回与调用元素的<strong>所有子节点</strong>(包括元素、注释和文本节点)对应的HTML标记</td>
+</tr>
+<tr>
+<td align="center">写模式，根据指定的值创建新的 DOM 树，然后用这个DOM树完全替换调用元素原先的所有子节点</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="center">outerHTML属性</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">读模式，返回<strong>调用它的元素及所有子节点</strong>的 HTML 标签</td>
+</tr>
+<tr>
+<td align="center">写模式，根据指定的HTML字符串创建新的DOM子树，然后用这个DOM子树完全替换调用元素</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="center"><code>insertAdjacentHTML()</code>方法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">它接收两个参数:插入位置和要插入的 HTML 文本</td>
+</tr>
+</tbody></table>
+<p>|第一个参数必须是|描述|<br>|:——:|<br>|beforebegin|在当前元素之前插入一个紧邻的同辈元素|<br>|afterbegin|在当前元素之下插入一个新的子元素或在第一个子元素之前再插入新的子元素|<br>|beforeend|在当前元素之下插入一个新的子元素或在最后一个子元素之后再插入新的子元素|<br>|afterend|在当前元素之后插入一个紧邻的同辈元素|</p>
+<p>性能问题：</p>
+<p>在删除带有事件处理程序或引用了其他JavaScript对象子树时，就有可能导致内存占用问题。<br><br>假设某个元素有一个事件处理程序(或者引用了一个JavaScript对象作为属性)，在使用前述某个属性将该元素从文档树中删除后，元素与事件处理程序(或 JavaScript 对象)之间的绑定关系在内存中并没有一并删除。如果这种情况频繁出现，页面占用的内存数量就会明显增加。</p>
+<ul>
+<li><strong><code>scrollIntoView()</code>方法</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center"><code>scrollIntoView()</code>方法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">在所有HTML元素上调用，通过滚动浏览器窗口或某个容器元素，调用元素就可以出现在视口中</td>
+</tr>
+<tr>
+<td align="center">传入true参数，或者不传入任何参数，那么窗口滚动之后会让调用元素的顶部与视口顶部尽可能平齐</td>
+</tr>
+<tr>
+<td align="center">传入false作为参数，调用元素会尽可能全部 出现在视口中</td>
+</tr>
+</tbody></table>
+<p>example:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//让元素可见 </span></span><br><span class="line"><span class="built_in">document</span>.forms[<span class="number">0</span>].scrollIntoView();</span><br></pre></td></tr></table></figure>
+
+<h2 id="专有扩展"><a href="#专有扩展" class="headerlink" title="专有扩展"></a>专有扩展</h2><ul>
+<li>文档模式</li>
+</ul>
+<p>页面的文档模式决定了可以使用什么功能。</p>
+<p>要强制浏览器以某种模式渲染页面，可以使用HTTP头部信息<code>X-UA-Compatible</code>，或通过等价的 <code>&lt;meta&gt;</code>标签来设置。</p>
+<p>通过<code>document.documentMode</code>属性可以知道给定页面使用的是什么文档模式。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"IE=IEVersion"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th align="center">children属性</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">只包含元素中同样还是元素的子节点</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="center">contains()方法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">知道某个节点是不是另一个节点的后代</td>
+</tr>
+<tr>
+<td align="center">祖先节点调用</td>
+</tr>
+<tr>
+<td align="center">接收一个参数，即要检测的后代节点</td>
+</tr>
+<tr>
+<td align="center">被检测的节点是后代节点，true, 否则，false</td>
+</tr>
+</tbody></table>
+<ul>
+<li>插入文本</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">innerText属性</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">可以操作元素中包含的所有文本内容，包括子文档树中的文本</td>
+</tr>
+<tr>
+<td align="center">读取值时，它会按照由浅入深的顺序</td>
+</tr>
+<tr>
+<td align="center">通过 innerText 写入值时，结果会删除元素的所有子节点，插入包含相应文本值的文本节点</td>
+</tr>
+<tr>
+<td align="center">设置 innerText 永远只会生成当前节点的一个子文本节点</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="center">outerText属性</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">读取文本值时，outerText 与 innerText 的结果完全一样</td>
+</tr>
+<tr>
+<td align="center">写模式，替换整个元素(包括子节点)</td>
+</tr>
+<tr>
+<td align="center">通过 innerText 写入值时，结果会删除元素的所有子节点，插入包含相应文本值的文本节点</td>
+</tr>
+<tr>
+<td align="center">设置 innerText 永远只会生成当前节点的一个子文本节点</td>
+</tr>
+</tbody></table>
+<p>example:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">div.innerText = <span class="string">"Hello world!"</span>;</span><br><span class="line"></span><br><span class="line">div.outerText = <span class="string">"Hello world!"</span>;</span><br><span class="line"><span class="comment">// 这行代码实际上相当于如下两行代码:</span></span><br><span class="line"><span class="keyword">var</span> text = <span class="built_in">document</span>.createTextNode(<span class="string">"Hello world!"</span>);</span><br><span class="line">div.parentNode.replaceChild(text, div);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>滚动</li>
+</ul>
+<blockquote>
+<p>对 HTMLElement 类型的扩展，因此在所有元素中都可以调用。<br><code>scrollIntoView()</code>和<code>scrollIntoViewIfNeeded()</code>的作用对象是元素的容器，而 <code>scrollByLines()</code>和<code>scrollByPages()</code>影响的则是元素自身。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th align="center">name</th>
+<th align="center">description</th>
+<th align="center">parameter</th>
+<th align="center">fit</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">scrollIntoViewIfNeeded(alignCenter)</td>
+<td align="center">只在当前元素在视口中不可见的情况下，才滚 动浏览器窗口或容器元素，最终让它可见。如果当前元素在视口中可见，这个方法什么也不做</td>
+<td align="center">可选的 alignCenter 参数设置为 true，则表示尽量将元素显示在视口中部(垂直方向)</td>
+<td align="center">Safari 和 Chrome</td>
+</tr>
+<tr>
+<td align="center">scrollByLines(lineCount)</td>
+<td align="center">将元素的内容滚动指定的行高</td>
+<td align="center">正负均可</td>
+<td align="center">Safari 和 Chrome</td>
+</tr>
+<tr>
+<td align="center">scrollByPages(pageCount)</td>
+<td align="center">将元素的内容滚动指定的页面高度，具体高度由元素的高度决 定</td>
+<td align="center">none</td>
+<td align="center">Safari 和 Chrome</td>
+</tr>
+</tbody></table>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章推荐</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/10/17/B-O-M/" rel="bookmark">B-O-M</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/10/13/object/" rel="bookmark">面向对象的程序设计</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/10/13/函数表达式/" rel="bookmark">函数表达式</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/05/09/第4章-基本类型和引用类型的值/" rel="bookmark">基本类型和引用类型的值</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/04/25/第3章-基本概念/" rel="bookmark">基本概念(数据类型)</a></div>
+    </li>
+  </ul>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>lyy
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://joyli.net.cn/2020/12/06/DOM%E6%89%A9%E5%B1%95/" title="DOM扩展">https://joyli.net.cn/2020/12/06/DOM扩展/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/JavaScript%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" rel="tag"># JavaScript高级程序设计</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/12/01/300-Longest-Increasing-Subsequence/" rel="prev" title="300-Longest-Increasing-Subsequence">
+      <i class="fa fa-chevron-left"></i> 300-Longest-Increasing-Subsequence
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/12/06/354-Russian-Doll-Envelopes/" rel="next" title="354-Russian-Doll-Envelopes">
+      354-Russian-Doll-Envelopes <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#选择符-API"><span class="nav-number">1.</span> <span class="nav-text">选择符 API</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#元素遍历"><span class="nav-number">2.</span> <span class="nav-text">元素遍历</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML5"><span class="nav-number">3.</span> <span class="nav-text">HTML5</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#专有扩展"><span class="nav-number">4.</span> <span class="nav-text">专有扩展</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="lyy"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">lyy</p>
+  <div class="site-description" itemprop="description">世间所有的相遇，都是久别重逢</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">203</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/lyylyylyylyy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;lyylyylyylyy" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zju.edu.cn/" title="ZJU → https:&#x2F;&#x2F;www.zju.edu.cn&#x2F;" rel="noopener" target="_blank"><i class="fa fa-graduation-cap fa-fw"></i>ZJU</a>
+      </span>
+  </div>
+
+
+
+    <div class="links-of-blogroll motion-element links-of-blogroll-block">
+      <div class="links-of-blogroll-title">
+        <!-- modify icon to fire by szw -->
+        <i class="fa fa-history fa-" aria-hidden="true"></i>
+        近期文章
+      </div>
+      <ul class="links-of-blogroll-list">
+        
+        
+          <li>
+            <a href="/2020/12/06/354-Russian-Doll-Envelopes/" title="354-Russian-Doll-Envelopes" target="_blank">354-Russian-Doll-Envelopes</a>
+          </li>
+        
+          <li>
+            <a href="/2020/12/06/DOM%E6%89%A9%E5%B1%95/" title="DOM扩展" target="_blank">DOM扩展</a>
+          </li>
+        
+          <li>
+            <a href="/2020/12/01/300-Longest-Increasing-Subsequence/" title="300-Longest-Increasing-Subsequence" target="_blank">300-Longest-Increasing-Subsequence</a>
+          </li>
+        
+          <li>
+            <a href="/2020/11/30/315-Count-of-Smaller-Numbers-After-Self/" title="315-Count-of-Smaller-Numbers-After-Self" target="_blank">315-Count-of-Smaller-Numbers-After-Self</a>
+          </li>
+        
+          <li>
+            <a href="/2020/11/25/162-Find-Peak-Element/" title="162-Find-Peak-Element" target="_blank">162-Find-Peak-Element</a>
+          </li>
+        
+      </ul>
+    </div>
+
+      </div>
+      <a href="https://clustrmaps.com/site/1b75d" target="_blank" rel="noopener"  title="Visit tracker"><img src="//www.clustrmaps.com/map_v2.png?d=MSgeNXm-y8DMM6r6hBqJa2IyTlI7gYrIkTQGt57lgv8&cl=ffffff" /></a>
+  </aside>
+    </div>
+    
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fab fa-android"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lyy</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-nest@1/canvas-nest.min.js"></script>
+  <script size="300" alpha="0.6" zIndex="-1" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : true,
+      appId      : 'mxQ2lQFuJOjoaYkjNciana8G-gzGzoHsz',
+      appKey     : 'AWuAvmWCK2rLASObQlsdeX2W',
+      placeholder: "Your comment makes this site better!",
+      avatar     : 'identicon',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+
+
+
+</body>
+</html>

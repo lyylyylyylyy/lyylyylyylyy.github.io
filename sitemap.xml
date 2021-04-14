@@ -1551,14 +1551,14 @@
   </url>
   
   <url>
-    <loc>https://joyli.net.cn/tags/BOM/</loc>
+    <loc>https://joyli.net.cn/tags/JavaScript/</loc>
     <lastmod>2021-04-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://joyli.net.cn/tags/JavaScript/</loc>
+    <loc>https://joyli.net.cn/tags/BOM/</loc>
     <lastmod>2021-04-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1572,14 +1572,14 @@
   </url>
   
   <url>
-    <loc>https://joyli.net.cn/tags/React/</loc>
+    <loc>https://joyli.net.cn/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/</loc>
     <lastmod>2021-04-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://joyli.net.cn/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/</loc>
+    <loc>https://joyli.net.cn/tags/React/</loc>
     <lastmod>2021-04-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1593,21 +1593,14 @@
   </url>
   
   <url>
+    <loc>https://joyli.net.cn/tags/Leetcode/</loc>
+    <lastmod>2021-04-14</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://joyli.net.cn/tags/javascript/</loc>
-    <lastmod>2021-04-14</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://joyli.net.cn/tags/java/</loc>
-    <lastmod>2021-04-14</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://joyli.net.cn/tags/c/</loc>
     <lastmod>2021-04-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1628,7 +1621,14 @@
   </url>
   
   <url>
-    <loc>https://joyli.net.cn/tags/Leetcode/</loc>
+    <loc>https://joyli.net.cn/tags/java/</loc>
+    <lastmod>2021-04-14</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://joyli.net.cn/tags/c/</loc>
     <lastmod>2021-04-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1656,13 +1656,6 @@
   </url>
   
   <url>
-    <loc>https://joyli.net.cn/tags/greedy/</loc>
-    <lastmod>2021-04-14</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://joyli.net.cn/tags/two-pointers/</loc>
     <lastmod>2021-04-14</lastmod>
     <changefreq>daily</changefreq>
@@ -1671,6 +1664,13 @@
   
   <url>
     <loc>https://joyli.net.cn/tags/dynamic-planning/</loc>
+    <lastmod>2021-04-14</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://joyli.net.cn/tags/greedy/</loc>
     <lastmod>2021-04-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1775,6 +1775,13 @@
   </url>
   
   <url>
+    <loc>https://joyli.net.cn/tags/HTML/</loc>
+    <lastmod>2021-04-14</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://joyli.net.cn/tags/JavaScript%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/</loc>
     <lastmod>2021-04-14</lastmod>
     <changefreq>daily</changefreq>
@@ -1782,7 +1789,7 @@
   </url>
   
   <url>
-    <loc>https://joyli.net.cn/tags/HTML/</loc>
+    <loc>https://joyli.net.cn/tags/Node/</loc>
     <lastmod>2021-04-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1831,13 +1838,6 @@
   </url>
   
   <url>
-    <loc>https://joyli.net.cn/tags/Node/</loc>
-    <lastmod>2021-04-14</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://joyli.net.cn/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/</loc>
     <lastmod>2021-04-14</lastmod>
     <changefreq>daily</changefreq>
@@ -1868,14 +1868,14 @@
   </url>
   
   <url>
-    <loc>https://joyli.net.cn/categories/BOM/</loc>
+    <loc>https://joyli.net.cn/categories/JavaScript/</loc>
     <lastmod>2021-04-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://joyli.net.cn/categories/JavaScript/</loc>
+    <loc>https://joyli.net.cn/categories/BOM/</loc>
     <lastmod>2021-04-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1889,14 +1889,14 @@
   </url>
   
   <url>
-    <loc>https://joyli.net.cn/categories/React/</loc>
+    <loc>https://joyli.net.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/</loc>
     <lastmod>2021-04-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://joyli.net.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/</loc>
+    <loc>https://joyli.net.cn/categories/React/</loc>
     <lastmod>2021-04-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1917,13 +1917,6 @@
   </url>
   
   <url>
-    <loc>https://joyli.net.cn/categories/JavaScript%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/</loc>
-    <lastmod>2021-04-14</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://joyli.net.cn/categories/HTML/</loc>
     <lastmod>2021-04-14</lastmod>
     <changefreq>daily</changefreq>
@@ -1931,7 +1924,7 @@
   </url>
   
   <url>
-    <loc>https://joyli.net.cn/categories/Vue/</loc>
+    <loc>https://joyli.net.cn/categories/JavaScript%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/</loc>
     <lastmod>2021-04-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1939,6 +1932,13 @@
   
   <url>
     <loc>https://joyli.net.cn/categories/Node/</loc>
+    <lastmod>2021-04-14</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://joyli.net.cn/categories/Vue/</loc>
     <lastmod>2021-04-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
